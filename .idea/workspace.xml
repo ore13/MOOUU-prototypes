@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59708be3-a81c-46db-ac5a-fae01c9056cd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/GNSMOO.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GNSMOO.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NSGA-II.py" beforeDir="false" afterPath="$PROJECT_DIR$/NSGA-II.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,60 +17,69 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="3" />
+          <entry key="py" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="3" />
+          <entry key="Python" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="NSGA-II" value="452" />
           <entry key="Python Console" value="781" />
-          <entry key="byteManipulation" value="348" />
-          <entry key="py" value="3901" />
+          <entry key="byteManipulation" value="361" />
+          <entry key="py" value="13366" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="5030" />
+          <entry key="Python" value="14960" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NSGA-II.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
+            <state relative-caret-position="334">
+              <caret line="160" lean-forward="true" selection-start-line="160" selection-end-line="160" />
               <folding>
                 <element signature="e#165#183#0" expanded="true" />
-                <element signature="e#319#754#0" />
-                <element signature="e#1505#2574#0" />
-                <element signature="e#2641#3387#0" />
-                <element signature="e#3658#4572#0" />
-                <element signature="e#4256#5412#0" />
-                <element signature="e#5515#5707#0" />
-                <element signature="e#5175#5589#0" />
-                <element signature="e#6074#6150#0" />
-                <element signature="e#6184#6206#0" />
-                <element signature="e#6530#6636#0" />
-                <element signature="e#5958#6077#0" />
-                <element signature="e#7307#7608#0" />
-                <element signature="e#6669#7256#0" />
-                <element signature="e#7002#7593#0" />
-                <element signature="e#7666#8318#0" />
-                <element signature="e#8470#8750#0" />
-                <marker date="1542254423256" expanded="true" signature="6192:6668" ph="..." />
+                <element signature="e#1230#1666#0" />
+                <element signature="e#1788#2879#0" />
+                <element signature="e#2946#3591#0" />
+                <element signature="e#3642#4556#0" />
+                <element signature="e#4659#5789#0" />
+                <element signature="e#5804#6036#0" />
+                <element signature="e#6485#6691#0" />
+                <element signature="e#6745#7163#0" />
+                <element signature="e#7196#7273#0" />
+                <element signature="e#7307#7330#0" />
+                <element signature="e#7336#7442#0" />
+                <element signature="e#7942#8115#0" />
+                <element signature="e#8563#9339#0" />
+                <element signature="e#9311#9795#0" />
+                <element signature="e#9298#9975#0" />
+                <element signature="e#10027#10809#0" />
+                <element signature="e#11586#12950#0" />
+                <element signature="e#12964#14491#0" />
+                <element signature="e#11499#13589#0" />
+                <element signature="e#13662#14314#0" />
+                <element signature="e#17590#18642#0" />
+                <element signature="e#18595#19440#0" />
+                <element signature="e#19619#20535#0" />
+                <marker date="1542599810163" expanded="true" signature="7040:7518" ph="..." />
               </folding>
             </state>
           </provider>
@@ -77,7 +88,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byteManipulation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="272">
               <caret line="17" column="70" selection-start-line="17" selection-start-column="70" selection-end-line="17" selection-end-column="70" />
               <folding>
                 <element signature="e#155#168#0" expanded="true" />
@@ -108,34 +119,23 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-3" />
-    <option name="y" value="4" />
-    <option name="width" value="1250" />
-    <option name="height" value="998" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="width" value="917" />
+    <option name="height" value="1017" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="GNSMOO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GNSMOO" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/byteManipulation.py" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="pyconsole" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myUseExistingConsole" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -149,25 +149,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.byteManipulation">
-    <configuration name="NSGA-II)" type="PythonConfigurationType" factoryName="Python">
-      <module name="GNSMOO" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="C:\Users\Violet\Anaconda3\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NSGA-II.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.NSGA-II">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="GNSMOO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -193,6 +175,9 @@
       <module name="GNSMOO" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="C:\Users\Violet\Anaconda3\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -208,7 +193,7 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.NSGA-II)" />
+      <item itemvalue="Python.NSGA-II" />
       <item itemvalue="Python.byteManipulation" />
     </list>
   </component>
@@ -235,16 +220,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-7" y="0" width="917" height="1017" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.2857143" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Python Console" sideWeight="0.49917492" visible="true" weight="0.387458" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32922733" />
-      <window_info anchor="bottom" id="Event Log" sideWeight="0.5008251" side_tool="true" weight="0.3398844" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32922733" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -252,6 +233,10 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32922733" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32922733" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5008251" side_tool="true" weight="0.3398844" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="10" sideWeight="0.49917492" visible="true" weight="0.36240092" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -259,6 +244,52 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA-II.py</url>
+          <line>78</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA-II.py</url>
+          <line>94</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA-II.py</url>
+          <line>114</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA-II.py</url>
+          <line>49</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA-II.py</url>
+          <line>203</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA-II.py</url>
+          <line>208</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA-II.py</url>
+          <line>223</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NSGA-II.py</url>
+          <line>169</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/pyemu/pyemu/prototypes/moouu.py">
@@ -268,7 +299,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/byteManipulation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="272">
           <caret line="17" column="70" selection-start-line="17" selection-start-column="70" selection-end-line="17" selection-end-column="70" />
           <folding>
             <element signature="e#155#168#0" expanded="true" />
@@ -278,29 +309,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/IPython/core/interactiveshell.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="2909" selection-start-line="2909" selection-end-line="2909" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/NSGA-II.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
+        <state relative-caret-position="334">
+          <caret line="160" lean-forward="true" selection-start-line="160" selection-end-line="160" />
           <folding>
             <element signature="e#165#183#0" expanded="true" />
-            <element signature="e#319#754#0" />
-            <element signature="e#1505#2574#0" />
-            <element signature="e#2641#3387#0" />
-            <element signature="e#3658#4572#0" />
-            <element signature="e#4256#5412#0" />
-            <element signature="e#5515#5707#0" />
-            <element signature="e#5175#5589#0" />
-            <element signature="e#6074#6150#0" />
-            <element signature="e#6184#6206#0" />
-            <element signature="e#6530#6636#0" />
-            <element signature="e#5958#6077#0" />
-            <element signature="e#7307#7608#0" />
-            <element signature="e#6669#7256#0" />
-            <element signature="e#7002#7593#0" />
-            <element signature="e#7666#8318#0" />
-            <element signature="e#8470#8750#0" />
-            <marker date="1542254423256" expanded="true" signature="6192:6668" ph="..." />
+            <element signature="e#1230#1666#0" />
+            <element signature="e#1788#2879#0" />
+            <element signature="e#2946#3591#0" />
+            <element signature="e#3642#4556#0" />
+            <element signature="e#4659#5789#0" />
+            <element signature="e#5804#6036#0" />
+            <element signature="e#6485#6691#0" />
+            <element signature="e#6745#7163#0" />
+            <element signature="e#7196#7273#0" />
+            <element signature="e#7307#7330#0" />
+            <element signature="e#7336#7442#0" />
+            <element signature="e#7942#8115#0" />
+            <element signature="e#8563#9339#0" />
+            <element signature="e#9311#9795#0" />
+            <element signature="e#9298#9975#0" />
+            <element signature="e#10027#10809#0" />
+            <element signature="e#11586#12950#0" />
+            <element signature="e#12964#14491#0" />
+            <element signature="e#11499#13589#0" />
+            <element signature="e#13662#14314#0" />
+            <element signature="e#17590#18642#0" />
+            <element signature="e#18595#19440#0" />
+            <element signature="e#19619#20535#0" />
+            <marker date="1542599810163" expanded="true" signature="7040:7518" ph="..." />
           </folding>
         </state>
       </provider>
