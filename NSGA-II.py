@@ -14,67 +14,74 @@ class NSGA_II:
     # ------------------------External methods--------------------------------
     def __init__(self, objectives, bounds, pop_size=50, cross_prob=0.5, cross_dist=20, mut_prob=0.05, mut_dist=30):
         """initialise the algorithm. Parameters:
-           objectives: vector of objective functions
+           objectives: vector of objective functions to be optimised
            bounds: array of upper and lower bounds for each decision variable, eg [(0, 5), (-2, 2)]
-           pop_size: population size
+           pop_size: size of population used at each iteration
            cross_prob: probability of crossover occurring for any child
-           mut_prob: probability of mutation occuring for any child"""
-        self.cross_dist = cross_dist
-        self.mut_dist = mut_dist
-        self.cross_prob = cross_prob
-        self.mut_prob = mut_prob
-        self.cross_prob = cross_prob
+           cross_dist: distribution parameter of the crossover operation
+           mut_prob: probability of mutation occurring for any child
+           mut_dist: distribution parameter of the mutation operation
+        """
         self.objectives = objectives
         self.bounds = bounds
+        self.pop_size = pop_size
+        self.cross_prob = cross_prob
+        self.cross_dist = cross_dist
+        self.mut_prob = mut_prob
+        self.mut_dist = mut_dist
+        self.n_decision_variables = len(bounds)
+        # first test is on unconstrained functions. reset bounds to (-inf/1e10, inf/1e10) <- to avoid overflow errors
+        # for i, _ in enumerate(self.bounds):
+        #     self.bounds[i][0] = -np.inf/1e10
+        #     self.bound[i][1] = np.inf/1e10
+        # now create parent population within bounds
+        self.parent_pop = []
+        # for i in range(pop_size):
+        #     values = []
+        #     for j in range(self.n_decision_variables):
+        #         values.append(bounds[j][0] + np.random.random() * (bounds[j][1] - bounds[j][0]))
+        #     self.parent_pop.append(PopIndividual(values))
+        # sort based on non-domination
+
         self.population = []
         self.fronts = []
         self.pareto_optimal_set = []
-        self.parent_pop = []
         self.child_pop = []
-        self.pop_size = pop_size
-        self.n_decision_variables = len(bounds)
 
     def main_algorithm(self):
-        self.population = []
-        self.population.append(self.parent_pop)
-        self.population.append(self.child_pop)
-        self.non_dominated_sort()
-        self.parent_pop = []
-        front_index = 0
-        while len(self.parent_pop) + len(self.fronts[front_index]) <= self.pop_size:
-            self.crowding_distance_assignment(front_index)
-            self.parent_pop.append(self.fronts[front_index])
-            front_index += 1
+        pass
 
     # ------------------------internal methods-------------------------------
-    def non_dominated_sort(self):
-        """ ----------------------------------Internal Method-----------------------------------
-            Sorts the population into a set of non-dominated pareto fronts F1, F2 ...
-        """
-        self.fronts.append([])
-        for i in range(0, len(self.population)):
-            p = self.population[i]
-            for j in range(0, len(self.population)):
-                q = self.population[j]
-                if p.dominates(q, self.objectives):
-                    p.dominated_set.append(q)
-                elif q.dominates(p, self.objectives):
-                    p.domination_count += 1
-            if p.domination_count == 0:
-                p.rank = 1
-                self.fronts[0].append(p)
-        i = 0
-        while self.fronts[i] != []:
-            Q = []
-            for p in self.fronts[i]:
-                for q in p.dominated_set:
-                    q.domination_count -= 1
-                    if q.domination_count == 0:
-                        q.rank = i + 1
-                        Q.append(q)
-            i += 1
-            self.fronts.append(Q)
-        self.fronts.pop()
+    def non_dominated_sort(self, init=False):
+        """Sorts the population into a set of non-dominated pareto fronts F1, F2 ..."""
+        if not init:
+            self.fronts = []
+            self.fronts.append([])
+            for i in range(self.pop_size):
+                p = self.population[i]
+                for j in range(self.pop_size):
+                    q = self.population[j]
+                    if p.dominates(q, self.objectives):
+                        p.dominated_set.append(q)
+                    elif q.dominates(p, self.objectives):
+                        p.domination_count += 1
+                if p.domination_count == 0:
+                    p.rank = 1
+                    self.fronts[0].append(p)
+            i = 0
+            while self.fronts[i] != []:
+                Q = []
+                for p in self.fronts[i]:
+                    for q in p.dominated_set:
+                        q.domination_count -= 1
+                        if q.domination_count == 0:
+                            q.rank = i + 1
+                            Q.append(q)
+                i += 1
+                self.fronts.append(Q)
+            self.fronts.pop()
+        else:
+            pass
 
     def crowding_distance_assignment(self, front_index):
         """Calculates the crowding distance for each individual in the population"""
@@ -147,12 +154,11 @@ class NSGA_II:
         """use mutation clock and polynomial mutation"""
         k = 0
         i = 0
-        self.child_pop[i].mutate_individual(k, self.bounds, self.mut_dist)
         while i < self.pop_size:
-            variable_step = - 1 / self.mut_prob * np.log(1 - np.random.random())
-            i = i + np.ceil((k + variable_step) / self.n_decision_variables)
-            k = (k + variable_step) % self.n_decision_variables
             self.child_pop[i].mutate_individual(k, self.bounds, self.mut_dist)
+            length = int(np.ceil(- 1 / self.mut_prob * np.log(1 - np.random.random())))
+            i += (k + length) // self.n_decision_variables
+            k = (k + length) % self.n_decision_variables
 
 
 # --------------------------Other Classes--------------------------------------
@@ -362,7 +368,7 @@ class Tests:
 
         F = [lambda x: x[0]]
         bounds = (-2, 2)
-        MOO = NSGA_II(F, bounds)
+        MOO = NSGA_II(F, bounds, pop_size=5)
         for i in range(5):
             MOO.population.append(PopIndividual([i]))
         MOO.non_dominated_sort()
@@ -371,7 +377,7 @@ class Tests:
             assert np.all([front[i][0].values == expected_front[i][0]])
 
         # insert other way to check
-        MOO = NSGA_II(F, bounds)
+        MOO = NSGA_II(F, bounds, pop_size=5)
         for i in range(4, -1, -1):
             MOO.population.append((PopIndividual([i])))
         MOO.non_dominated_sort()
@@ -385,7 +391,7 @@ class Tests:
                           [[1, 3], [2, 3], [3, 3], [4, 3]], [[1, 4], [2, 4], [3, 4], [4, 4]]]
 
         F = [lambda x: x[0], lambda x: 1 / x[0] + x[1]]
-        MOO = NSGA_II(F, bounds)
+        MOO = NSGA_II(F, bounds, pop_size=16)
         for i in range(1, 5):
             for j in range(1, 5):
                 MOO.population.append(PopIndividual([i, j]))
@@ -396,7 +402,7 @@ class Tests:
                 assert np.all([front[i][j].values == expected_front[i][j]])
 
         # insert other way to check
-        MOO = NSGA_II(F, bounds)
+        MOO = NSGA_II(F, bounds, pop_size=16)
         for i in range(4, 0, -1):
             for j in range(4, 0, -1):
                 MOO.population.append(PopIndividual([j, i]))
@@ -413,7 +419,7 @@ class Tests:
     def test_crowding_distance_assignment():
         F = [lambda x: x[0], lambda x: 1 / x[0] + x[1]]
         bounds = []
-        MOO = NSGA_II(F, bounds, 20)
+        MOO = NSGA_II(F, bounds, pop_size=16)
         for i in range(1, 5):
             for j in range(1, 5):
                 MOO.population.append(PopIndividual([i, j]))
@@ -522,7 +528,23 @@ class Tests:
 
     @staticmethod
     def test_mutate():
-        pass
+        np.random.seed(123456789)
+        a = PopIndividual([5, 3])
+        b = PopIndividual([2, 7])
+        c = PopIndividual([20, 91])
+        d = PopIndividual([-3, -17])
+        e = PopIndividual([7, 8])
+        F = lambda x: x[0]
+        bounds = [(-100, 100), (-100, 100)]
+        MOO = NSGA_II(F, bounds, mut_prob=0.5, pop_size=5)
+        MOO.child_pop = [a, b, c, d, e]
+        MOO.mutate()
+        assert np.all(np.isclose(MOO.child_pop[0].values, PopIndividual([5.207918232261214, 3]).values))
+        assert np.all(np.isclose(MOO.child_pop[1].values, PopIndividual([2.0609653247733437, 7]).values))
+        assert np.all(np.isclose(MOO.child_pop[2].values, PopIndividual([20, 86.94314294871329]).values))
+        assert np.all(np.isclose(MOO.child_pop[3].values, PopIndividual([-3, -17]).values))
+        assert np.all(np.isclose(MOO.child_pop[4].values, PopIndividual([11.278392367467381, 9.229767723357321]).values))
+        print("NSGA-II.mutate() passed")
 
 
 def main():
@@ -538,6 +560,7 @@ def main():
     Tests.test_crowded_sort()
     Tests.test_tournament_selection()
     Tests.test_crossover()
+    Tests.test_mutate()
 
 
 main()
