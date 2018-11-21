@@ -7,15 +7,14 @@ import matplotlib.pyplot as plt
 
 def nice_plot():
     # run NSGA_II
-    np.random.seed(123426)
     objectives = [lambda x: abs(x[0]), lambda y: 1 / (abs(y[0]) + 0.1) + y[1] ** 2]
     bounds = [(-2, 2), (-2, 2)]
-    moo = NSGA_II.NSGA_II(objectives, bounds, iterations=10, parent_pop_size=100)
+    moo = NSGA_II.NSGA_II(objectives, bounds, iterations=100, parent_pop_size=100)
     pareto_set = moo.run()
     # get data
     x = []
     y = []
-    for individual in pareto_set:
+    for individual in moo.population:
         x.append(objectives[0](individual.values))
         y.append(objectives[1](individual.values))
     # line representing real pareto set
@@ -32,6 +31,9 @@ def nice_plot():
 
 
 nice_plot()
+
+
+
 
 
 

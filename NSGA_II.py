@@ -6,10 +6,16 @@ import numpy as np
 import math
 
 
-# import byteManipulation as byt
-
 class NSGA_II:
-    """NSGA-II algorithm"""
+    """implements the NSGA_II algorithm for multi objective optimisation
+       Methods to be used:
+       __init__: initialise the algorithm.
+            Objectives: a list of functions to be optimised, e.g [f1, f2...]
+            bounds: limits on the decision variables in the problem, to be specified as
+            ([x1_lower, x1_upper], [x2_lower, x2_upper], ...)
+            Other values are just numbers specifying parameters of the algorithm
+        run: runs the algorithm and returns an approximation to the pareto front
+    """
 
     # ------------------------External methods--------------------------------
     def __init__(self, objectives, bounds, parent_pop_size=50, cross_prob=0.5, cross_dist=20, mut_prob=0.01,
@@ -17,7 +23,8 @@ class NSGA_II:
         """initialise the algorithm. Parameters:
            objectives: vector of objective functions to be optimised
            bounds: array of upper and lower bounds for each decision variable, eg [(0, 5), (-2, 2)]
-           parent_pop_size: size of PARENT population. actual population is 2 * pop_size
+           ------------------------------------- Optional parameters -------------------------------------------------
+           parent_pop_size: size of parent population. Full population size is 2 * parent_pop due to child population
            cross_prob: probability of crossover occurring for any child
            cross_dist: distribution parameter of the crossover operation
            mut_prob: probability of mutation occurring for any child
@@ -34,19 +41,21 @@ class NSGA_II:
         self.iterations = iterations
         self.n_decision_variables = len(bounds)
         # visualisation storage variables
+        self.population_storage = []
         # --------------------------------sets of population members------------------------------------------
         self.parent_pop = []
         self.child_pop = []
         self.fronts = []
-        self.pareto_optimal_set = []
         self.population = []
 
     def run(self):
+        """Run the NSGA-II algorithm. This will return an approximation to the pareto front"""
         self.initialise_parent_population()
         self.non_dominated_sort(init=True)
         self.new_child_population()
         for i in range(self.iterations):
             self.population = self.child_pop + self.parent_pop
+            self.population_storage.append(self.population)
             self.non_dominated_sort()
             self.parent_pop = []
             j = 0
@@ -61,12 +70,15 @@ class NSGA_II:
         return self.fronts[0]
 
     def new_child_population(self):
+        """Internal method. creates a new child population from the parent using tournament selection, crossover,
+            and mutation."""
         self.child_pop = []
         self.tournament_selection()
         self.crossover()
         self.mutate()
 
     def initialise_parent_population(self):
+        """Internal method. Create the initial parent population"""
         for i in range(self.parent_pop_size):
             values = []
             for j in range(self.n_decision_variables):
@@ -74,7 +86,7 @@ class NSGA_II:
             self.parent_pop.append(PopIndividual(values))
 
     def non_dominated_sort(self, init=False):
-        """Sorts the population into a set of non-dominated pareto fronts F1, F2 ..."""
+        """Internal method. Sorts the population into a set of non-dominated pareto fronts F1, F2 ..."""
         if init:
             self.population = self.parent_pop
         for p in self.population:
@@ -85,8 +97,6 @@ class NSGA_II:
             p = self.population[i]
             for j in range(i + 1, len(self.population)):
                 q = self.population[j]
-                if q == p:
-                    continue
                 if p.dominates(q, self.objectives):
                     p.dominated_set.append(q)
                     q.domination_count += 1
@@ -111,7 +121,7 @@ class NSGA_II:
         self.fronts.pop()
 
     def crowding_distance_assignment(self, front_index):
-        """Calculates the crowding distance for each individual in the population"""
+        """Internal method. Calculates and assigns the crowding distance for each individual in the population"""
         front = self.fronts[front_index]
         n = len(front)
         for individual in front:
@@ -128,7 +138,8 @@ class NSGA_II:
                             f(front[i + 1].values) - f(front[i - 1].values)) / (fmax - fmin)
 
     def crowded_sort(self, front_index):
-        """implements an insertion sort using the crowded comparison operator"""
+        """Internal method. Uses an insertion sort with a self defined comparison operator to sort the front into
+            order with the best individuals at the front"""
         for i in range(1, len(self.fronts[front_index])):
             indiv_1 = self.fronts[front_index][i]
             j = i - 1
@@ -148,37 +159,30 @@ class NSGA_II:
                     self.fronts[front_index][j + 1] = indiv_1
 
     def tournament_selection(self):
-        """performs a tournament selection on the parent population. Note that it is assumed that the population has
-        already been ranked and been assign"""
-        np.random.shuffle(self.parent_pop)
-        i = 0
-        while i < (self.parent_pop_size // 2):
-            if self.parent_pop[2 * i].compare(self.parent_pop[2 * i + 1]):
-                self.child_pop.append(PopIndividual(self.parent_pop[2 * i].values))
-            else:
-                self.child_pop.append(PopIndividual(self.parent_pop[2 * i + 1].values))
-            i += 1
-        # now repeat this process again:
-        i = 0
-        np.random.shuffle(self.parent_pop)
-        while i < (self.parent_pop_size // 2):
-            if self.parent_pop[2 * i].compare(self.parent_pop[2 * i + 1]):
-                self.child_pop.append(PopIndividual(self.parent_pop[2 * i].values))
-            else:
-                self.child_pop.append(PopIndividual(self.parent_pop[2 * i + 1].values))
-            i += 1
+        """Internal method. performs a tournament selection on the parent population. Note that it is assumed that the
+            population has already been ranked and been assigned crowding distances"""
+        for _ in range(2):
+            np.random.shuffle(self.parent_pop)
+            i = 0
+            while i < (self.parent_pop_size // 2):
+                if self.parent_pop[2 * i].compare(self.parent_pop[2 * i + 1]):
+                    self.child_pop.append(self.parent_pop[2 * i].clone())
+                else:
+                    self.child_pop.append(self.parent_pop[2 * i + 1].clone())
+                i += 1
         if self.parent_pop_size % 2 == 1:  # i.e is odd
-            self.child_pop.append(PopIndividual(self.parent_pop[self.parent_pop_size - 1].values))
+            self.child_pop.append(self.parent_pop[self.parent_pop_size - 1].clone())
         # child population now populated from tournament selection
 
     def crossover(self):
+        """Internal method. Crosses a random selection of the child population"""
         for i in range(len(self.child_pop)):
             if np.random.random() > self.cross_prob:
                 rand_index = np.random.randint(0, len(self.child_pop))
                 self.child_pop[i].recombine(self.child_pop[rand_index], self.bounds, self.cross_dist)
 
     def mutate(self):
-        """use mutation clock and polynomial mutation"""
+        """Internal method. Use mutation clock to mutate a small selection of the child population"""
         k = 0
         i = 0
         while i < self.parent_pop_size:
@@ -188,11 +192,11 @@ class NSGA_II:
             k = (k + length) % self.n_decision_variables
 
 
-# --------------------------Other Classes--------------------------------------
 class PopIndividual:
     """represents an individual in a population for NSGA-II"""
 
     def __init__(self, values):
+        """initialise the new population member"""
         self.values = np.array(values, dtype=float)
         # self.byte_encoding = self._encode(value)
         self.dominated_set = []
@@ -201,6 +205,7 @@ class PopIndividual:
         self.crowding_distance = 0
 
     def dominates(self, other, objectives):
+        """tests for dominance between self and other. returns true if self dominates other, false otherwise"""
         i = 0
         weak_dom = True
         strong_condition = False
@@ -214,34 +219,22 @@ class PopIndividual:
         return weak_dom and strong_condition
 
     def __str__(self):
+        """string representation of the individual"""
         s = "solution at {}, rank {}".format(self.values, self.rank)
         return s
 
     def __repr__(self):
+        """representation of the individual"""
         return "[{:.2f}, {:.2f}], cd={:.2f}".format(self.values[0], self.values[1], self.crowding_distance)
 
-    # note: some methods for encoding and decoding floats are included here. These may be used at a later date
-    # for now it has been determined that for large sets of decision variables, simply swapping these may be sufficient.
-    # def _encode(self, values):
-    #     encoded = []
-    #     for value in values:
-    #         encoded.append(byt.float2bytearray(value))
-    #     return encoded
-
-    # def _decode(self, values):
-    #     decoded = []
-    #     for value in values:
-    #         decoded.append(byt.bytearray2float(value))
-    #     return decoded
-
     def compare(self, other):
-        """true if self is better, false otherwise"""
+        """compares self and other in terms of their rank and crowding distance. Returns true the rank of self is lower
+            than other, or if the ranks are equal and the crowding distance of self is higher."""
         return ((self.rank < other.rank) or (
                     (self.rank == other.rank) and (self.crowding_distance > other.crowding_distance)))
 
     def recombine(self, other, bounds, distribution_parameter):
-        """Use SBX Deb [1995] to cross self and other. Note this uses the suggested extension to multi variable problems
-        given by Deb and Kumar [1995], where variables in each of the individuals crossing have P = 0.5 of crossing"""
+        """uses simulated binary crossover"""
         for i in range(len(self.values)):
             if np.random.random() >= 0.5:
                 p1 = self.values[i]
@@ -256,6 +249,9 @@ class PopIndividual:
                     B2 = self.get_beta(beta_u, distribution_parameter)
                 self.values[i] = 0.5 * ((p1 + p2) - B1 * abs(p2 - p1))
                 other.values[i] = 0.5 * ((p1 + p2) + B2 * abs(p2 - p1))
+
+    def clone(self):
+        return PopIndividual(self.values)
 
     @staticmethod
     def get_beta(transformation, n, is_close_values=False):
@@ -282,332 +278,3 @@ class PopIndividual:
     def clear(self):
         self.domination_count = 0
         self.dominated_set = []
-
-
-# ----------------------------Tests-----------------------
-class Tests:
-
-    # ------------------------tests for PopIndividual-------------------------
-    @staticmethod
-    def test_dominates():
-        # test very simple objective function
-        F = [lambda x: x[0]]
-        bounds = (-2, 2)
-        MOO = NSGA_II(F, bounds, 20)
-        for i in range(5):
-            MOO.population.append(PopIndividual([i]))
-        assert MOO.population[0].dominates(MOO.population[1], MOO.objectives) is True
-        assert MOO.population[0].dominates(MOO.population[3], MOO.objectives) is True
-        assert MOO.population[3].dominates(MOO.population[0], MOO.objectives) is False
-        assert MOO.population[0].dominates(MOO.population[0], MOO.objectives) is False
-
-        # test more complex objective function
-        # F = [lambda x: ]
-        print("PopIndividaul.dominates() passed")
-
-    @staticmethod
-    def test_compare():
-        x = PopIndividual([])
-        y = PopIndividual([])
-        z = PopIndividual([])
-        q = PopIndividual([])
-        r = PopIndividual([])
-        t = PopIndividual([])
-        # values don't actually matter, we can just assign empty values
-
-        x.rank = 1
-        x.crowding_distance = 5
-        y.rank = 1
-        y.crowding_distance = 4
-        z.rank = 1
-        z.crowding_distance = 6
-        q.rank = 2
-        q.crowding_distance = 2
-        r.rank = 3
-        r.crowding_distance = 1
-        t.rank = 1
-        t.crowding_distance = 3
-
-        assert x.compare(y) is True
-        assert x.compare(z) is False
-        assert x.compare(x) is False
-        assert q.compare(r) is True
-        assert q.compare(t) is False
-        print("PopIndividual.compare() passed")
-
-    @staticmethod
-    def test_recombine():
-        np.random.seed(1002402)
-        bounds = [(-20, 20)]
-        dist_param = 3
-        # test 1
-        p1 = PopIndividual([5])
-        p2 = PopIndividual([10])
-        p1.recombine(p2, dist_param)
-        assert np.isclose(p1.values[0], 5.022211826787321, atol=1e-6)
-        assert np.isclose(p2.values[0], 9.977788173212678, atol=1e-6)
-        # test 2
-        p1 = PopIndividual([5])
-        p2 = PopIndividual([10])
-        p1.recombine(p2, dist_param)
-        assert np.isclose(p1.values[0], 5.0, atol=1e-6)
-        assert np.isclose(p2.values[0], 10.0, atol=1e-6)
-        # test 3
-        p1 = PopIndividual([5])
-        p2 = PopIndividual([10])
-        p1.recombine(p2, dist_param)
-        assert np.isclose(p1.values[0], 5.0, atol=1e-6)
-        assert np.isclose(p2.values[0], 10.0, atol=1e-6)
-        # test 4
-        p1 = PopIndividual([5])
-        p2 = PopIndividual([10])
-        p1.recombine(p2, dist_param)
-        assert np.isclose(p1.values[0], 5.998068382956265, atol=1e-6)
-        assert np.isclose(p2.values[0], 9.001931617043736, atol=1e-6)
-        # test 5
-        p1 = PopIndividual([5])
-        p2 = PopIndividual([10])
-        p1.recombine(p2, dist_param)
-        assert np.isclose(p1.values[0], 5.746398124977722, atol=1e-6)
-        assert np.isclose(p2.values[0], 9.25360187502228, atol=1e-6)
-        print("PopIndividual.recombine() passed")
-
-    @staticmethod
-    def test_mutate_individual():
-        np.random.seed(12645678)
-        bounds = [(-5, 5)]
-        distribution_param = 2
-        indiv_value = 0
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], -0.07299526594720773, atol=1e-6)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], -0.027816685123562834)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], -0.9019673485855295)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], 0.49704076190606683)
-        # test 2
-        np.random.seed(12645678)
-        indiv_value = 4.9
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], 4.755469373424529)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], 4.844922963455346)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], 3.1141046498006517)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], 4.909940815238122)
-        print("PopIndividual.mutate_individual() passed")
-
-    # ----------------------------tests for NSGA-II---------------------------
-    @staticmethod
-    def test_non_dominated_sort():
-        # test very simple objective function
-        expected_front = [[[0]], [[1]], [[2]], [[3]], [[4]]]
-
-        F = [lambda x: x[0]]
-        bounds = (-2, 2)
-        MOO = NSGA_II(F, bounds, parent_pop_size=5)
-        for i in range(5):
-            MOO.population.append(PopIndividual([i]))
-        MOO.non_dominated_sort()
-        front = MOO.fronts
-        for i in range(len(expected_front)):
-            assert np.all([front[i][0].values == expected_front[i][0]])
-
-        # insert other way to check
-        MOO = NSGA_II(F, bounds, parent_pop_size=5)
-        for i in range(4, -1, -1):
-            MOO.population.append((PopIndividual([i])))
-        MOO.non_dominated_sort()
-        front = MOO.fronts
-        for i in range(len(expected_front)):
-            assert np.all([front[i][0].values == expected_front[i][0]])
-        # simple tests done
-
-        # test more complex objective function
-        expected_front = [[[1, 1], [2, 1], [3, 1], [4, 1]], [[1, 2], [2, 2], [3, 2], [4, 2]],
-                          [[1, 3], [2, 3], [3, 3], [4, 3]], [[1, 4], [2, 4], [3, 4], [4, 4]]]
-
-        F = [lambda x: x[0], lambda x: 1 / x[0] + x[1]]
-        MOO = NSGA_II(F, bounds, parent_pop_size=16)
-        for i in range(1, 5):
-            for j in range(1, 5):
-                MOO.population.append(PopIndividual([i, j]))
-        MOO.non_dominated_sort()
-        front = MOO.fronts
-        for i in range(len(expected_front)):
-            for j in range(len(expected_front[i])):
-                assert np.all([front[i][j].values == expected_front[i][j]])
-
-        # insert other way to check
-        MOO = NSGA_II(F, bounds, parent_pop_size=16)
-        for i in range(4, 0, -1):
-            for j in range(4, 0, -1):
-                MOO.population.append(PopIndividual([j, i]))
-        MOO.non_dominated_sort()
-        front = MOO.fronts
-        for i in range(len(expected_front)):
-            sorted_front = sorted(front[i], key=lambda x: x.values[0])
-            for j in range(len(expected_front[i])):
-                assert np.all([sorted_front[j].values == expected_front[i][j]])
-        print("NSGA-II.non_dominated_sort() passed")
-        # complex tests passed
-
-    @staticmethod
-    def test_crowding_distance_assignment():
-        F = [lambda x: x[0], lambda x: 1 / x[0] + x[1]]
-        bounds = []
-        MOO = NSGA_II(F, bounds, parent_pop_size=16)
-        for i in range(1, 5):
-            for j in range(1, 5):
-                MOO.population.append(PopIndividual([i, j]))
-        MOO.non_dominated_sort()
-        MOO.crowding_distance_assignment(0)
-        front1 = MOO.fronts[0]
-        d = front1[0]
-        c = front1[1]
-        b = front1[2]
-        a = front1[3]
-        assert d.crowding_distance == np.inf
-        assert a.crowding_distance == np.inf
-        assert math.isclose(c.crowding_distance, 1)
-        assert math.isclose(b.crowding_distance, 14 / 9)
-        print("NSGA-II.crowding_distance_assignment() passed")
-
-    @staticmethod
-    def test_crowded_sort():
-        """unfinished"""
-        F = lambda x: x[0]
-        bounds = (-10, 10)
-        MOO = NSGA_II(F, bounds)
-        a = PopIndividual([1])
-        b = PopIndividual([2])
-        c = PopIndividual([3])
-        d = PopIndividual([4])
-        e = PopIndividual([5])
-        f = PopIndividual([6])
-        g = PopIndividual([7])
-        h = PopIndividual([8])
-        a.rank = 1
-        a.crowding_distance = 10
-        b.rank = 1
-        b.crowding_distance = 9
-        c.rank = 1
-        c.crowding_distance = 7
-        d.rank = 2
-        d.crowding_distance = 15
-        e.rank = 2
-        e.crowding_distance = 14
-        f.rank = 2
-        f.crowding_distance = 10
-        g.rank = 3
-        g.crowding_distance = 25
-        h.rank = 7
-        h.crowding_distance = 10
-        MOO.fronts.append([a, b, c, d, e, f, g, h])
-        # setup complete
-        expected = [a, b, c, d, e, f, g, h]
-        for i in range(10):
-            np.random.shuffle(MOO.fronts[0])
-            MOO.crowded_sort(0)
-            assert MOO.fronts[0] == expected
-        print("NSGA-II.crowded_sort() passed")
-
-    @staticmethod
-    def test_tournament_selection():
-        np.random.seed(12645678)
-        F = lambda x: x[0]
-        bounds = (-10, 10)
-        MOO = NSGA_II(F, bounds, parent_pop_size=4)
-        a = PopIndividual([1])
-        b = PopIndividual([2])
-        c = PopIndividual([3])
-        d = PopIndividual([4])
-        e = PopIndividual([5])
-        a.rank = 1
-        a.crowding_distance = 3
-        b.rank = 1
-        b.crowding_distance = 2
-        c.rank = 4
-        c.crowding_distance = 7
-        d.rank = 5
-        d.crowding_distance = 1
-        e.rank = 4
-        e.crowding_distance = 2
-        MOO.parent_pop = [a, b, c, d]
-        MOO.tournament_selection()
-        assert MOO.child_pop == [c, a, a, c]
-        np.random.seed(12345678)
-        MOO = NSGA_II(F, bounds, parent_pop_size=5)
-        MOO.parent_pop = [a, b, c, d, e]
-        MOO.tournament_selection()
-        assert MOO.child_pop == [b, a, a, b, e]
-        print("NSGA-II.tournament_sort() passed")
-
-    @staticmethod
-    def test_crossover():
-        np.random.seed(1234567890)
-        a = PopIndividual([5, 3])
-        b = PopIndividual([2, 7])
-        c = PopIndividual([20, 91])
-        d = PopIndividual([-3, -17])
-        e = PopIndividual([7, 8])
-        F = lambda x: x[0]
-        bounds = [(-5, 20), (-20, 100)]
-        MOO = NSGA_II(F, bounds)
-        MOO.child_pop = [a, b, c, d, e]
-        MOO.crossover()
-        assert np.all(np.isclose(MOO.child_pop[0].values, PopIndividual([5, 3]).values))
-        assert np.all(np.isclose(MOO.child_pop[1].values, PopIndividual([2, 7.0]).values))
-        assert np.all(np.isclose(MOO.child_pop[2].values, PopIndividual([20.268629037161734, 91]).values))
-        assert np.all(np.isclose(MOO.child_pop[3].values, PopIndividual([-2.3824405709323537, -17]).values))
-        assert np.all(np.isclose(MOO.child_pop[4].values, PopIndividual([6.113811533770617, 8]).values))
-        print("NSGA-II.crossover() passed")
-
-    @staticmethod
-    def test_mutate():
-        np.random.seed(123456789)
-        a = PopIndividual([5, 3])
-        b = PopIndividual([2, 7])
-        c = PopIndividual([20, 91])
-        d = PopIndividual([-3, -17])
-        e = PopIndividual([7, 8])
-        F = lambda x: x[0]
-        bounds = [(-100, 100), (-100, 100)]
-        MOO = NSGA_II(F, bounds, mut_prob=0.5, parent_pop_size=5)
-        MOO.child_pop = [a, b, c, d, e]
-        MOO.mutate()
-        assert np.all(np.isclose(MOO.child_pop[0].values, PopIndividual([5.207918232261214, 3]).values))
-        assert np.all(np.isclose(MOO.child_pop[1].values, PopIndividual([2.0609653247733437, 7]).values))
-        assert np.all(np.isclose(MOO.child_pop[2].values, PopIndividual([20, 86.94314294871329]).values))
-        assert np.all(np.isclose(MOO.child_pop[3].values, PopIndividual([-3, -17]).values))
-        assert np.all(np.isclose(MOO.child_pop[4].values, PopIndividual([11.278392367467381, 9.229767723357321]).values))
-        print("NSGA-II.mutate() passed")
-
-
-def main():
-    # PopIndividual tests
-    Tests.test_dominates()
-    Tests.test_compare()
-    # Tests.test_recombine()
-    Tests.test_mutate_individual()
-
-    # NSGA-II tests
-    Tests.test_non_dominated_sort()
-    Tests.test_crowding_distance_assignment()
-    Tests.test_crowded_sort()
-    Tests.test_tournament_selection()
-    Tests.test_crossover()
-    Tests.test_mutate()
-
-
-#main()
