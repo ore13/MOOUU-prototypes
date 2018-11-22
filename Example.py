@@ -3,6 +3,16 @@
 import NSGA_II
 import numpy as np
 import matplotlib.pyplot as plt
+from Test_suite import *
+
+
+def run_test_problems():
+    test1 = Test_Algorithm(ZDT1, NSGA_II.NSGA_II)
+    test1.plot_results()
+    plt.show()
+
+
+run_test_problems()
 
 
 def nice_plot():
@@ -14,7 +24,7 @@ def nice_plot():
     # get data
     x = []
     y = []
-    for individual in moo.population:
+    for individual in pareto_set:
         x.append(objectives[0](individual.values))
         y.append(objectives[1](individual.values))
     # line representing real pareto set
@@ -30,7 +40,7 @@ def nice_plot():
     plt.show()
 
 
-nice_plot()
+#nice_plot()
 
 
 

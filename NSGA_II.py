@@ -18,8 +18,8 @@ class NSGA_II:
     """
 
     # ------------------------External methods--------------------------------
-    def __init__(self, objectives, bounds, parent_pop_size=50, cross_prob=0.5, cross_dist=20, mut_prob=0.01,
-                 mut_dist=20, iterations=30):
+    def __init__(self, objectives, bounds, parent_pop_size=100, cross_prob=0.5, cross_dist=20, mut_prob=0.01,
+                 mut_dist=20, iterations=250):
         """initialise the algorithm. Parameters:
            objectives: vector of objective functions to be optimised
            bounds: array of upper and lower bounds for each decision variable, eg [(0, 5), (-2, 2)]
@@ -47,6 +47,9 @@ class NSGA_II:
         self.child_pop = []
         self.fronts = []
         self.population = []
+
+    def __str__(self):
+        return "NSGA-II with population size {} and {} iterations".format(self.parent_pop_size, self.iterations)
 
     def run(self):
         """Run the NSGA-II algorithm. This will return an approximation to the pareto front"""
@@ -133,9 +136,10 @@ class NSGA_II:
             front[-1].crowding_distance = np.inf
             fmax = f(front[-1].values)
             fmin = f(front[0].values)
-            for i in range(1, n - 1):
-                front[i].crowding_distance = front[i].crowding_distance + (
-                            f(front[i + 1].values) - f(front[i - 1].values)) / (fmax - fmin)
+            if not np.isclose(fmax, fmin):
+                for i in range(1, n - 1):
+                    front[i].crowding_distance = front[i].crowding_distance + (
+                                f(front[i + 1].values) - f(front[i - 1].values)) / (fmax - fmin)
 
     def crowded_sort(self, front_index):
         """Internal method. Uses an insertion sort with a self defined comparison operator to sort the front into
