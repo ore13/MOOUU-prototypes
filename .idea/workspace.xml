@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59708be3-a81c-46db-ac5a-fae01c9056cd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Cantilever.py" beforeDir="false" afterPath="$PROJECT_DIR$/Cantilever.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cantilever.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Example.py" beforeDir="false" afterPath="$PROJECT_DIR$/Example.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NSGA_II.py" beforeDir="false" afterPath="$PROJECT_DIR$/NSGA_II.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_suite.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_suite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/byteManipulation.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,39 +15,99 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/Abstract_Moo.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="349">
+                    <caret line="122" column="23" lean-forward="true" selection-start-line="122" selection-start-column="23" selection-end-line="122" selection-end-column="23" />
+                    <folding>
+                      <element signature="e#860#1906#0" />
+                      <element signature="e#1935#1939#0" />
+                      <element signature="e#3079#3329#0" />
+                      <element signature="e#3391#3706#0" />
+                      <element signature="e#3795#3965#0" />
+                      <element signature="e#4014#4647#0" />
+                      <element signature="e#5050#5128#0" />
+                      <element signature="e#5230#5419#0" />
+                      <element signature="e#5461#5997#0" />
+                      <element signature="e#6036#6298#0" />
+                      <element signature="e#6329#6398#0" />
+                      <element signature="e#6476#7512#0" />
+                      <element signature="e#7600#7893#0" />
+                      <element signature="e#8053#8550#0" />
+                      <marker date="1543452430988" expanded="true" signature="2046:2585" ph="..." />
+                      <marker date="1543452430988" expanded="true" signature="2686:3016" ph="..." />
+                      <marker date="1543452430988" expanded="true" signature="5638:5689" ph="..." />
+                      <marker date="1543452430988" expanded="true" signature="6803:6943" ph="..." />
+                      <marker date="1543452430988" expanded="true" signature="8439:8444" ph="..." />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/SPEA.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="357">
+                    <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
+                    <folding>
+                      <element signature="e#137#155#0" expanded="true" />
+                      <element signature="e#426#661#0" />
+                      <element signature="e#690#1465#0" />
+                      <element signature="e#1600#1859#0" />
+                      <element signature="e#1937#2423#0" />
+                      <element signature="e#2463#3664#0" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FUSProjectUsageTrigger">
     <session id="1602270817">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="8" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.open.time.8" value="2" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.8" value="4" />
+          <entry key="project.open.time.9" value="2" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="15" />
+          <entry key="py" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="15" />
+          <entry key="Python" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="NSGA-II" value="452" />
-          <entry key="Python Console" value="781" />
+          <entry key="Python Console" value="902" />
           <entry key="byteManipulation" value="361" />
-          <entry key="py" value="23578" />
+          <entry key="dummy" value="6" />
+          <entry key="py" value="50409" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="25172" />
+          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="Python" value="52124" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -52,28 +115,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NSGA_II.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="280" lean-forward="true" selection-start-line="280" selection-end-line="280" />
+            <state relative-caret-position="267">
+              <caret line="148" column="107" selection-start-line="148" selection-start-column="107" selection-end-line="148" selection-end-column="107" />
               <folding>
-                <element signature="e#250#8356#0" />
-                <element signature="e#250#291#1" />
-                <element signature="e#517#1811#0" />
-                <element signature="e#1997#2821#0" />
-                <element signature="e#2962#3064#0" />
-                <element signature="e#3261#3547#0" />
-                <element signature="e#3148#4436#0" />
-                <element signature="e#4503#5218#0" />
-                <element signature="e#5269#6161#0" />
-                <element signature="e#6804#7628#0" />
-                <element signature="e#7672#7934#0" />
-                <element signature="e#7730#8129#0" />
-                <element signature="e#8237#12197#0" />
-                <marker date="1542830631174" expanded="true" signature="3593:3676" ph="..." />
-                <marker date="1542830631174" expanded="true" signature="11648:11696" ph="..." />
-                <marker date="1542830631174" expanded="true" signature="11842:12071" ph="..." />
+                <element signature="e#173#191#0" expanded="true" />
+                <marker date="1543445155184" expanded="true" signature="3411:3603" ph="..." />
+                <marker date="1543445155184" expanded="true" signature="6484:6635" ph="..." />
               </folding>
             </state>
           </provider>
@@ -82,24 +132,39 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Example.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+            <state relative-caret-position="255">
+              <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
               <folding>
-                <marker date="1542830393985" expanded="true" signature="919:923" ph="..." />
+                <element signature="e#34#48#0" expanded="true" />
+                <marker date="1543445155246" expanded="true" signature="163:439" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SPEA_2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="64" column="45" lean-forward="true" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+              <folding>
+                <element signature="e#24#42#0" expanded="true" />
+                <marker date="1543525853616" expanded="true" signature="718:1350" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Visualisation.py">
+        <entry file="file://$PROJECT_DIR$/moo_sorting_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+            <state relative-caret-position="340">
+              <caret line="47" column="37" lean-forward="true" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
               <folding>
-                <element signature="e#56#74#0" expanded="true" />
-                <marker date="1542828793017" expanded="true" signature="505:510" ph="..." />
-                <marker date="1542828793017" expanded="true" signature="566:575" ph="..." />
+                <marker date="1543443287474" expanded="true" signature="116:121" ph="..." />
+                <marker date="1543443287474" expanded="true" signature="289:294" ph="..." />
+                <marker date="1543443287474" expanded="true" signature="795:800" ph="..." />
+                <marker date="1543443287474" expanded="true" signature="1290:2046" ph="..." />
               </folding>
             </state>
           </provider>
@@ -108,11 +173,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test_suite.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="272">
+              <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
               <folding>
                 <element signature="e#61#79#0" expanded="true" />
-                <marker date="1542771210703" expanded="true" signature="151:156" ph="..." />
+                <marker date="1543444572078" expanded="true" signature="134:139" ph="..." />
+                <marker date="1543444572078" expanded="true" signature="1520:1696" ph="..." />
+                <marker date="1543444572078" expanded="true" signature="2117:2465" ph="..." />
+                <marker date="1543444572078" expanded="true" signature="2146:2155" ph="..." />
+                <marker date="1543444572078" expanded="true" signature="2465:3001" ph="..." />
               </folding>
             </state>
           </provider>
@@ -135,6 +204,12 @@
       <find>fronts</find>
       <find>cross_prob</find>
       <find>np.random.seed</find>
+      <find>objectives</find>
+      <find>mutate</find>
+      <find>self.n_decision_variables</find>
+      <find>kwargs</find>
+      <find>crowded_sort</find>
+      <find>compare</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -146,17 +221,21 @@
         <option value="$PROJECT_DIR$/byteManipulation.py" />
         <option value="$PROJECT_DIR$/NSGA-II.py" />
         <option value="$PROJECT_DIR$/Cantilever.py" />
-        <option value="$PROJECT_DIR$/Test_suite.py" />
         <option value="$PROJECT_DIR$/Visualisation.py" />
-        <option value="$PROJECT_DIR$/Example.py" />
         <option value="$PROJECT_DIR$/Tests.py" />
+        <option value="$PROJECT_DIR$/SPEA.py" />
+        <option value="$PROJECT_DIR$/moo_sorting_functions.py" />
+        <option value="$PROJECT_DIR$/Test_suite.py" />
         <option value="$PROJECT_DIR$/NSGA_II.py" />
+        <option value="$PROJECT_DIR$/Example.py" />
+        <option value="$PROJECT_DIR$/Abstract_Moo.py" />
+        <option value="$PROJECT_DIR$/SPEA_2.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-6" />
-    <option name="width" value="1645" />
+    <option name="x" value="-10" />
+    <option name="width" value="883" />
     <option name="height" value="1017" />
   </component>
   <component name="ProjectView">
@@ -166,7 +245,7 @@
     <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/NSGA_II.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Test_suite.py" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -190,6 +269,48 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.testbox">
+    <configuration name="Abstract_moo" type="PythonConfigurationType" factoryName="Python">
+      <module name="GNSMOO" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Violet\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Abstract_Moo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="true" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SPEA tests" type="PythonConfigurationType" factoryName="Python">
+      <module name="GNSMOO" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Violet\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SPEA.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="true" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="GNSMOO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -232,6 +353,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="moo_sorting_functions" type="PythonConfigurationType" factoryName="Python">
+      <module name="GNSMOO" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Violet\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/moo_sorting_functions.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="true" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="testbox" type="PythonConfigurationType" factoryName="Python">
       <module name="GNSMOO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -247,7 +389,7 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Example.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="EMULATE_TERMINAL" value="true" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
@@ -255,6 +397,9 @@
     </configuration>
     <list>
       <item itemvalue="Python.testbox" />
+      <item itemvalue="Python.moo_sorting_functions" />
+      <item itemvalue="Python.SPEA tests" />
+      <item itemvalue="Python.Abstract_moo" />
       <item itemvalue="Python.NSGA_II" />
       <item itemvalue="Python.byteManipulation" />
     </list>
@@ -282,86 +427,112 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="1645" height="1017" extended-state="0" />
+    <frame x="-10" y="0" width="883" height="1017" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.2857143" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3277592" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49818182" weight="0.37123746" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.38127092" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3277592" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3277592" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5018182" side_tool="true" weight="0.2412231" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49917492" weight="0.32887402" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.2857143" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32922733" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2412231" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49818182" visible="true" weight="0.28647688" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3556059" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32842582" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32842582" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5008251" side_tool="true" weight="0.3398844" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49917492" weight="0.32616082" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5018182" side_tool="true" weight="0.2412231" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49917492" weight="0.66704416" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>i</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>i = 240</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>self.fronts</expression-string>
+        <expression-string>data[pivot_index]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>len(self.parent_pop)</expression-string>
+        <expression-string>data[pivot]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.population[0] == self.population[2]</expression-string>
+        <expression-string>data[i]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>q == p</expression-string>
+        <expression-string>len(data)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.population[3].dominates(self.population[3], self.objectives)</expression-string>
+        <expression-string>np.count_nonzero(np.linalg.norm(diff_vector, 2, axis=1) &lt; neighborhood)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.population[3].dominates(self.population[2], self.objectives)</expression-string>
+        <expression-string>np.linalg.norm(diff_vector, 2, axis=1) &lt; neighborhood</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.population[3].dominates(self.population[1], self.objectives)</expression-string>
+        <expression-string>np.linalg.norm(diff_vector, 2, axis=1)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.population[3].dominates(self.population[0], self.objectives)</expression-string>
+        <expression-string>diff_vector</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.population[2].dominates(self.population[3], self.objectives)</expression-string>
+        <expression-string>self.pareto_set[2]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/pyemu/pyemu/prototypes/moouu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13056" />
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -391,89 +562,140 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cantilever.py">
+    <entry file="file://$PROJECT_DIR$/Cantilever.py" />
+    <entry file="file://$PROJECT_DIR$/byteManipulation.py" />
+    <entry file="file://$PROJECT_DIR$/Visualisation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="391">
+          <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/core/fromnumeric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="1865" selection-start-line="1865" selection-end-line="1865" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/pyemu/pyemu/prototypes/moouu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="598" column="34" selection-start-line="598" selection-start-column="28" selection-end-line="598" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/pyemu/pyemu/prototypes/smoother.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="446" column="49" selection-start-line="446" selection-start-column="49" selection-end-line="446" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_suite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
           <folding>
-            <element signature="e#34#48#0" expanded="true" />
+            <element signature="e#61#79#0" expanded="true" />
+            <marker date="1543444572078" expanded="true" signature="134:139" ph="..." />
+            <marker date="1543444572078" expanded="true" signature="1520:1696" ph="..." />
+            <marker date="1543444572078" expanded="true" signature="2117:2465" ph="..." />
+            <marker date="1543444572078" expanded="true" signature="2146:2155" ph="..." />
+            <marker date="1543444572078" expanded="true" signature="2465:3001" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/byteManipulation.py">
+    <entry file="file://$PROJECT_DIR$/NSGA_II.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="70" selection-start-line="17" selection-start-column="70" selection-end-line="17" selection-end-column="70" />
+        <state relative-caret-position="267">
+          <caret line="148" column="107" selection-start-line="148" selection-start-column="107" selection-end-line="148" selection-end-column="107" />
           <folding>
-            <element signature="e#155#168#0" expanded="true" />
-            <marker date="1542243073412" expanded="true" signature="215:220" ph="..." />
-            <marker date="1542243073412" expanded="true" signature="380:385" ph="..." />
+            <element signature="e#173#191#0" expanded="true" />
+            <marker date="1543445155184" expanded="true" signature="3411:3603" ph="..." />
+            <marker date="1543445155184" expanded="true" signature="6484:6635" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/moo_sorting_functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="47" column="37" lean-forward="true" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+          <folding>
+            <marker date="1543443287474" expanded="true" signature="116:121" ph="..." />
+            <marker date="1543443287474" expanded="true" signature="289:294" ph="..." />
+            <marker date="1543443287474" expanded="true" signature="795:800" ph="..." />
+            <marker date="1543443287474" expanded="true" signature="1290:2046" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Example.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+        <state relative-caret-position="255">
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
           <folding>
-            <marker date="1542830393985" expanded="true" signature="919:923" ph="..." />
+            <element signature="e#34#48#0" expanded="true" />
+            <marker date="1543445155246" expanded="true" signature="163:439" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Visualisation.py">
+    <entry file="file://$PROJECT_DIR$/SPEA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+        <state relative-caret-position="357">
+          <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
           <folding>
-            <element signature="e#56#74#0" expanded="true" />
-            <marker date="1542828793017" expanded="true" signature="505:510" ph="..." />
-            <marker date="1542828793017" expanded="true" signature="566:575" ph="..." />
+            <element signature="e#137#155#0" expanded="true" />
+            <element signature="e#426#661#0" />
+            <element signature="e#690#1465#0" />
+            <element signature="e#1600#1859#0" />
+            <element signature="e#1937#2423#0" />
+            <element signature="e#2463#3664#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test_suite.py">
+    <entry file="file://$PROJECT_DIR$/Abstract_Moo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="349">
+          <caret line="122" column="23" lean-forward="true" selection-start-line="122" selection-start-column="23" selection-end-line="122" selection-end-column="23" />
           <folding>
-            <element signature="e#61#79#0" expanded="true" />
-            <marker date="1542771210703" expanded="true" signature="151:156" ph="..." />
+            <element signature="e#860#1906#0" />
+            <element signature="e#1935#1939#0" />
+            <element signature="e#3079#3329#0" />
+            <element signature="e#3391#3706#0" />
+            <element signature="e#3795#3965#0" />
+            <element signature="e#4014#4647#0" />
+            <element signature="e#5050#5128#0" />
+            <element signature="e#5230#5419#0" />
+            <element signature="e#5461#5997#0" />
+            <element signature="e#6036#6298#0" />
+            <element signature="e#6329#6398#0" />
+            <element signature="e#6476#7512#0" />
+            <element signature="e#7600#7893#0" />
+            <element signature="e#8053#8550#0" />
+            <marker date="1543452430988" expanded="true" signature="2046:2585" ph="..." />
+            <marker date="1543452430988" expanded="true" signature="2686:3016" ph="..." />
+            <marker date="1543452430988" expanded="true" signature="5638:5689" ph="..." />
+            <marker date="1543452430988" expanded="true" signature="6803:6943" ph="..." />
+            <marker date="1543452430988" expanded="true" signature="8439:8444" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tests.py">
+    <entry file="file://$PROJECT_DIR$/SPEA_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="12" lean-forward="true" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA_II.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="280" lean-forward="true" selection-start-line="280" selection-end-line="280" />
+        <state relative-caret-position="229">
+          <caret line="64" column="45" lean-forward="true" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
           <folding>
-            <element signature="e#250#8356#0" />
-            <element signature="e#250#291#1" />
-            <element signature="e#517#1811#0" />
-            <element signature="e#1997#2821#0" />
-            <element signature="e#2962#3064#0" />
-            <element signature="e#3261#3547#0" />
-            <element signature="e#3148#4436#0" />
-            <element signature="e#4503#5218#0" />
-            <element signature="e#5269#6161#0" />
-            <element signature="e#6804#7628#0" />
-            <element signature="e#7672#7934#0" />
-            <element signature="e#7730#8129#0" />
-            <element signature="e#8237#12197#0" />
-            <marker date="1542830631174" expanded="true" signature="3593:3676" ph="..." />
-            <marker date="1542830631174" expanded="true" signature="11648:11696" ph="..." />
-            <marker date="1542830631174" expanded="true" signature="11842:12071" ph="..." />
+            <element signature="e#24#42#0" expanded="true" />
+            <marker date="1543525853616" expanded="true" signature="718:1350" ph="..." />
           </folding>
         </state>
       </provider>
