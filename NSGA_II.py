@@ -131,9 +131,9 @@ class NSGA_II(AbstractMOEA):
 class PopIndividual(AbstractPopIndividual):
     """represents an individual in a population for NSGA-II"""
 
-    def __init__(self, values, objectives):
+    def __init__(self, values, objectives, objective_values=None):
         """initialise the new population member"""
-        super().__init__(values, objectives)
+        super().__init__(values, objectives, objective_values)
         self.dominated_set = []
         self.domination_count = 0
         self.rank = None
