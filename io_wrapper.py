@@ -9,6 +9,15 @@ test_dict = {"zdt1": ts.ZDT1, "zdt2": ts.ZDT2, "zdt3": ts.ZDT3, "zdt4": ts.ZDT4,
 
 
 def parse():
+    """ parse the command args
+
+    Parameters
+    ----------
+        None
+
+    Returns
+        args : ArgumentParser instance parsed arguments from the command line
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("--test_function", nargs=1, dest="test_function", default="zdt1")
     parser.add_argument("--input", nargs=1, default="input.dat", dest="input_file")
@@ -18,8 +27,17 @@ def parse():
 
 
 def run_through_wrapper(args):
+    """run a given ZDT benchmark via an input and output file
 
-    # io_wrapper(args.test_function,args.input_file,args.output_file)
+    Parameters
+    ----------
+        args : ArgumentParser instance parsed arguments from the command line
+
+    Returns
+    -------
+        None
+    """
+
     test_function = args.test_function.lower()
     if test_function not in test_dict.keys():
         raise Exception("'test_function' {0} not found in test suite", format(test_function))
@@ -35,6 +53,9 @@ def run_through_wrapper(args):
         f.write("f2 {0:20.8E}\n".format(f2))
 
 def test_wrapper():
+    """test that the io wrapper is doing something...
+
+    """
     args = parse()
     names = ["par_{0:02d}".format(i) for i in range(30)]
     vals = np.zeros(30) + 0.5
