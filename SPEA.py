@@ -104,8 +104,8 @@ class SPEA(AbstractMOEA):
 class PopIndividual(AbstractPopIndividual):
     """represents an individual in a population for SPEA"""
 
-    def __init__(self, values, objectives):
-        super().__init__(values, objectives)
+    def __init__(self, values, objectives, objective_values=None):
+        super().__init__(values, objectives, objective_values=objective_values)
         self.covered_by_set = []
 
     def __str__(self):

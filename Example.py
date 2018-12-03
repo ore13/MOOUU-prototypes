@@ -13,6 +13,8 @@ def run_test_problems():
     test.new_plot("ZDT1", colour='b', marker='o')
     test.change_algorithm(NSGA_II.NSGA_II)
     test.replot(colour='g', marker='o')
+    test.change_algorithm(SPEA_2.SPEA_2)
+    test.replot(colour='r', marker='o')
     # test.save_plot('ZDT4', 'C:/Users/Violet/Desktop/GNS work/Comparisons')
     plt.show()
 
@@ -82,7 +84,7 @@ def nice_plot_SPEA_2():
     objectives = [lambda x: abs(x[0]), lambda y: 1 / (abs(y[0]) + 0.1) + y[1] ** 2]
     bounds = [(-2, 2), (-2, 2)]
     np.random.seed(1245678)
-    moo = SPEA_2.SPEA_2(objectives, bounds, iterations=30, archive_size=50, population_size=50)
+    moo = SPEA_2.SPEA_2(objectives, bounds, iterations=10, archive_size=50, population_size=50)
     pareto_set = moo.run()
     # get data
     x = []
