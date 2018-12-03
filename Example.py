@@ -103,4 +103,7 @@ def nice_plot_SPEA_2():
     plt.show()
 
 
-nice_plot_SPEA_2()
+
+if __name__ == "__main__":
+    run_test_problems()
+#nice_plot_SPEA_2()
