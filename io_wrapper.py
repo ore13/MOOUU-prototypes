@@ -45,12 +45,16 @@ def run_through_wrapper(args):
     try:
         input_df = pd.read_csv(args.input_file)
     except Exception as e:
-        raise Exception("error reading input file {0}:{1}".format(args.input_file,str(e)))
+        raise Exception("error reading input file {0}:{1}".format(args.input_file, str(e)))
+    if len(input_df) != tf.number_decision_vars():
+        raise Exception("Incorrect number of decision variables. Should be {} d. vars. got {} d. vars."
+                        .format(len(input_df), tf.number_decision_vars()))
     f1 = tf.f1(input_df.parval1)
     f2 = tf.f2(input_df.parval1)
-    with open(args.output_file,'w') as f:
+    with open(args.output_file, 'w') as f:
         f.write("f1 {0:20.8E}\n".format(f1))
         f.write("f2 {0:20.8E}\n".format(f2))
+
 
 def test_wrapper():
     """test that the io wrapper is doing something...
@@ -59,11 +63,11 @@ def test_wrapper():
     args = parse()
     names = ["par_{0:02d}".format(i) for i in range(30)]
     vals = np.zeros(30) + 0.5
-    df = pd.DataFrame({"parnme":names,"parval1":vals})
+    df = pd.DataFrame({"parnme": names, "parval1": vals})
     df.to_csv("input.dat")
     run_through_wrapper(args)
     assert os.path.exists(args.output_file)
-    df = pd.read_csv(args.output_file,delim_whitespace=True,header=None)
+    df = pd.read_csv(args.output_file, delim_whitespace=True, header=None)
     print(df)
 
 if __name__ == "__main__":

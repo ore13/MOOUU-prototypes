@@ -28,14 +28,12 @@ class SPEA_2(AbstractMOEA):
         for _ in range(self.iterations):
             self.joint = self.population + self.archive
             self.fitness_assignment()  # Assigns fitness values to all population members
-            t0 = time.perf_counter()
             self.environmental_selection()  # create new archive from current archive and population
-            t1 = time.perf_counter()
-            print("Enviromental Selection Time:", t1 - t0)
-            next_population = self.tournament_selection(self.archive, self.population_size)
-            self.crossover_step_SBX(next_population)
-            self.mutation_step_polynomial(next_population)
-            self.population = next_population
+            self.population = self.tournament_selection(self.archive, self.population_size)
+            self.crossover_step_SBX(self.population)
+            self.mutation_step_polynomial(self.population)
+            for individual in self.archive:
+                individual.clear()
         return self.archive
 
     def fitness_assignment(self):
@@ -64,15 +62,13 @@ class SPEA_2(AbstractMOEA):
     def environmental_selection(self):
         self.next_archive = self.get_non_dominated()
         distances_initialised = False
-        distances = None
         while len(self.next_archive) > self.archive_size:
             if not distances_initialised:
                 self.distance_assignment()
                 distances_initialised = True
             self.distance_sort()
-            self.truncate(distances)
+            self.truncate()
         while len(self.next_archive) < self.archive_size:
-            print(len(self.next_archive))
             k = self.archive_size - len(self.next_archive)
             a = np.partition(self.joint, k - 1)[:k]
             self.next_archive += list(a)
@@ -100,7 +96,9 @@ class SPEA_2(AbstractMOEA):
         # return distances
 
     def truncate(self):
-        for i, individual1 in enumerate(self.next_archive):
+        i = 0
+        while i < len(self.next_archive):
+            individual1 = self.next_archive[i]
             min_individual = True
             j = 0
             while min_individual and j < len(self.next_archive):
@@ -179,6 +177,12 @@ class PopIndividual(AbstractPopIndividual):
             lt = self.distances[self.keys[i]] < other.distances[other.keys[i]]
             i += 1
         return eq or lt
+
+    def clear(self):
+        self.keys = []
+        self.distances = dict()
+        self.dominating_set = []
+        self.fitness_distances = None
 
 
 class Tests:
@@ -281,18 +285,56 @@ class Tests:
         b.connect(c, 4)
         b.connect(d, 7)
         d.connect(c, 2)
-        a.sort()
-        b.sort()
-        c.sort()
-        d.sort()
         moo.next_archive = [a, b, c, d]
+        moo.distance_sort()
         moo.truncate()
         assert moo.next_archive == [a, b, d]
-        a.sort()
-        b.sort()
-        d.sort()
+        moo.distance_sort()
         moo.truncate()
         assert moo.next_archive == [b, d]
+        moo.distance_sort()
+        moo.truncate()
+        assert moo.next_archive == [d]
+
+    @staticmethod
+    def test_distance_assignment():
+        objectives = [lambda x: x[0]]
+        bounds = []
+        moo = SPEA_2(objectives, bounds)
+        a = PopIndividual([1], objectives)
+        b = PopIndividual([2], objectives)
+        c = PopIndividual([3], objectives)
+        d = PopIndividual([4], objectives)
+        moo.next_archive = [a, b, c, d]
+        moo.distance_assignment()
+        assert moo.next_archive[0].distances[b] == 1
+        assert moo.next_archive[0].distances[c] == 2
+        assert moo.next_archive[0].distances[d] == 3
+        assert moo.next_archive[1].distances[a] == 1
+        assert moo.next_archive[1].distances[c] == 1
+        assert moo.next_archive[1].distances[d] == 2
+        assert moo.next_archive[2].distances[a] == 2
+        assert moo.next_archive[2].distances[b] == 1
+        assert moo.next_archive[2].distances[d] == 1
+        assert moo.next_archive[3].distances[a] == 3
+        assert moo.next_archive[3].distances[c] == 1
+        assert moo.next_archive[3].distances[b] == 2
+
+    @staticmethod
+    def test_environmental_selection():
+        objectives = [lambda x: x[0], lambda x: 1/x[0] + x[1]]
+        bounds = []
+        moo = SPEA_2(objectives, bounds, population_size=4, archive_size=4)
+        individuals = []
+        for i in range(1, 7):
+            individuals.append(PopIndividual([i, 1], objectives))
+            individuals[i-1].fitness = 0.1
+        moo.joint = individuals.copy()
+        moo.environmental_selection()
+        assert moo.archive == individuals[:2] + [individuals[3]] + [individuals[5]]
+
+
+
 
 
 
@@ -301,6 +343,8 @@ def main():
     Tests.test_graph_operations()
     Tests.test_fitness_assignment()
     Tests.test_truncate()
+    Tests.test_distance_assignment()
+    Tests.test_environmental_selection()
 
 main()
 

@@ -84,7 +84,7 @@ def nice_plot_SPEA_2():
     objectives = [lambda x: abs(x[0]), lambda y: 1 / (abs(y[0]) + 0.1) + y[1] ** 2]
     bounds = [(-2, 2), (-2, 2)]
     np.random.seed(1245678)
-    moo = SPEA_2.SPEA_2(objectives, bounds, iterations=10, archive_size=50, population_size=50)
+    moo = SPEA_2.SPEA_2(objectives, bounds, iterations=100, archive_size=50, population_size=50)
     pareto_set = moo.run()
     # get data
     x = []
@@ -105,7 +105,6 @@ def nice_plot_SPEA_2():
     plt.show()
 
 
-
-if __name__ == "__main__":
-    run_test_problems()
-#nice_plot_SPEA_2()
+# if __name__ == "__main__":
+#     run_test_problems()
+nice_plot_SPEA_2()

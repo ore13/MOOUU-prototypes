@@ -90,6 +90,7 @@ class Problem:
     def __init__(self):
         self.bounds = []
         self.objectives = [self.f1, self.f2]
+        self.number_of_decision_vars = None
 
     @staticmethod
     def f1(x):
@@ -103,13 +104,18 @@ class Problem:
         x = np.array([np.linspace(self.bounds[0][0], self.bounds[0][1], 500)])
         return np.array([self.f1(x), self.f2(x, front=True)])
 
+    @staticmethod
+    def number_decision_vars():
+        return None
+
 
 class ZDT1(Problem):
     """represents ZDT problem 1"""
 
     def __init__(self):
         super().__init__()
-        self.bounds = [(0, 1) for _ in range(30)]
+        self.number_of_decision_vars = 30
+        self.bounds = [(0, 1) for _ in range(self.number_of_decision_vars)]
 
     def __str__(self):
         return "ZDT1"
@@ -126,13 +132,18 @@ class ZDT1(Problem):
             g = 1 + 9 * np.sum(x[1:]) / (len(x) - 1)
         return g * (1 - np.sqrt(ZDT1.f1(x) / g))
 
+    @staticmethod
+    def number_decision_vars():
+        return 30
+
 
 class ZDT2(Problem):
     """represents ZDT problem 2"""
 
     def __init__(self):
         super().__init__()
-        self.bounds = [(0, 1) for _ in range(30)]
+        self.number_of_decision_vars = 30
+        self.bounds = [(0, 1) for _ in range(self.number_of_decision_vars)]
 
     def __str__(self):
         return "Test problem ZDT2"
@@ -149,13 +160,18 @@ class ZDT2(Problem):
             g = 1 + 9 * np.sum(x[1:]) / (len(x) - 1)
         return g * (1 - np.power(ZDT2.f1(x)/g, 2))
 
+    @staticmethod
+    def number_decision_vars():
+        return 30
+
 
 class ZDT3(Problem):
     """ZDT problem 3"""
 
     def __init__(self):
         super().__init__()
-        self.bounds = [(0, 1) for _ in range(30)]
+        self.number_of_decision_vars = 30
+        self.bounds = [(0, 1) for _ in range(self.number_of_decision_vars)]
 
     def __str__(self):
         return "Test problem ZDT3"
@@ -172,13 +188,18 @@ class ZDT3(Problem):
             g = 1 + 9 * np.sum(x[1:]) / (len(x) - 1)
         return g * (1 - np.sqrt(ZDT3.f1(x)/g) - (ZDT3.f1(x)/g) * np.sin(10 * np.pi * ZDT3.f1(x)))
 
+    @staticmethod
+    def number_decision_vars():
+        return 30
+
 
 class ZDT4(Problem):
     """ZDT problem 4"""
 
     def __init__(self):
         super().__init__()
-        self.bounds = [(0, 1) if i == 0 else (-5, 5) for i in range(10)]
+        self.number_of_decision_vars = 10
+        self.bounds = [(0, 1) if i == 0 else (-5, 5) for i in range(self.number_of_decision_vars)]
 
     def __str__(self):
         return "Test problem ZDT4"
@@ -195,13 +216,18 @@ class ZDT4(Problem):
             g = 1 + 10 * (len(x) - 1) + np.sum(np.power(x[1:], 2) - 10 * np.cos(4 * np.pi * x[1:]))
         return g * (1 - np.sqrt(ZDT4.f1(x)/g))
 
+    @staticmethod
+    def number_decision_vars():
+        return 10
+
 
 class ZDT6(Problem):
     """ZDT problem 6"""
 
     def __init__(self):
         super().__init__()
-        self.bounds = [(0, 1) for _ in range(10)]
+        self.number_of_decision_vars = 10
+        self.bounds = [(0, 1) for _ in range(self.number_of_decision_vars)]
 
     def __str__(self):
         return "Test problem ZDT6"
@@ -217,3 +243,7 @@ class ZDT6(Problem):
         else:
             g = 1 + 9 * np.power(np.sum(x[1:]) / (len(x) - 1), 0.25)
         return g * (1 - np.power(ZDT6.f1(x)/g, 2))
+
+    @staticmethod
+    def number_decision_vars():
+        return 10
