@@ -12,18 +12,30 @@ class TestAlgorithm:
         self.problem = problem()
         self.algorithm = algorithm
         bounds = self.problem.bounds
-        self.moo = algorithm(self.problem.objectives, bounds, iterations=250)
+        if self.problem.constrained():
+            constraints = self.problem.constraints
+        else:
+            constraints = None
+        self.moo = algorithm(self.problem.objectives, bounds, iterations=250, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def change_problem(self, problem):
         self.problem = problem()
         bounds = self.problem.bounds
-        self.moo = self.algorithm(self.problem.objectives, bounds, iterations=250)
+        if self.problem.constrained():
+            constraints = self.problem.constraints
+        else:
+            constraints = None
+        self.moo = self.algorithm(self.problem.objectives, bounds, iterations=250, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def change_algorithm(self, algorithm):
         self.algorithm = algorithm
-        self.moo = algorithm(self.problem.objectives, self.problem.bounds, iterations=250)
+        if self.problem.constrained():
+            constraints = self.problem.constraints
+        else:
+            constraints = None
+        self.moo = algorithm(self.problem.objectives, self.problem.bounds, iterations=250, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def new_plot(self, name, **kwargs):
@@ -54,8 +66,8 @@ class TestAlgorithm:
         x = []
         y = []
         for individual in pareto_set:
-            x.append(self.problem.f1(individual.values))
-            y.append(self.problem.f2(individual.values))
+            x.append(self.problem.f1(individual.d_vars))
+            y.append(self.problem.f2(individual.d_vars))
         return pareto_set, x, y
 
     def convergence_metric(self):
@@ -91,6 +103,8 @@ class Problem:
         self.bounds = []
         self.objectives = [self.f1, self.f2]
         self.number_of_decision_vars = None
+        if self.constrained():
+            self.constraints = [self.constraint1, self.constraint2]
 
     @staticmethod
     def f1(x):
@@ -107,6 +121,17 @@ class Problem:
     @staticmethod
     def number_decision_vars():
         return None
+
+    def constrained(self):
+        return False
+
+    @staticmethod
+    def constraint1(x):
+        return np.NAN
+
+    @staticmethod
+    def constraint2(x):
+        return np.NAN
 
 
 class ZDT1(Problem):
@@ -247,3 +272,45 @@ class ZDT6(Problem):
     @staticmethod
     def number_decision_vars():
         return 10
+
+
+class CONSTR(Problem):
+    """CONSTR problem for testing constraint handling"""
+
+    def __init__(self):
+        super().__init__()
+        self.number_decision_vars = 2
+        self.bounds = [(0.1, 1), (0, 5)]
+
+    def __str__(self):
+        return "Test problem CONSTR"
+
+    def constrained(self):
+        return True
+
+    @staticmethod
+    def constraint1(x):
+        return (x[1] + 9 * x[0])/6 - 1
+
+    @staticmethod
+    def constraint2(x):
+        return -x[1] + 9 * x[0] - 1
+
+    @staticmethod
+    def f1(x):
+        return x[0]
+
+    @staticmethod
+    def f2(x, front=False):
+        if front:
+            raise Exception("This problem does not support the front flag")
+        return (1 + x[1])/x[0]
+
+    def get_pareto_front(self):
+        x1_1 = np.linspace(7 / 18, 2 / 3)
+        x1_2 = np.linspace(2 / 3, 1)
+        f1 = np.concatenate((x1_1, x1_2))
+        f2 = np.concatenate(((7 - 9 * x1_1) / x1_1, 1 / x1_2))
+        return f1, f2
+
+

@@ -11,9 +11,9 @@ import time
 class SPEA_2(AbstractMOEA):
     """Represents the SPEA_2 algorithm"""
 
-    def __init__(self, objectives, bounds, population_size=50, archive_size=50, cross_prob=0.9, cross_dist=15,
+    def __init__(self, objectives, bounds, constraints=None, population_size=50, archive_size=50, cross_prob=0.9, cross_dist=15,
                  mut_prob=0.01, mut_dist=20, iterations=20):
-        super().__init__(objectives, bounds, cross_prob, cross_dist, mut_prob, mut_dist, iterations)
+        super().__init__(objectives, bounds, constraints, cross_prob, cross_dist, mut_prob, mut_dist, iterations)
         self.population_size = population_size
         self.archive_size = archive_size
         self.population = []
@@ -27,7 +27,7 @@ class SPEA_2(AbstractMOEA):
         self.archive = []
         for _ in range(self.iterations):
             self.joint = self.population + self.archive
-            self.fitness_assignment()  # Assigns fitness values to all population members
+            self.fitness_assignment()  # Assigns fitness d_vars to all population members
             self.environmental_selection()  # create new archive from current archive and population
             self.population = self.tournament_selection(self.archive, self.population_size)
             self.crossover_step_SBX(self.population)
@@ -134,15 +134,15 @@ class SPEA_2(AbstractMOEA):
 class PopIndividual(AbstractPopIndividual):
     """PopIndividual for SPEA algoritm"""
 
-    def __init__(self, values, objectives, objective_values=None):
-        super().__init__(values, objectives, objective_values=objective_values)
+    def __init__(self, d_vars, objectives, constraints=None, objective_values=None, constrained_values=None):
+        super().__init__(d_vars, objectives, constraints, objective_values, constrained_values)
         self.dominating_set = []
         self.fitness_distances = None
         self.keys = []
         self.distances = dict()
 
     def __str__(self):
-        return "values: {}, objectives: {}".format(self.values, self.objective_values)
+        return "d_vars: {}, objectives: {}".format(self.d_vars, self.objective_values)
 
     def __repr__(self):
         return str(self)
@@ -346,5 +346,5 @@ def main():
     Tests.test_distance_assignment()
     Tests.test_environmental_selection()
 
-main()
+#main()
 

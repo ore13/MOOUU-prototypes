@@ -11,9 +11,9 @@ from Abstract_Moo import AbstractPopIndividual, AbstractMOEA
 
 class SPEA(AbstractMOEA):
 
-    def __init__(self, objectives, bounds, population_size=80, archive_size=20, cross_prob=0.9, cross_dist=15,
+    def __init__(self, objectives, bounds, constraints=None, population_size=80, archive_size=20, cross_prob=0.9, cross_dist=15,
                  mut_prob=0.01, mut_dist=20, iterations=20):
-        super().__init__(objectives, bounds, cross_prob, cross_dist, mut_prob, mut_dist, iterations)
+        super().__init__(objectives, bounds, constraints, cross_prob, cross_dist, mut_prob, mut_dist, iterations)
         self.population_size = population_size
         self.archive_size = archive_size
         self.population = []
@@ -104,12 +104,12 @@ class SPEA(AbstractMOEA):
 class PopIndividual(AbstractPopIndividual):
     """represents an individual in a population for SPEA"""
 
-    def __init__(self, values, objectives, objective_values=None):
-        super().__init__(values, objectives, objective_values=objective_values)
+    def __init__(self, d_vars, objectives, constraints=None, objective_values=None, constrained_values=None):
+        super().__init__(d_vars, objectives, constraints, objective_values, constrained_values)
         self.covered_by_set = []
 
     def __str__(self):
-        return "values: {}, objectives: {}".format(self.values, self.objective_values)
+        return "d_vars: {}, objectives: {}".format(self.d_vars, self.objective_values)
 
     def __repr__(self):
         return str(self)

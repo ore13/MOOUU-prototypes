@@ -9,12 +9,12 @@ class AbstractMOEA:
             Objectives: a list of functions to be optimised, e.g [f1, f2...]
             bounds: limits on the decision variables in the problem, to be specified as
             ([x1_lower, x1_upper], [x2_lower, x2_upper], ...)
-            Other values are just numbers specifying parameters of the algorithm
+            Other d_vars are just numbers specifying parameters of the algorithm
         run: runs the algorithm and returns an approximation to the pareto front
     """
 
     # ------------------------External methods--------------------------------
-    def __init__(self, objectives, bounds, cross_prob=0.8, cross_dist=20, mut_prob=0.01,
+    def __init__(self, objectives, bounds, constraints=None, cross_prob=0.8, cross_dist=20, mut_prob=0.01,
                  mut_dist=20, iterations=20):
         """initialise the algorithm. Parameters:
            objectives: vector of objective functions to be optimised
@@ -27,6 +27,8 @@ class AbstractMOEA:
            mut_dist: distribution parameter of the mutation operation
            iterations: number of iterations of the algorithm
         """
+        self.constraints = constraints
+        self.is_constrained = constraints is not None
         self.objectives = objectives
         self.bounds = bounds
         self.cross_prob = cross_prob
@@ -57,10 +59,10 @@ class AbstractMOEA:
     def initialise_population(self, population_size, population_class):
         new_population = []
         for i in range(population_size):
-            values = []
+            d_vars = []
             for j in range(len(self.bounds)):
-                values.append(self.bounds[j][0] + np.random.random() * (self.bounds[j][1] - self.bounds[j][0]))
-            new_population.append(population_class(values, self.objectives))
+                d_vars.append(self.bounds[j][0] + np.random.random() * (self.bounds[j][1] - self.bounds[j][0]))
+            new_population.append(population_class(d_vars, self.objectives, self.constraints))
         return new_population
 
     def crossover_step_SBX(self, population):
@@ -103,22 +105,59 @@ class AbstractMOEA:
             M += top
             return M
 
+    def dominates(self, a, b):
+        if self.is_constrained:
+            return a.constrain_dominates(b)
+        else:
+            return a.dominates(b)
+
+    def covers(self, a, b):
+        if self.is_constrained:
+            return a.constrain_covers(b)
+        else:
+            return a.covers(b)
+
 
 class AbstractPopIndividual:
     """represents an individual in a population for NSGA-II"""
 
-    def __init__(self, values, objectives, objective_values=None):
+    def __init__(self, d_vars, objectives, constraints=None, objective_values=None, total_constraint_violation=None):
         """initialise the new population member"""
-        self.values = np.array(values, dtype=float)
+        self.d_vars = np.array(d_vars, dtype=float)
         self.objectives = objectives
-        if objective_values is None:
+        self.fitness = 0
+        self.is_constrained = not (constraints is None)
+        if not self.is_constrained:
+            if objective_values is None:
+                self.objective_values = self.calculate_objective_values()
+            else:
+                self.objective_values = objective_values
+        else:
+            self.constraints = constraints
+            if total_constraint_violation is None:
+                self.total_constraint_violation = self.calculate_constrained_values(self.constraints, self.d_vars)
+            else:
+                self.total_constraint_violation = total_constraint_violation
+            self.violates = self.total_constraint_violation > 0
+            if self.violates:
+                print('violations check')
+            if not self.violates: # if it does not violate, THEN calculate objective values in the constrained case
+                if objective_values is None:
+                    self.objective_values = self.calculate_objective_values()
+                else:
+                    self.objective_values = objective_values
+
+    def update(self):
+        if not self.is_constrained:
             self.objective_values = self.calculate_objective_values()
         else:
-            self.objective_values = objective_values
-        self.fitness = 0
+            self.total_constraint_violation = self.calculate_constrained_values(self.constraints, self.d_vars)
+            self.violates = self.total_constraint_violation > 0
+            if not self.violates: # if it does not violate, THEN calculate objective values in the constrained case
+                self.objective_values = self.calculate_objective_values()
 
     def __str__(self):
-        return "values: {}, objectives: {}".format(self.values, self.objective_values)
+        return "d_vars: {}, objectives: {}".format(self.d_vars, self.objective_values)
 
     def __repr__(self):
         return str(self)
@@ -141,8 +180,30 @@ class AbstractPopIndividual:
     def calculate_objective_values(self):
         obj_vector = np.zeros(len(self.objectives), dtype=float)
         for i, objective in enumerate(self.objectives):
-            obj_vector[i] = objective(self.values)
+            obj_vector[i] = objective(self.d_vars)
         return obj_vector
+
+    def constrain_dominates(self, other):
+        if self.violates and other.violates:
+            result = self.total_constraint_violation <= other.total_constraint_violation
+        elif self.violates:
+            result = False
+        elif other.violates:
+            result = True
+        else:
+            result = self.dominates(other)
+        return result
+
+    def constrain_covers(self, other):
+        if self.violates and other.violates:
+            result = self.total_constraint_violation <= other.total_constraint_violation
+        elif self.violates:
+            result = False
+        elif other.violates:
+            result = True
+        else:
+            result = self.covers(other)
+        return result
 
     def dominates(self, other):
         """tests for dominance between self and other. returns true if self dominates other, false otherwise"""
@@ -168,14 +229,21 @@ class AbstractPopIndividual:
 
     def clone(self):
         cls = self.__class__
-        return cls(self.values, self.objectives, objective_values=self.objective_values)
+        if self.is_constrained and self.violates:
+            return cls(self.d_vars, self.objectives, self.constraints,
+                       total_constraint_violation=self.total_constraint_violation)
+        elif self.is_constrained:
+            return cls(self.d_vars, self.objectives, self.constraints, self.objective_values,
+                       self.total_constraint_violation)
+        else:
+            return cls(self.d_vars, self.objectives, objective_values=self.objective_values)
 
     def crossover_SBX(self, other, bounds, distribution_parameter):
         """uses simulated binary crossover"""
-        for i in range(len(self.values)):
+        for i in range(len(self.d_vars)):
             if np.random.random() >= 0.5:
-                p1 = self.values[i]
-                p2 = other.values[i]
+                p1 = self.d_vars[i]
+                p2 = other.d_vars[i]
                 if np.isclose(p1, p2, rtol=0, atol=1e-15):
                     B1 = self.get_beta(0, distribution_parameter, is_close_values=True)
                     B2 = self.get_beta(0, distribution_parameter, is_close_values=True)
@@ -184,10 +252,18 @@ class AbstractPopIndividual:
                     beta_u = (2 * bounds[i][1] - p1 - p2) / (abs(p2 - p1))
                     B1 = self.get_beta(beta_l, distribution_parameter)
                     B2 = self.get_beta(beta_u, distribution_parameter)
-                self.values[i] = 0.5 * ((p1 + p2) - B1 * abs(p2 - p1))
-                other.values[i] = 0.5 * ((p1 + p2) + B2 * abs(p2 - p1))
-                self.objective_values = self.calculate_objective_values()
-                other.objective_values = other.calculate_objective_values()
+                self.d_vars[i] = 0.5 * ((p1 + p2) - B1 * abs(p2 - p1))
+                other.d_vars[i] = 0.5 * ((p1 + p2) + B2 * abs(p2 - p1))
+        self.update()
+        other.update()
+        # self.objective_values = self.calculate_objective_values()
+        # other.objective_values = other.calculate_objective_values()
+        # if self.is_constrained:
+        #     self.total_constraint_violation = self.calculate_constrained_values(self.constraints, self.d_vars)
+        #     other.total_constraint_violation = other.calculate_constrained_values(other.constraints, other.d_vars)
+        # TODO: This seems to be causing the issue. Need to update the self.violates (and other variables) accordingly
+        # Note: issue that self.violates is not updated, along with other variables that should be updated
+        # when decision variables change
 
     @staticmethod
     def get_beta(transformation, n, is_close_values=False):
@@ -206,8 +282,22 @@ class AbstractPopIndividual:
         u = np.random.random()
         if u <= 0.5:
             delta = (2 * u) ** (1 / (distribution_parameter + 1)) - 1
-            self.values[variable] = self.values[variable] + delta * (self.values[variable] - bounds[variable][0])
+            self.d_vars[variable] = self.d_vars[variable] + delta * (self.d_vars[variable] - bounds[variable][0])
         else:
             delta = 1 - (2 * (1 - u)) ** (1 / (1 + distribution_parameter))
-            self.values[variable] = self.values[variable] + delta * (bounds[variable][1] - self.values[variable])
-        self.objective_values = self.calculate_objective_values()
+            self.d_vars[variable] = self.d_vars[variable] + delta * (bounds[variable][1] - self.d_vars[variable])
+        # self.objective_values = self.calculate_objective_values()
+        # if self.is_constrained:
+        #     self.total_constraint_violation = self.calculate_constrained_values(self.constraints, self.d_vars)
+        self.update()
+            # TODO: Same as Crossover
+
+    @staticmethod
+    def calculate_constrained_values(constraints, d_vars):
+        """return the total constraint violation. Assumes all constraints are of the form g(X) >= 0"""
+        total_constraint_violation = 0
+        for constraint in constraints:
+            g = constraint(d_vars)
+            if g < 0:
+                total_constraint_violation += abs(g)
+        return total_constraint_violation

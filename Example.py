@@ -19,7 +19,10 @@ def run_test_problems():
     plt.show()
 
 
-#run_test_problems()
+def constr_test():
+    constr = TestAlgorithm(CONSTR, NSGA_II.NSGA_II)
+    constr.new_plot("CONSTR, colour='b", marker='o')
+    plt.show()
 
 
 def nice_plot_NSGA_II():
@@ -32,8 +35,8 @@ def nice_plot_NSGA_II():
     x = []
     y = []
     for individual in pareto_set:
-        x.append(objectives[0](individual.values))
-        y.append(objectives[1](individual.values))
+        x.append(objectives[0](individual.d_vars))
+        y.append(objectives[1](individual.d_vars))
     # line representing real pareto set
     t = np.linspace(0, 2, 100)
     f = lambda z: 1 / (abs(z) + 0.1)
@@ -47,9 +50,6 @@ def nice_plot_NSGA_II():
     plt.show()
 
 
-#nice_plot_NSGA_II()
-
-
 def nice_plot_SPEA():
     # run NSGA_II
     objectives = [lambda x: abs(x[0]), lambda y: 1 / (abs(y[0]) + 0.1) + y[1] ** 2]
@@ -61,8 +61,8 @@ def nice_plot_SPEA():
     x = []
     y = []
     for individual in pareto_set:
-        x.append(objectives[0](individual.values))
-        y.append(objectives[1](individual.values))
+        x.append(objectives[0](individual.d_vars))
+        y.append(objectives[1](individual.d_vars))
     # line representing real pareto set
     t = np.linspace(0, 2, 100)
     f = lambda z: 1 / (abs(z) + 0.1)
@@ -74,9 +74,6 @@ def nice_plot_SPEA():
     plt.ylabel("Objective 2")
     plt.legend()
     plt.show()
-
-
-#nice_plot_SPEA()
 
 
 def nice_plot_SPEA_2():
@@ -90,8 +87,8 @@ def nice_plot_SPEA_2():
     x = []
     y = []
     for individual in pareto_set:
-        x.append(objectives[0](individual.values))
-        y.append(objectives[1](individual.values))
+        x.append(objectives[0](individual.d_vars))
+        y.append(objectives[1](individual.d_vars))
     # line representing real pareto set
     t = np.linspace(0, 2, 100)
     f = lambda z: 1 / (abs(z) + 0.1)
@@ -105,6 +102,10 @@ def nice_plot_SPEA_2():
     plt.show()
 
 
-# if __name__ == "__main__":
-#     run_test_problems()
-nice_plot_SPEA_2()
+if __name__ == "__main__":
+    # run_test_problems()
+    # run_test_problems()
+    # nice_plot_SPEA_2()
+    # nice_plot_SPEA()
+    # nice_plot_NSGA_II()
+    constr_test()

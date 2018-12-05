@@ -7,7 +7,6 @@ Otis Rea
 """
 import numpy as np
 from Abstract_Moo import *
-import math
 
 
 class NSGA_II(AbstractMOEA):
@@ -17,13 +16,13 @@ class NSGA_II(AbstractMOEA):
             Objectives: a list of functions to be optimised, e.g [f1, f2...]
             bounds: limits on the decision variables in the problem, to be specified as
             ([x1_lower, x1_upper], [x2_lower, x2_upper], ...)
-            Other values are just numbers specifying parameters of the algorithm
+            Other d_vars are just numbers specifying parameters of the algorithm
         run: runs the algorithm and returns an approximation to the pareto front
     """
 
     # ------------------------External methods--------------------------------
-    def __init__(self, objectives, bounds, parent_pop_size=100, cross_prob=0.9, cross_dist=15, mut_prob=0.01,
-                 mut_dist=20, iterations=20):
+    def __init__(self, objectives, bounds, constraints=None, parent_pop_size=100, cross_prob=0.9, cross_dist=15,
+                 mut_prob=0.01, mut_dist=20, iterations=20):
         """initialise the algorithm. Parameters:
            objectives: vector of objective functions to be optimised
            bounds: array of upper and lower bounds for each decision variable, eg [(0, 5), (-2, 2)]
@@ -35,7 +34,7 @@ class NSGA_II(AbstractMOEA):
            mut_dist: distribution parameter of the mutation operation
            iterations: number of iterations of the algorithm
         """
-        super().__init__(objectives, bounds, cross_prob, cross_dist, mut_prob, mut_dist, iterations)
+        super().__init__(objectives, bounds, constraints, cross_prob, cross_dist, mut_prob, mut_dist, iterations)
         # --------------------------------sets of population members------------------------------------------
         self.parent_pop_size = parent_pop_size
         self.parent_pop = []
@@ -64,6 +63,8 @@ class NSGA_II(AbstractMOEA):
             self.fronts[j].sort()
             self.parent_pop += self.fronts[j][:(self.parent_pop_size - len(self.parent_pop))]
             self.new_child_population()
+        # for individual in self.fronts[0]:
+        #     print(individual.violates)
         return self.fronts[0]
 
     def new_child_population(self):
@@ -86,10 +87,10 @@ class NSGA_II(AbstractMOEA):
             p = self.population[i]
             for j in range(i + 1, len(self.population)):
                 q = self.population[j]
-                if p.dominates(q):
+                if self.dominates(p, q):
                     p.dominated_set.append(q)
                     q.domination_count += 1
-                elif q.dominates(p):
+                elif self.dominates(q, p):
                     q.dominated_set.append(p)
                     p.domination_count += 1
             if p.domination_count == 0:
@@ -116,24 +117,25 @@ class NSGA_II(AbstractMOEA):
         for individual in front:
             individual.crowding_distance = 0
         for f in self.objectives:
-            sort_key = lambda x: f(x.values)
+            sort_key = lambda x: f(x.d_vars)
             front.sort(key=sort_key)
             front[0].crowding_distance = np.inf
             front[-1].crowding_distance = np.inf
-            fmax = f(front[-1].values)
-            fmin = f(front[0].values)
+            fmax = f(front[-1].d_vars)
+            fmin = f(front[0].d_vars)
             if not np.isclose(fmax, fmin):
                 for i in range(1, n - 1):
                     front[i].crowding_distance = front[i].crowding_distance + (
-                                f(front[i + 1].values) - f(front[i - 1].values)) / (fmax - fmin)
+                                f(front[i + 1].d_vars) - f(front[i - 1].d_vars)) / (fmax - fmin)
+            # TODO: remove calculation of objective here: efficiency gain by using pre-calculated objective in self
 
 
 class PopIndividual(AbstractPopIndividual):
     """represents an individual in a population for NSGA-II"""
 
-    def __init__(self, values, objectives, objective_values=None):
+    def __init__(self, d_vars, objectives, constraints=None, objective_values=None, total_constraint_violation=None):
         """initialise the new population member"""
-        super().__init__(values, objectives, objective_values)
+        super().__init__(d_vars, objectives, constraints, objective_values, total_constraint_violation)
         self.dominated_set = []
         self.domination_count = 0
         self.rank = None
@@ -141,12 +143,12 @@ class PopIndividual(AbstractPopIndividual):
 
     def __str__(self):
         """string representation of the individual"""
-        s = "solution at {}, rank {}".format(self.values, self.rank)
+        s = "solution at {}, rank {}".format(self.d_vars, self.rank)
         return s
 
     def __repr__(self):
         """representation of the individual"""
-        return "[{:.2f}, {:.2f}], cd={:.2f}".format(self.values[0], self.values[1], self.crowding_distance)
+        return "[{:.2f}, {:.2f}], cd={:.2f}".format(self.d_vars[0], self.d_vars[1], self.crowding_distance)
 
     def __lt__(self, other):
         return ((self.rank < other.rank) or (
