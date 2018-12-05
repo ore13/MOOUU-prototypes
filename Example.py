@@ -107,5 +107,5 @@ if __name__ == "__main__":
     # run_test_problems()
     # nice_plot_SPEA_2()
     # nice_plot_SPEA()
-    # nice_plot_NSGA_II()
+    nice_plot_NSGA_II()
     constr_test()

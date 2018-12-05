@@ -139,8 +139,6 @@ class AbstractPopIndividual:
             else:
                 self.total_constraint_violation = total_constraint_violation
             self.violates = self.total_constraint_violation > 0
-            if self.violates:
-                print('violations check')
             if not self.violates: # if it does not violate, THEN calculate objective values in the constrained case
                 if objective_values is None:
                     self.objective_values = self.calculate_objective_values()
@@ -277,6 +275,8 @@ class AbstractPopIndividual:
         else:
             beta = (1 / (2 - 2 * u)) ** (1 / (n + 1))
         return beta
+    # TODO: Distrbution not symmetrical, i.e average values of p1&p2 should remain the same. needs to use the same
+    # TODO: random value u
 
     def mutate_polynomial(self, variable, bounds, distribution_parameter):
         u = np.random.random()
@@ -301,3 +301,115 @@ class AbstractPopIndividual:
             if g < 0:
                 total_constraint_violation += abs(g)
         return total_constraint_violation
+
+
+class Tests:
+
+    @staticmethod
+    def test__init__():
+        objectives = [lambda x: x[0], lambda x: (1 + x[1])/x[0]]
+        constraints = [lambda x: x[1] + 9 * x[0] - 6, lambda x: -x[1] + 9 * x[0] - 1]
+        a = AbstractPopIndividual([0.2, 1], objectives)
+        assert a.fitness == 0
+        assert np.all(np.isclose(a.d_vars, np.array([0.2, 1])))
+        assert a.objectives == objectives
+        assert a.is_constrained is False
+        assert np.all(np.isclose(a.objective_values, [0.2, 10]))
+        b = AbstractPopIndividual([0.2, 1], objectives, objective_values=np.array([0.2, 10], dtype=float))
+        assert b.is_constrained is False
+        assert np.all(np.isclose(b.objective_values, [0.2, 10]))
+        c = AbstractPopIndividual([0.2, 1], objectives, constraints)
+        assert c.is_constrained
+        assert c.constraints == constraints
+        assert c.violates
+        assert np.isclose(c.total_constraint_violation, 3.4)
+        try:
+            _ = c.objective_values
+            raise Exception("objective values should not be defined")
+        except AttributeError:
+            pass
+        d = AbstractPopIndividual([0.60000001, 0.6], objectives, constraints)
+        assert d.violates is False
+        assert np.isclose(d.total_constraint_violation, 0)
+        assert np.all(np.isclose(d.objective_values, [0.6, 8/3]))
+
+    @staticmethod
+    def test_update():
+        objectives = [lambda x: x[0], lambda x: (1 + x[1]) / x[0]]
+        constraints = [lambda x: x[1] + 9 * x[0] - 6, lambda x: -x[1] + 9 * x[0] - 1]
+        a = AbstractPopIndividual([0.3, 1], objectives, constraints)
+        a.d_vars = np.array([0.2, 1], dtype=float)
+        a.update()
+        assert a.is_constrained
+        assert a.constraints == constraints
+        assert a.violates
+        assert np.isclose(a.total_constraint_violation, 3.4)
+        a.d_vars = np.array([0.6000001, 0.6])
+        a.update()
+        assert a.violates is False
+        assert np.isclose(a.total_constraint_violation, 0)
+        assert np.all(np.isclose(a.objective_values, [0.6, 8/3]))
+        b = AbstractPopIndividual([0.1, 1], objectives)
+        b.d_vars = np.array([0.2, 1], dtype=float)
+        b.update()
+        assert b.fitness == 0
+        assert np.all(np.isclose(b.d_vars, np.array([0.2, 1])))
+        assert b.objectives == objectives
+        assert b.is_constrained is False
+        assert np.all(np.isclose(b.objective_values, [0.2, 10]))
+
+    @staticmethod
+    def test_dominates():
+        # test very simple objective function
+        objectives = [lambda x: x[0]]
+        population = []
+        for i in range(5):
+            population.append(AbstractPopIndividual([i], objectives))
+        assert population[0].dominates(population[1]) is True
+        assert population[0].dominates(population[3]) is True
+        assert population[3].dominates(population[0]) is False
+        assert population[0].dominates(population[0]) is False
+
+    @staticmethod
+    def test_SBX():
+        np.random.seed(1002402)
+        bounds = [(-np.inf, np.inf)]
+        objectives = [lambda x: x[0]]
+        dist_param = 3
+        p1 = AbstractPopIndividual([5], objectives)
+        p2 = AbstractPopIndividual([10], objectives)
+        p1.crossover_SBX(p2, bounds, dist_param)
+        assert np.isclose(p1.d_vars[0], 5.022211826787321, atol=1e-6)
+        print(p2.d_vars)
+        assert np.isclose(p2.d_vars[0], 9.977788173212678, atol=1e-6)
+        p1 = AbstractPopIndividual([5], objectives)
+        p2 = AbstractPopIndividual([10], objectives)
+        p1.crossover_SBX(p2, bounds, dist_param)
+        assert np.isclose(p1.d_vars[0], 5.0, atol=1e-6)
+        assert np.isclose(p2.d_vars[0], 10.0, atol=1e-6)
+        # test 3
+        p1 = AbstractPopIndividual([5], objectives)
+        p2 = AbstractPopIndividual([10], objectives)
+        p1.crossover_SBX(p2, bounds, dist_param)
+        assert np.isclose(p1.d_vars[0], 5.0, atol=1e-6)
+        assert np.isclose(p2.d_vars[0], 10.0, atol=1e-6)
+        # test 4
+        p1 = AbstractPopIndividual([5], objectives)
+        p2 = AbstractPopIndividual([10], objectives)
+        p1.crossover_SBX(p2, bounds, dist_param)
+        assert np.isclose(p1.d_vars[0], 5.998068382956265, atol=1e-6)
+        assert np.isclose(p2.d_vars[0], 9.001931617043736, atol=1e-6)
+        # test 5
+        p1 = AbstractPopIndividual([5], objectives)
+        p2 = AbstractPopIndividual([10], objectives)
+        p1.crossover_SBX(p2, bounds, dist_param)
+        assert np.isclose(p1.d_vars[0], 5.746398124977722, atol=1e-6)
+        assert np.isclose(p2.d_vars[0], 9.25360187502228, atol=1e-6)
+
+
+if __name__ == "__main__":
+    Tests.test__init__()
+    Tests.test_update()
+    Tests.test_dominates()
+    Tests.test_SBX()
+

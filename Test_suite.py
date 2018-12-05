@@ -16,7 +16,7 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = algorithm(self.problem.objectives, bounds, iterations=250, constraints=constraints)
+        self.moo = algorithm(self.problem.objectives, bounds, iterations=500, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def change_problem(self, problem):
@@ -26,7 +26,7 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = self.algorithm(self.problem.objectives, bounds, iterations=250, constraints=constraints)
+        self.moo = self.algorithm(self.problem.objectives, bounds, iterations=500, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def change_algorithm(self, algorithm):
@@ -35,7 +35,7 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = algorithm(self.problem.objectives, self.problem.bounds, iterations=250, constraints=constraints)
+        self.moo = algorithm(self.problem.objectives, self.problem.bounds, iterations=500, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def new_plot(self, name, **kwargs):
