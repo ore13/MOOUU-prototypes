@@ -11,8 +11,8 @@ import time
 class SPEA_2(AbstractMOEA):
     """Represents the SPEA_2 algorithm"""
 
-    def __init__(self, objectives, bounds, constraints=None, population_size=50, archive_size=50, cross_prob=0.9, cross_dist=15,
-                 mut_prob=0.01, mut_dist=20, iterations=20):
+    def __init__(self, objectives, bounds, constraints=None, population_size=50, archive_size=50, cross_prob=0.9,
+                 cross_dist=15, mut_prob=0.01, mut_dist=20, iterations=20):
         super().__init__(objectives, bounds, constraints, cross_prob, cross_dist, mut_prob, mut_dist, iterations)
         self.population_size = population_size
         self.archive_size = archive_size
@@ -32,8 +32,7 @@ class SPEA_2(AbstractMOEA):
             self.population = self.tournament_selection(self.archive, self.population_size)
             self.crossover_step_SBX(self.population)
             self.mutation_step_polynomial(self.population)
-            for individual in self.archive:
-                individual.clear()
+            self.reset_population(self.archive)
         return self.archive
 
     def fitness_assignment(self):
@@ -44,7 +43,7 @@ class SPEA_2(AbstractMOEA):
             for j, individual2 in itr.filterfalse(lambda x: x[0] == i, enumerate(self.joint)):
                 if j > i:
                     j -= 1
-                if individual1.dominates(individual2):
+                if self.dominates(individual1,individual2):
                     strength_dict[individual1] = strength_dict.get(individual1, 0) + 1
                     individual2.dominating_set.append(individual1)
                 distance = np.linalg.norm(individual1.objective_values - individual2.objective_values, 2)
@@ -58,6 +57,7 @@ class SPEA_2(AbstractMOEA):
             density = individual1.fitness_distances[k]
             density = 1 / (density + 2)
             individual1.fitness = raw_fitness + density
+        # TODO: fix use of objective_values...
 
     def environmental_selection(self):
         self.next_archive = self.get_non_dominated()
@@ -88,12 +88,7 @@ class SPEA_2(AbstractMOEA):
         for individual1, individual2 in itr.combinations(self.next_archive, 2):
             distance = np.linalg.norm(individual1.objective_values - individual2.objective_values, 2)
             individual1.connect(individual2, distance)
-        # distances = pd.DataFrame(columns=self.next_archive, index=self.next_archive)
-        # for individual1, individual2 in itr.combinations(self.next_archive, 2):
-        #     distance = np.linalg.norm(individual1.objective_values - individual2.objective_values, 2)
-        #     distances[individual1][individual2] = distance
-        #     distances[individual2][individual1] = distance
-        # return distances
+        # TODO: objective_values...
 
     def truncate(self):
         i = 0
@@ -109,26 +104,10 @@ class SPEA_2(AbstractMOEA):
                 i = len(self.next_archive)
                 individual1.delete()
             i += 1
-        # i = 0
-        # while i < len(self.next_archive):
-        #     individual1 = self.next_archive[i]
-        #     min_individual = True
-        #     j = 0
-        #     while min_individual and j < len(self.next_archive):
-        #         min_individual = individual1.less_than(self.next_archive[j])
-        #         j += 1
-        #     if min_individual:
-        #         distances.drop(index=individual1, columns=individual1)
-        #         self.next_archive.pop(i)
-        #         i = len(self.next_archive)
-        #     i += 1
 
     def distance_sort(self):
         for individual in self.next_archive:
             individual.sort()
-        # for individual1 in self.next_archive:
-        #     individual1.distances = np.array(distances[individual1].dropna())
-        #     individual1.distances.sort()
 
 
 class PopIndividual(AbstractPopIndividual):
@@ -334,17 +313,11 @@ class Tests:
         assert moo.archive == individuals[:2] + [individuals[3]] + [individuals[5]]
 
 
-
-
-
-
-def main():
+if __name__ == "__main__":
     Tests.test_distance_less_than()
     Tests.test_graph_operations()
     Tests.test_fitness_assignment()
     Tests.test_truncate()
     Tests.test_distance_assignment()
     Tests.test_environmental_selection()
-
-#main()
 

@@ -49,7 +49,10 @@ class NSGA_II(AbstractMOEA):
         """Run the NSGA-II algorithm. This will return an approximation to the pareto front"""
         self.parent_pop = self.initialise_population(self.parent_pop_size, PopIndividual)
         self.non_dominated_sort(init=True)
-        self.new_child_population()
+        self.child_pop = []
+        self.child_pop = self.tournament_selection(self.parent_pop, self.parent_pop_size)
+        self.crossover_step_SBX(self.child_pop)
+        self.mutation_step_polynomial(self.child_pop)
         for i in range(self.iterations):
             self.population = self.child_pop + self.parent_pop
             self.non_dominated_sort()
@@ -62,23 +65,17 @@ class NSGA_II(AbstractMOEA):
             self.crowding_distance_assignment(j)
             self.fronts[j].sort()
             self.parent_pop += self.fronts[j][:(self.parent_pop_size - len(self.parent_pop))]
-            self.new_child_population()
-        return self.fronts[0]
-
-    def new_child_population(self):
-        """Internal method. creates a new child population from the parent using tournament selection, crossover,
-            and mutation."""
-        self.child_pop = []
-        self.child_pop = self.tournament_selection(self.parent_pop, self.parent_pop_size)
-        self.crossover_step_SBX(self.child_pop)
-        self.mutation_step_polynomial(self.child_pop)
+            self.child_pop = []
+            self.child_pop = self.tournament_selection(self.parent_pop, self.parent_pop_size)
+            self.crossover_step_SBX(self.child_pop)
+            self.mutation_step_polynomial(self.child_pop)
+            self.reset_population(self.parent_pop)
+        return self.parent_pop
 
     def non_dominated_sort(self, init=False):
         """Internal method. Sorts the population into a set of non-dominated pareto fronts F1, F2 ..."""
         if init:
             self.population = self.parent_pop
-        for p in self.population:
-            p.clear()
         self.fronts = []
         Q = set()
         for i in range(len(self.population)):
@@ -111,21 +108,20 @@ class NSGA_II(AbstractMOEA):
     def crowding_distance_assignment(self, front_index):
         """Internal method. Calculates and assigns the crowding distance for each individual in the population"""
         front = self.fronts[front_index]
-        n = len(front)
-        for individual in front:
-            individual.crowding_distance = 0
-        for f in self.objectives:
-            sort_key = lambda x: f(x.d_vars)
-            front.sort(key=sort_key)
+        i = 0
+        while i < len(self.objectives):
+            front.sort(key=lambda x: x.objective_values[i])
             front[0].crowding_distance = np.inf
             front[-1].crowding_distance = np.inf
-            fmax = f(front[-1].d_vars)
-            fmin = f(front[0].d_vars)
-            if not np.isclose(fmax, fmin):
-                for i in range(1, n - 1):
-                    front[i].crowding_distance = front[i].crowding_distance + (
-                                f(front[i + 1].d_vars) - f(front[i - 1].d_vars)) / (fmax - fmin)
-            # TODO: remove calculation of objective here: efficiency gain by using pre-calculated objective in self
+            max_objective = front[-1].objective_values[i]
+            min_objective = front[0].objective_values[i]
+            if not np.isclose(min_objective, max_objective):
+                for j in range(1, len(front) - 1):
+                    front[j].crowding_distance += (front[j + 1].objective_values[i] - front[j - 1].objective_values[i])\
+                                                  / (max_objective - min_objective)
+                    j += 1
+            i += 1
+            # TODO: Sorting by objective values: will not work in constrained problem
 
 
 class PopIndividual(AbstractPopIndividual):
@@ -155,6 +151,7 @@ class PopIndividual(AbstractPopIndividual):
     def clear(self):
         self.domination_count = 0
         self.dominated_set = []
+        self.crowding_distance = 0
 
 
 class Tests:
@@ -186,41 +183,6 @@ class Tests:
         assert x < x is False
         assert q < r is True
         assert q < t is False
-
-    @staticmethod
-    def test_mutate_individual():
-        np.random.seed(12645678)
-        bounds = [(-5, 5)]
-        distribution_param = 2
-        indiv_value = 0
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], -0.07299526594720773, atol=1e-6)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], -0.027816685123562834)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], -0.9019673485855295)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], 0.49704076190606683)
-        # test 2
-        np.random.seed(12645678)
-        indiv_value = 4.9
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], 4.755469373424529)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], 4.844922963455346)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], 3.1141046498006517)
-        p = PopIndividual([indiv_value])
-        p.mutate_individual(0, bounds, distribution_param)
-        assert np.isclose(p.values[0], 4.909940815238122)
-        print("PopIndividual.mutate_individual() passed")
 
     # ----------------------------tests for NSGA-II---------------------------
     @staticmethod

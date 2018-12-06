@@ -1,5 +1,6 @@
 """abstract class for MOEA and PopIndividual classes"""
 import numpy as np
+import itertools as itr
 
 
 class AbstractMOEA:
@@ -80,10 +81,15 @@ class AbstractMOEA:
             i += (k + length) // len(self.bounds)
             k = (k + length) % len(self.bounds)
 
-    def fast_non_dominated(self, population, key=lambda s, o: s.dominates(o)):
+    def fast_non_dominated_front(self, population, covers=False):
         """use Kung's algorithim to identify the non dominated set"""
-        population.sort(key=lambda x: x.objective_values[0])
-        return self._front(population, key=key)
+        if not covers:
+            population.sort(key=lambda x: x.objective_values[0])
+            return self._front(population, key=self.dominates)
+        # TODO: objective_values
+        else:
+            population.sort(key=lambda x: x.objective_values[0])
+            return self._front(population, key=self.covers)
 
     def _front(self, population, key):
         if len(population) == 1:
@@ -116,6 +122,11 @@ class AbstractMOEA:
             return a.constrain_covers(b)
         else:
             return a.covers(b)
+
+    @staticmethod
+    def reset_population(*args):
+        for individual in itr.chain(*args):
+            individual.clear()
 
 
 class AbstractPopIndividual:
@@ -161,19 +172,19 @@ class AbstractPopIndividual:
         return str(self)
 
     def __lt__(self, other):
-        return self.fitness < other.fitness
+        return bool(self.fitness < other.fitness)
 
     def __le__(self, other):
-        return self.fitness <= other.fitness
+        return bool(self.fitness <= other.fitness)
 
     def __gt__(self, other):
-        return self.fitness > other.fitness
+        return bool(self.fitness > other.fitness)
 
     def __ge__(self, other):
-        return self.fitness >= other.fitness
+        return bool(self.fitness >= other.fitness)
 
     def fitness_equals(self, other):
-        return self.fitness == other.fitness
+        return bool(self.fitness == other.fitness)
 
     def calculate_objective_values(self):
         obj_vector = np.zeros(len(self.objectives), dtype=float)
@@ -183,7 +194,7 @@ class AbstractPopIndividual:
 
     def constrain_dominates(self, other):
         if self.violates and other.violates:
-            result = self.total_constraint_violation <= other.total_constraint_violation
+            result = bool(self.total_constraint_violation <= other.total_constraint_violation)
         elif self.violates:
             result = False
         elif other.violates:
@@ -243,40 +254,31 @@ class AbstractPopIndividual:
                 p1 = self.d_vars[i]
                 p2 = other.d_vars[i]
                 if np.isclose(p1, p2, rtol=0, atol=1e-15):
-                    B1 = self.get_beta(0, distribution_parameter, is_close_values=True)
-                    B2 = self.get_beta(0, distribution_parameter, is_close_values=True)
+                    beta_1, beta_2 = self.get_beta(np.NaN, np.NaN, distribution_parameter, values_are_close=True)
                 else:
-                    beta_l = (p1 + p2 - 2 * bounds[i][0]) / (abs(p2 - p1))
-                    beta_u = (2 * bounds[i][1] - p1 - p2) / (abs(p2 - p1))
-                    B1 = self.get_beta(beta_l, distribution_parameter)
-                    B2 = self.get_beta(beta_u, distribution_parameter)
-                self.d_vars[i] = 0.5 * ((p1 + p2) - B1 * abs(p2 - p1))
-                other.d_vars[i] = 0.5 * ((p1 + p2) + B2 * abs(p2 - p1))
+                    lower_transformation = (p1 + p2 - 2 * bounds[i][0]) / (abs(p2 - p1))
+                    upper_transformation = (2 * bounds[i][1] - p1 - p2) / (abs(p2 - p1))
+                    beta_1, beta_2 = self.get_beta(lower_transformation, upper_transformation, distribution_parameter)
+                self.d_vars[i] = 0.5 * ((p1 + p2) - beta_1 * abs(p2 - p1))
+                other.d_vars[i] = 0.5 * ((p1 + p2) + beta_2 * abs(p2 - p1))
         self.update()
         other.update()
-        # self.objective_values = self.calculate_objective_values()
-        # other.objective_values = other.calculate_objective_values()
-        # if self.is_constrained:
-        #     self.total_constraint_violation = self.calculate_constrained_values(self.constraints, self.d_vars)
-        #     other.total_constraint_violation = other.calculate_constrained_values(other.constraints, other.d_vars)
-        # TODO: This seems to be causing the issue. Need to update the self.violates (and other variables) accordingly
-        # Note: issue that self.violates is not updated, along with other variables that should be updated
-        # when decision variables change
 
     @staticmethod
-    def get_beta(transformation, n, is_close_values=False):
-        if is_close_values:
-            p = 1
-        else:
-            p = 1 - 1 / (2 * transformation ** (n + 1))
-        u = np.random.ranf() * p
-        if u <= 0.5:
-            beta = (2 * u) ** (1 / (n + 1))
-        else:
-            beta = (1 / (2 - 2 * u)) ** (1 / (n + 1))
-        return beta
-    # TODO: Distrbution not symmetrical, i.e average values of p1&p2 should remain the same. needs to use the same
-    # TODO: random value u
+    def get_beta(transformation1, transformation2, distribution_parameter, values_are_close=False):
+        rand = np.random.random()
+        beta_values = []
+        for transformation in [transformation1, transformation2]:
+            if values_are_close:
+                p = 1
+            else:
+                p = 1 - 1/(2 * transformation ** (distribution_parameter + 1))
+            u = rand * p
+            if u <= 0.5:
+                beta_values.append((2 * u) ** (1 / (distribution_parameter + 1)))
+            else:
+                beta_values.append((1 / (2 - 2 * u)) ** (1 / (distribution_parameter + 1)))
+        return beta_values
 
     def mutate_polynomial(self, variable, bounds, distribution_parameter):
         u = np.random.random()
@@ -286,11 +288,7 @@ class AbstractPopIndividual:
         else:
             delta = 1 - (2 * (1 - u)) ** (1 / (1 + distribution_parameter))
             self.d_vars[variable] = self.d_vars[variable] + delta * (bounds[variable][1] - self.d_vars[variable])
-        # self.objective_values = self.calculate_objective_values()
-        # if self.is_constrained:
-        #     self.total_constraint_violation = self.calculate_constrained_values(self.constraints, self.d_vars)
         self.update()
-            # TODO: Same as Crossover
 
     @staticmethod
     def calculate_constrained_values(constraints, d_vars):
@@ -301,6 +299,9 @@ class AbstractPopIndividual:
             if g < 0:
                 total_constraint_violation += abs(g)
         return total_constraint_violation
+
+    def clear(self):
+        self.fitness = 0
 
 
 class Tests:
@@ -380,31 +381,93 @@ class Tests:
         p2 = AbstractPopIndividual([10], objectives)
         p1.crossover_SBX(p2, bounds, dist_param)
         assert np.isclose(p1.d_vars[0], 5.022211826787321, atol=1e-6)
-        print(p2.d_vars)
         assert np.isclose(p2.d_vars[0], 9.977788173212678, atol=1e-6)
         p1 = AbstractPopIndividual([5], objectives)
         p2 = AbstractPopIndividual([10], objectives)
         p1.crossover_SBX(p2, bounds, dist_param)
         assert np.isclose(p1.d_vars[0], 5.0, atol=1e-6)
         assert np.isclose(p2.d_vars[0], 10.0, atol=1e-6)
-        # test 3
         p1 = AbstractPopIndividual([5], objectives)
         p2 = AbstractPopIndividual([10], objectives)
         p1.crossover_SBX(p2, bounds, dist_param)
         assert np.isclose(p1.d_vars[0], 5.0, atol=1e-6)
         assert np.isclose(p2.d_vars[0], 10.0, atol=1e-6)
-        # test 4
         p1 = AbstractPopIndividual([5], objectives)
         p2 = AbstractPopIndividual([10], objectives)
         p1.crossover_SBX(p2, bounds, dist_param)
         assert np.isclose(p1.d_vars[0], 5.998068382956265, atol=1e-6)
         assert np.isclose(p2.d_vars[0], 9.001931617043736, atol=1e-6)
-        # test 5
         p1 = AbstractPopIndividual([5], objectives)
         p2 = AbstractPopIndividual([10], objectives)
         p1.crossover_SBX(p2, bounds, dist_param)
         assert np.isclose(p1.d_vars[0], 5.746398124977722, atol=1e-6)
         assert np.isclose(p2.d_vars[0], 9.25360187502228, atol=1e-6)
+        np.random.seed(100)
+        bounds = [(0, 5)]
+        p1 = AbstractPopIndividual([3], objectives)
+        p2 = AbstractPopIndividual([4], objectives)
+        p1.crossover_SBX(p2, bounds, dist_param)
+        assert np.isclose(p1.d_vars[0], 3.068122818593165)
+        assert np.isclose(p2.d_vars[0], 3.9312316083035745)
+
+    @staticmethod
+    def test_mutate_polynomial():
+        np.random.seed(12645678)
+        bounds = [(-5, 5)]
+        distribution_param = 2
+        objectives = [lambda x: x[0]]
+        d_var = 0
+        p = AbstractPopIndividual([d_var], objectives)
+        p.mutate_polynomial(0, bounds, distribution_param)
+        assert np.isclose(p.d_vars[0], -0.07299526594720773)
+        p = AbstractPopIndividual([d_var], objectives)
+        p.mutate_polynomial(0, bounds, distribution_param)
+        assert np.isclose(p.d_vars[0], -0.027816685123562834)
+        p = AbstractPopIndividual([d_var], objectives)
+        p.mutate_polynomial(0, bounds, distribution_param)
+        assert np.isclose(p.d_vars[0], -0.9019673485855295)
+        p = AbstractPopIndividual([d_var], objectives)
+        p.mutate_polynomial(0, bounds, distribution_param)
+        assert np.isclose(p.d_vars[0], 0.49704076190606683)
+        np.random.seed(12645678)
+        d_var = 4.9
+        p = AbstractPopIndividual([d_var], objectives)
+        p.mutate_polynomial(0, bounds, distribution_param)
+        assert np.isclose(p.d_vars[0], 4.755469373424529)
+        p = AbstractPopIndividual([d_var], objectives)
+        p.mutate_polynomial(0, bounds, distribution_param)
+        assert np.isclose(p.d_vars[0], 4.844922963455346)
+        p = AbstractPopIndividual([d_var], objectives)
+        p.mutate_polynomial(0, bounds, distribution_param)
+        assert np.isclose(p.d_vars[0], 3.1141046498006517)
+        p = AbstractPopIndividual([d_var], objectives)
+        p.mutate_polynomial(0, bounds, distribution_param)
+        assert np.isclose(p.d_vars[0], 4.909940815238122)
+
+    @staticmethod
+    def test_constrain_dominates():
+        objectives = [lambda x: x[0], lambda x: (1 + x[1]) / x[0]]
+        constraints = [lambda x: x[1] + 9 * x[0] - 6, lambda x: -x[1] + 9 * x[0] - 1]
+        a = AbstractPopIndividual([0.6, 0.7], objectives, constraints)
+        b = AbstractPopIndividual([0.8, 2], objectives, constraints)
+        c = AbstractPopIndividual([0.2, 1], objectives, constraints)
+        d = AbstractPopIndividual([0.1, 3], objectives, constraints)
+        assert a.constrain_dominates(b)
+        assert a.constrain_dominates(c)
+        assert a.constrain_dominates(d)
+        assert b.constrain_dominates(c)
+        assert b.constrain_dominates(d)
+        assert c.constrain_dominates(d)
+        assert b.constrain_dominates(a) is False
+        assert c.constrain_dominates(a) is False
+        assert d.constrain_dominates(a) is False
+        assert c.constrain_dominates(b) is False
+        assert d.constrain_dominates(b) is False
+        assert d.constrain_dominates(c) is False
+
+    @staticmethod
+    def test_constrain_covers():
+        pass
 
 
 if __name__ == "__main__":
@@ -412,4 +475,6 @@ if __name__ == "__main__":
     Tests.test_update()
     Tests.test_dominates()
     Tests.test_SBX()
+    Tests.test_mutate_polynomial()
+    Tests.test_constrain_dominates()
 
