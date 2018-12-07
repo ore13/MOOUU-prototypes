@@ -42,13 +42,13 @@ class AbstractMOEA:
         pass
 
     @staticmethod
-    def tournament_selection(old_population, new_max_size):
+    def tournament_selection(old_population, new_max_size, is_better=lambda x, y: x.fitness < y.fitness):
         new_population = []
         for _ in range(2):
             np.random.shuffle(old_population)
             i = 0
             while i < (new_max_size // 2):
-                if old_population[2 * i] < old_population[2 * i + 1]:
+                if is_better(old_population[2 * i], old_population[2 * i + 1]):  # Change this to a method -> __lt__ no more
                     new_population.append(old_population[2 * i].clone())
                 else:
                     new_population.append(old_population[2 * i + 1].clone())
@@ -81,36 +81,6 @@ class AbstractMOEA:
             i += (k + length) // len(self.bounds)
             k = (k + length) % len(self.bounds)
 
-    def fast_non_dominated_front(self, population, covers=False):
-        """use Kung's algorithim to identify the non dominated set"""
-        if not covers:
-            population.sort(key=lambda x: x.objective_values[0])
-            return self._front(population, key=self.dominates)
-        # TODO: objective_values
-        else:
-            population.sort(key=lambda x: x.objective_values[0])
-            return self._front(population, key=self.covers)
-
-    def _front(self, population, key):
-        if len(population) == 1:
-            return population
-        else:
-            mid = int(np.round(len(population) / 2))
-            top = self._front(population[:mid], key)
-            bottom = self._front(population[mid:], key)
-            M = []
-            for individual1 in bottom:
-                dominated = False
-                i = 0
-                while not dominated and i < len(top):
-                    if key(top[i], individual1):
-                        dominated = True
-                    i += 1
-                if not dominated:
-                    M.append(individual1)
-            M += top
-            return M
-
     def dominates(self, a, b):
         if self.is_constrained:
             return a.constrain_dominates(b)
@@ -138,23 +108,17 @@ class AbstractPopIndividual:
         self.objectives = objectives
         self.fitness = 0
         self.is_constrained = not (constraints is None)
-        if not self.is_constrained:
-            if objective_values is None:
-                self.objective_values = self.calculate_objective_values()
-            else:
-                self.objective_values = objective_values
+        if objective_values is None:
+            self.objective_values = self.calculate_objective_values()
         else:
+            self.objective_values = objective_values
+        if self.is_constrained:
             self.constraints = constraints
             if total_constraint_violation is None:
                 self.total_constraint_violation = self.calculate_constrained_values(self.constraints, self.d_vars)
             else:
                 self.total_constraint_violation = total_constraint_violation
             self.violates = self.total_constraint_violation > 0
-            if not self.violates: # if it does not violate, THEN calculate objective values in the constrained case
-                if objective_values is None:
-                    self.objective_values = self.calculate_objective_values()
-                else:
-                    self.objective_values = objective_values
 
     def update(self):
         if not self.is_constrained:
@@ -194,7 +158,7 @@ class AbstractPopIndividual:
 
     def constrain_dominates(self, other):
         if self.violates and other.violates:
-            result = bool(self.total_constraint_violation <= other.total_constraint_violation)
+            result = bool(self.total_constraint_violation < other.total_constraint_violation)
         elif self.violates:
             result = False
         elif other.violates:
@@ -205,7 +169,7 @@ class AbstractPopIndividual:
 
     def constrain_covers(self, other):
         if self.violates and other.violates:
-            result = self.total_constraint_violation <= other.total_constraint_violation
+            result = self.total_constraint_violation < other.total_constraint_violation
         elif self.violates:
             result = False
         elif other.violates:

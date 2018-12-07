@@ -314,3 +314,41 @@ class CONSTR(Problem):
         return f1, f2
 
 
+class SRN(Problem):
+    """CONSTR problem for testing constraint handling"""
+
+    def __init__(self):
+        super().__init__()
+        self.number_decision_vars = 2
+        self.bounds = [(-20, 20), (-20, 20)]
+
+    def __str__(self):
+        return "Test problem CONSTR"
+
+    def constrained(self):
+        return True
+
+    @staticmethod
+    def constraint1(x):
+        return np.power(x[0], 2) + np.power(x[1], 2) - 225
+
+    @staticmethod
+    def constraint2(x):
+        return x[0] - 3 * x[1] + 10
+
+    @staticmethod
+    def f1(x):
+        return np.power(x[0] - 2, 2) + np.power(x[1] - 1, 2) + 2
+
+    @staticmethod
+    def f2(x, front=False):
+        if front:
+            raise Exception("This problem does not support the front flag")
+        return 9 * x[0] - np.power(x[1] - 1, 2)
+
+    def get_pareto_front(self):
+        x1_1 = np.linspace(7 / 18, 2 / 3)
+        x1_2 = np.linspace(2 / 3, 1)
+        f1 = np.concatenate((x1_1, x1_2))
+        f2 = np.concatenate(((7 - 9 * x1_1) / x1_1, 1 / x1_2))
+        return f1, f2

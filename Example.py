@@ -9,9 +9,9 @@ from Test_suite import *
 
 
 def run_test_problems():
-    test = TestAlgorithm(ZDT1, NSGA_II.NSGA_II)
+    test = TestAlgorithm(ZDT6, NSGA_II.NSGA_II)
     test.new_plot("ZDT1", colour='b', marker='o')
-    test.change_algorithm(NSGA_II.NSGA_II)
+    test.change_algorithm(SPEA.SPEA)
     test.replot(colour='g', marker='o')
     test.change_algorithm(SPEA_2.SPEA_2)
     test.replot(colour='r', marker='o')
@@ -107,9 +107,8 @@ def nice_plot_SPEA_2():
 
 
 if __name__ == "__main__":
-    # run_test_problems()
-    # run_test_problems()
+    run_test_problems()
     # nice_plot_SPEA_2()
     # nice_plot_SPEA()
     # nice_plot_NSGA_II()
-    constr_test()
+    #constr_test()

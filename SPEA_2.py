@@ -11,8 +11,8 @@ import time
 class SPEA_2(AbstractMOEA):
     """Represents the SPEA_2 algorithm"""
 
-    def __init__(self, objectives, bounds, constraints=None, population_size=50, archive_size=50, cross_prob=0.9,
-                 cross_dist=15, mut_prob=0.01, mut_dist=20, iterations=20):
+    def __init__(self, objectives, bounds, constraints=None, population_size=100, archive_size=100, cross_prob=0.9,
+                 cross_dist=1, mut_prob=0.01, mut_dist=20, iterations=20):
         super().__init__(objectives, bounds, constraints, cross_prob, cross_dist, mut_prob, mut_dist, iterations)
         self.population_size = population_size
         self.archive_size = archive_size
@@ -34,6 +34,9 @@ class SPEA_2(AbstractMOEA):
             self.mutation_step_polynomial(self.population)
             self.reset_population(self.archive)
         return self.archive
+
+    def __str__(self):
+        return "SPEA-2"
 
     def fitness_assignment(self):
         k = int(np.sqrt(self.population_size + self.archive_size)) - 1
@@ -113,8 +116,8 @@ class SPEA_2(AbstractMOEA):
 class PopIndividual(AbstractPopIndividual):
     """PopIndividual for SPEA algoritm"""
 
-    def __init__(self, d_vars, objectives, constraints=None, objective_values=None, constrained_values=None):
-        super().__init__(d_vars, objectives, constraints, objective_values, constrained_values)
+    def __init__(self, d_vars, objectives, constraints=None, objective_values=None, total_constraint_violation=None):
+        super().__init__(d_vars, objectives, constraints, objective_values, total_constraint_violation)
         self.dominating_set = []
         self.fitness_distances = None
         self.keys = []
