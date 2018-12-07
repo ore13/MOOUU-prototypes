@@ -347,8 +347,12 @@ class SRN(Problem):
         return 9 * x[0] - np.power(x[1] - 1, 2)
 
     def get_pareto_front(self):
-        x1_1 = np.linspace(7 / 18, 2 / 3)
-        x1_2 = np.linspace(2 / 3, 1)
-        f1 = np.concatenate((x1_1, x1_2))
-        f2 = np.concatenate(((7 - 9 * x1_1) / x1_1, 1 / x1_2))
-        return f1, f2
+        maximiser1 = -2.5
+        upper_bound = 1.1
+        lowerx1 = np.full(100, maximiser1)
+        lowerx2 = np.linspace((maximiser1 + 10)/3, np.sqrt(225 - maximiser1 ** 2), 100)
+        upperx1 = np.linspace(maximiser1, upper_bound, 100)
+        upperx2 = (10 + upperx1)/3
+        x1 = np.concatenate((lowerx1, upperx1))
+        x2 = np.concatenate((lowerx2, upperx2))
+        return SRN.f1(np.array([x1, x2])), SRN.f2(np.array([x1, x2]))

@@ -20,7 +20,7 @@ def run_test_problems():
 
 
 def constr_test():
-    constr = TestAlgorithm(CONSTR, NSGA_II.NSGA_II)
+    constr = TestAlgorithm(SRN, NSGA_II.NSGA_II)
     constr.new_plot("CONSTR", colour='b', marker='o')
     constr.change_algorithm(SPEA.SPEA)
     constr.replot(colour='g', marker='o')
@@ -107,8 +107,8 @@ def nice_plot_SPEA_2():
 
 
 if __name__ == "__main__":
-    run_test_problems()
+    # run_test_problems()
     # nice_plot_SPEA_2()
     # nice_plot_SPEA()
     # nice_plot_NSGA_II()
-    #constr_test()
+    constr_test()
