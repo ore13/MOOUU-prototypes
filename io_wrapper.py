@@ -46,9 +46,9 @@ def run_through_wrapper(args):
         input_df = pd.read_csv(args.input_file)
     except Exception as e:
         raise Exception("error reading input file {0}:{1}".format(args.input_file, str(e)))
-    if len(input_df) != tf.number_decision_vars():
+    if len(input_df.columns) != tf.number_decision_vars():
         raise Exception("Incorrect number of decision variables. Should be {} d. vars. got {} d. vars."
-                        .format(len(input_df), tf.number_decision_vars()))
+                        .format(len(input_df.columns), tf.number_decision_vars()))
     f1 = tf.f1(input_df.parval1)
     f2 = tf.f2(input_df.parval1)
     with open(args.output_file, 'w') as f:

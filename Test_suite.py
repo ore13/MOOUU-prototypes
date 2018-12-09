@@ -1,4 +1,3 @@
-
 """Suite of test problems from ZDT - use with a plotter"""
 
 import numpy as np
@@ -16,7 +15,7 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = algorithm(self.problem.objectives, bounds, iterations=500, constraints=constraints)
+        self.moo = algorithm(self.problem.objectives, bounds, iterations=100, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def change_problem(self, problem):
@@ -26,7 +25,7 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = self.algorithm(self.problem.objectives, bounds, iterations=500, constraints=constraints)
+        self.moo = self.algorithm(self.problem.objectives, bounds, iterations=100, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def change_algorithm(self, algorithm):
@@ -35,25 +34,27 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = algorithm(self.problem.objectives, self.problem.bounds, iterations=500, constraints=constraints)
+        self.moo = algorithm(self.problem.objectives, self.problem.bounds, iterations=100, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def new_plot(self, name, **kwargs):
         plt.close('all')
         plt.figure(name)
-        plt.scatter(self.x, self.y, s=10, c=kwargs.get('colour'), marker=kwargs.get('marker'),
-                    label='{}'.format(str(self.moo)))
+        if self.problem.constrained():
+            reigonf1, reigonf2 = self.problem.feasible_reigon()
+            plt.scatter(reigonf1, reigonf2, s=10, c='y', alpha=0.1)
+        plt.scatter(self.x, self.y, s=10, c=kwargs.get('colour'), marker=kwargs.get('marker'), label=str(self.moo))
         px, py = self.problem.get_pareto_front()
         plt.plot(px, py, label='True Pareto Front')
-        x_bounds = (int(np.rint(min(px))), int(np.rint(max(px))))
-        plt.xlim(x_bounds)
+        # x_bounds = (int(np.rint(min(px))), int(np.rint(max(px))))
+        # plt.xlim(x_bounds)
         plt.xlabel('Objective 1')
         plt.ylabel('Objective 2')
         plt.legend()
         plt.title(name)
 
     def replot(self, **kwargs):
-        plt.scatter(self.x, self.y, s=10, c=kwargs.get('colour'), marker=kwargs.get('marker'),
+        plt.plot(self.x, self.y, c=kwargs.get('colour'), marker=kwargs.get('marker'),
                     label='{}'.format(str(self.moo)))
         plt.legend()
 
@@ -183,7 +184,7 @@ class ZDT2(Problem):
             g = 1
         else:
             g = 1 + 9 * np.sum(x[1:]) / (len(x) - 1)
-        return g * (1 - np.power(ZDT2.f1(x)/g, 2))
+        return g * (1 - np.power(ZDT2.f1(x) / g, 2))
 
     @staticmethod
     def number_decision_vars():
@@ -211,7 +212,7 @@ class ZDT3(Problem):
             g = 1
         else:
             g = 1 + 9 * np.sum(x[1:]) / (len(x) - 1)
-        return g * (1 - np.sqrt(ZDT3.f1(x)/g) - (ZDT3.f1(x)/g) * np.sin(10 * np.pi * ZDT3.f1(x)))
+        return g * (1 - np.sqrt(ZDT3.f1(x) / g) - (ZDT3.f1(x) / g) * np.sin(10 * np.pi * ZDT3.f1(x)))
 
     @staticmethod
     def number_decision_vars():
@@ -239,7 +240,7 @@ class ZDT4(Problem):
             g = 1
         else:
             g = 1 + 10 * (len(x) - 1) + np.sum(np.power(x[1:], 2) - 10 * np.cos(4 * np.pi * x[1:]))
-        return g * (1 - np.sqrt(ZDT4.f1(x)/g))
+        return g * (1 - np.sqrt(ZDT4.f1(x) / g))
 
     @staticmethod
     def number_decision_vars():
@@ -267,7 +268,7 @@ class ZDT6(Problem):
             g = 1
         else:
             g = 1 + 9 * np.power(np.sum(x[1:]) / (len(x) - 1), 0.25)
-        return g * (1 - np.power(ZDT6.f1(x)/g, 2))
+        return g * (1 - np.power(ZDT6.f1(x) / g, 2))
 
     @staticmethod
     def number_decision_vars():
@@ -290,7 +291,7 @@ class CONSTR(Problem):
 
     @staticmethod
     def constraint1(x):
-        return (x[1] + 9 * x[0])/6 - 1
+        return (x[1] + 9 * x[0]) / 6 - 1
 
     @staticmethod
     def constraint2(x):
@@ -304,7 +305,7 @@ class CONSTR(Problem):
     def f2(x, front=False):
         if front:
             raise Exception("This problem does not support the front flag")
-        return (1 + x[1])/x[0]
+        return (1 + x[1]) / x[0]
 
     def get_pareto_front(self):
         x1_1 = np.linspace(7 / 18, 2 / 3)
@@ -312,6 +313,9 @@ class CONSTR(Problem):
         f1 = np.concatenate((x1_1, x1_2))
         f2 = np.concatenate(((7 - 9 * x1_1) / x1_1, 1 / x1_2))
         return f1, f2
+
+    def feasible_reigon(self):
+        pass
 
 
 class SRN(Problem):
@@ -323,18 +327,18 @@ class SRN(Problem):
         self.bounds = [(-20, 20), (-20, 20)]
 
     def __str__(self):
-        return "Test problem CONSTR"
+        return "Test problem SRN"
 
     def constrained(self):
         return True
 
     @staticmethod
     def constraint1(x):
-        return np.power(x[0], 2) + np.power(x[1], 2) - 225
+        return 225 - np.power(x[0], 2) - np.power(x[1], 2)
 
     @staticmethod
     def constraint2(x):
-        return x[0] - 3 * x[1] + 10
+        return 3 * x[1] - x[0] - 10
 
     @staticmethod
     def f1(x):
@@ -350,9 +354,26 @@ class SRN(Problem):
         maximiser1 = -2.5
         upper_bound = 1.1
         lowerx1 = np.full(100, maximiser1)
-        lowerx2 = np.linspace((maximiser1 + 10)/3, np.sqrt(225 - maximiser1 ** 2), 100)
+        lowerx2 = np.linspace((maximiser1 + 10) / 3, np.sqrt(225 - maximiser1 ** 2), 100)
         upperx1 = np.linspace(maximiser1, upper_bound, 100)
-        upperx2 = (10 + upperx1)/3
+        upperx2 = (10 + upperx1) / 3
         x1 = np.concatenate((lowerx1, upperx1))
         x2 = np.concatenate((lowerx2, upperx2))
         return SRN.f1(np.array([x1, x2])), SRN.f2(np.array([x1, x2]))
+
+    def feasible_reigon(self):
+        """plot randomly generated selection of points to approximate feasible reigon"""
+        n_points = 20000
+        constr_bounds = (-15, -1 + 3 * np.sqrt(86) / 2)
+        x1 = np.zeros(n_points)
+        x2 = np.zeros(n_points)
+        for i in range(n_points):
+            a = constr_bounds[0] + np.random.random() * (constr_bounds[1] - constr_bounds[0])
+            if a < -1 - 3 * np.sqrt(86)/2:
+                x2_bounds = (-np.sqrt(225 - a ** 2), np.sqrt(225 - a ** 2))
+            else:
+                x2_bounds = ((10 + a)/3, np.sqrt(225 - a ** 2))
+            b = x2_bounds[0] + np.random.random() * (x2_bounds[1] - x2_bounds[0])
+            x1[i] = a
+            x2[i] = b
+        return SRN.f1([x1, x2]), SRN.f2([x1, x2])

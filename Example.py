@@ -21,11 +21,11 @@ def run_test_problems():
 
 def constr_test():
     constr = TestAlgorithm(SRN, NSGA_II.NSGA_II)
-    constr.new_plot("CONSTR", colour='b', marker='o')
-    constr.change_algorithm(SPEA.SPEA)
-    constr.replot(colour='g', marker='o')
-    constr.change_algorithm(SPEA_2.SPEA_2)
-    constr.replot(colour='r', marker='o')
+    constr.new_plot("SRN", colour='b', marker='o')
+    # constr.change_algorithm(SPEA.SPEA)
+    # constr.replot(colour='g', marker='o')
+    # constr.change_algorithm(SPEA_2.SPEA_2)
+    # constr.replot(colour='r', marker='o')
     plt.show()
 
 

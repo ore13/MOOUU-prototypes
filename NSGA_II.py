@@ -71,7 +71,7 @@ class NSGA_II(AbstractMOEA):
             self.crossover_step_SBX(self.child_pop)
             self.mutation_step_polynomial(self.child_pop)
             self.reset_population(self.parent_pop)
-        return self.parent_pop
+        return self.fronts[0]
 
     def non_dominated_sort(self, init=False):
         """Internal method. Sorts the population into a set of non-dominated pareto fronts F1, F2 ..."""
