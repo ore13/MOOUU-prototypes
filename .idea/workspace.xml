@@ -2,11 +2,105 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59708be3-a81c-46db-ac5a-fae01c9056cd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Animation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NSGA2.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SPEA.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SPEA2.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/tcl8.6/init.tcl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/Activate.ps1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_asyncio.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_bz2.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_ctypes.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_ctypes_test.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_decimal.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_elementtree.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_hashlib.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_lzma.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_msi.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_multiprocessing.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_overlapped.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_socket.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_sqlite3.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_ssl.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_testbuffer.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_testcapi.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_testconsole.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_testimportmultiple.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_testmultiphase.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/_tkinter.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/activate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/activate.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-console-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-datetime-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-debug-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-errorhandling-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-file-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-file-l1-2-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-file-l2-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-handle-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-heap-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-interlocked-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-libraryloader-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-localization-l1-2-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-memory-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-namedpipe-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-processenvironment-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-processthreads-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-processthreads-l1-1-1.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-profile-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-rtlsupport-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-string-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-synch-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-synch-l1-2-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-sysinfo-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-timezone-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-core-util-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-conio-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-convert-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-environment-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-filesystem-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-heap-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-locale-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-math-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-multibyte-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-private-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-process-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-runtime-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-stdio-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-string-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-time-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/api-ms-win-crt-utility-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/concrt140.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/deactivate.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/msvcp140.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/pyexpat.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/python.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/python3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/python36.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/pythonw.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/select.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/sqlite3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/tcl86t.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/tk86t.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/ucrtbase.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/unicodedata.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/vccorlib140.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/vcomp140.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/vcruntime140.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/winsound.pyd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/xlwings32-0.11.5.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/xlwings64-0.11.5.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/GNSMOO.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GNSMOO.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abstract_Moo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Abstract_Moo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Example.py" beforeDir="false" afterPath="$PROJECT_DIR$/Example.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NSGA_II.py" beforeDir="false" afterPath="$PROJECT_DIR$/NSGA_II.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SPEA.py" beforeDir="false" afterPath="$PROJECT_DIR$/SPEA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SPEA_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/SPEA_2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test_suite.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_suite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/io_wrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/io_wrapper.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,66 +108,44 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/Abstract_Moo.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="267">
-                    <caret line="137" column="5" lean-forward="true" selection-start-line="137" selection-start-column="5" selection-end-line="137" selection-end-column="5" />
-                    <folding>
-                      <element signature="e#56#74#0" expanded="true" />
-                      <element signature="e#902#2041#0" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FUSProjectUsageTrigger">
     <session id="1602270817">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="18" />
+          <entry key="project.closed" value="28" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="4" />
-          <entry key="project.open.time.10" value="2" />
-          <entry key="project.open.time.7" value="3" />
-          <entry key="project.open.time.8" value="5" />
-          <entry key="project.open.time.9" value="5" />
-          <entry key="project.opened" value="21" />
+          <entry key="project.open.time.10" value="4" />
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.7" value="4" />
+          <entry key="project.open.time.8" value="9" />
+          <entry key="project.open.time.9" value="7" />
+          <entry key="project.opened" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="66" />
+          <entry key="py" value="72" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="66" />
+          <entry key="Python" value="72" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="NSGA-II" value="452" />
-          <entry key="Python Console" value="902" />
+          <entry key="Python Console" value="1020" />
           <entry key="byteManipulation" value="361" />
           <entry key="dummy" value="7" />
-          <entry key="py" value="74471" />
+          <entry key="py" value="76619" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="76186" />
+          <entry key="Python" value="78452" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -82,10 +154,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Abstract_Moo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4352">
+              <caret line="257" selection-start-line="257" selection-end-line="264" selection-end-column="113" />
+              <folding>
+                <element signature="e#56#74#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NSGA_II.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-850">
-              <caret line="73" selection-start-line="73" selection-end-line="73" />
+            <state relative-caret-position="374">
+              <caret line="23" column="111" selection-start-line="23" selection-start-column="111" selection-end-line="23" selection-end-column="111" />
               <folding>
                 <element signature="e#173#191#0" expanded="true" />
               </folding>
@@ -97,16 +181,7 @@
         <entry file="file://$PROJECT_DIR$/SPEA.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-              <folding>
-                <element signature="e#444#692#0" />
-                <element signature="e#721#1539#0" />
-                <element signature="e#1572#1585#0" />
-                <element signature="e#1674#1933#0" />
-                <element signature="e#2011#2497#0" />
-                <element signature="e#2537#3857#0" />
-                <element signature="e#3901#4432#0" />
-              </folding>
+              <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -114,11 +189,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SPEA_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="149" column="28" selection-start-line="149" selection-start-column="28" selection-end-line="149" selection-end-column="28" />
+            <state relative-caret-position="153">
+              <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
               <folding>
                 <element signature="e#24#42#0" expanded="true" />
-                <marker date="1544142869014" expanded="true" signature="1502:1532" ph="..." />
+                <marker date="1544559589644" expanded="true" signature="1503:1533" ph="..." />
               </folding>
             </state>
           </provider>
@@ -127,41 +202,55 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Example.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+            <state relative-caret-position="136">
+              <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
               <folding>
                 <element signature="e#34#48#0" expanded="true" />
-                <marker date="1544394109344" expanded="true" signature="546:837" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test_suite.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="934">
-              <caret line="378" column="49" lean-forward="true" selection-start-line="378" selection-start-column="49" selection-end-line="378" selection-end-column="49" />
-              <folding>
-                <element signature="e#61#79#0" expanded="true" />
-                <marker date="1544394188406" expanded="true" signature="133:138" ph="..." />
-                <marker date="1544394188406" expanded="true" signature="2141:2308" ph="..." />
-                <marker date="1544394188406" expanded="true" signature="2729:3077" ph="..." />
-                <marker date="1544394188406" expanded="true" signature="2758:2767" ph="..." />
-                <marker date="1544394188406" expanded="true" signature="3077:3613" ph="..." />
-                <marker date="1544394188406" expanded="true" signature="4869:4897" ph="..." />
-                <marker date="1544394188406" expanded="true" signature="8461:8487" ph="..." />
-                <marker date="1544394188406" expanded="true" signature="8608:8650" ph="..." />
+                <marker date="1544564392999" expanded="true" signature="663:946" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Test_suite.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3230">
+              <caret line="268" column="52" selection-start-line="268" selection-start-column="52" selection-end-line="268" selection-end-column="52" />
+              <folding>
+                <element signature="e#60#78#0" expanded="true" />
+                <marker date="1544564392968" expanded="true" signature="133:138" ph="..." />
+                <marker date="1544564392968" expanded="true" signature="2044:2207" ph="..." />
+                <marker date="1544564392968" expanded="true" signature="2628:2976" ph="..." />
+                <marker date="1544564392968" expanded="true" signature="2657:2666" ph="..." />
+                <marker date="1544564392968" expanded="true" signature="2976:3512" ph="..." />
+                <marker date="1544564392968" expanded="true" signature="4768:4796" ph="..." />
+                <marker date="1544564392968" expanded="true" signature="8295:8321" ph="..." />
+                <marker date="1544564392968" expanded="true" signature="8442:8484" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Animation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+              <folding>
+                <element signature="e#80#98#0" expanded="true" />
+                <marker date="1544556194882" expanded="true" signature="260:261" ph="..." />
+                <marker date="1544556194882" expanded="true" signature="260:266" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/io_wrapper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="52" column="32" lean-forward="true" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+            <state relative-caret-position="799">
+              <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -169,8 +258,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="289" column="26" lean-forward="true" selection-start-line="289" selection-start-column="26" selection-end-line="289" selection-end-column="26" />
+            <state relative-caret-position="4913">
+              <caret line="289" column="26" selection-start-line="289" selection-start-column="26" selection-end-line="289" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -225,31 +314,29 @@
         <option value="$PROJECT_DIR$/Visualisation.py" />
         <option value="$PROJECT_DIR$/Tests.py" />
         <option value="$PROJECT_DIR$/moo_sorting_functions.py" />
+        <option value="$PROJECT_DIR$/io_wrapper.py" />
         <option value="$PROJECT_DIR$/Abstract_Moo.py" />
+        <option value="$PROJECT_DIR$/Animation.py" />
+        <option value="$PROJECT_DIR$/NSGA_II.py" />
         <option value="$PROJECT_DIR$/SPEA.py" />
         <option value="$PROJECT_DIR$/SPEA_2.py" />
-        <option value="$PROJECT_DIR$/NSGA_II.py" />
         <option value="$PROJECT_DIR$/Example.py" />
         <option value="$PROJECT_DIR$/Test_suite.py" />
-        <option value="$PROJECT_DIR$/io_wrapper.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="width" value="973" />
-    <option name="height" value="1047" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="width" value="2550" />
+    <option name="height" value="1605" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/io_wrapper.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Abstract_Moo.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -286,6 +373,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Abstract_Moo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="true" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Animation" type="PythonConfigurationType" factoryName="Python">
+      <module name="GNSMOO" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Violet\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Animation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="true" />
@@ -445,6 +553,7 @@
       <item itemvalue="Python.SPEA2" />
       <item itemvalue="Python.io_wrapper" />
       <item itemvalue="Python.testbox" />
+      <item itemvalue="Python.Animation" />
       <item itemvalue="Python.moo_sorting_functions" />
       <item itemvalue="Python.SPEA tests" />
       <item itemvalue="Python.Abstract_moo" />
@@ -475,7 +584,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="973" height="1047" extended-state="0" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.28263214" />
@@ -483,15 +592,15 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3272933" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49818182" weight="0.35268345" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.25410733" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49789253" weight="0.36883408" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.40635267" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3272933" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3277592" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5018182" side_tool="true" weight="0.2412231" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49917492" weight="0.32851985" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5021075" side_tool="true" weight="0.32969034" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49917492" weight="0.45627803" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -518,17 +627,6 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/NSGA_II.py</url>
-          <line>73</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
@@ -593,6 +691,11 @@ x[0] ** 2 + x[1] ** 2</expression-string>
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>self.animation_generation</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>self.fronts[0][-1].d_vars</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -629,11 +732,6 @@ x[0] ** 2 + x[1] ** 2</expression-string>
       </expression>
       <expression>
         <expression-string>other.total_constraint_violation</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.total_constraint_violation</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -723,61 +821,11 @@ x[0] ** 2 + x[1] ** 2</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/pyemu/pyemu/utils/pp_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/pyemu/pyemu/utils/smp_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/pyemu/pyemu/utils/os_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$USER_HOME$/pyemu/pyemu/utils/helpers.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/pyemu/pyemu/utils/gw_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-442" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/pyemu/pyemu/utils/geostats.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Abstract_Moo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="137" column="5" lean-forward="true" selection-start-line="137" selection-start-column="5" selection-end-line="137" selection-end-column="5" />
-          <folding>
-            <element signature="e#56#74#0" expanded="true" />
-            <element signature="e#902#2041#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="289" column="26" lean-forward="true" selection-start-line="289" selection-start-column="26" selection-end-line="289" selection-end-column="26" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/matplotlib/artist.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -786,13 +834,48 @@ x[0] ** 2 + x[1] ** 2</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SPEA_2.py">
+    <entry file="file://$USER_HOME$/pyemu/pyemu/utils/pp_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="149" column="28" selection-start-line="149" selection-start-column="28" selection-end-line="149" selection-end-column="28" />
+        <state relative-caret-position="257">
+          <caret line="374" column="81" selection-start-line="374" selection-start-column="81" selection-end-line="374" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/pyemu/pyemu/utils/smp_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1052">
+          <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/pyemu/pyemu/utils/gw_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6120">
+          <caret line="324" column="29" lean-forward="true" selection-start-line="324" selection-start-column="29" selection-end-line="324" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/pyemu/pyemu/utils/geostats.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-748" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Abstract_Moo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4352">
+          <caret line="257" selection-start-line="257" selection-end-line="264" selection-end-column="113" />
           <folding>
-            <element signature="e#24#42#0" expanded="true" />
-            <marker date="1544142869014" expanded="true" signature="1502:1532" ph="..." />
+            <element signature="e#56#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NSGA_II.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="23" column="111" selection-start-line="23" selection-start-column="111" selection-end-line="23" selection-end-column="111" />
+          <folding>
+            <element signature="e#173#191#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -800,62 +883,73 @@ x[0] ** 2 + x[1] ** 2</expression-string>
     <entry file="file://$PROJECT_DIR$/SPEA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-          <folding>
-            <element signature="e#444#692#0" />
-            <element signature="e#721#1539#0" />
-            <element signature="e#1572#1585#0" />
-            <element signature="e#1674#1933#0" />
-            <element signature="e#2011#2497#0" />
-            <element signature="e#2537#3857#0" />
-            <element signature="e#3901#4432#0" />
-          </folding>
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NSGA_II.py">
+    <entry file="file://$PROJECT_DIR$/SPEA_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-850">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        <state relative-caret-position="153">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
           <folding>
-            <element signature="e#173#191#0" expanded="true" />
+            <element signature="e#24#42#0" expanded="true" />
+            <marker date="1544559589644" expanded="true" signature="1503:1533" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Example.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+        <state relative-caret-position="136">
+          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
           <folding>
             <element signature="e#34#48#0" expanded="true" />
-            <marker date="1544394109344" expanded="true" signature="546:837" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_suite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="934">
-          <caret line="378" column="49" lean-forward="true" selection-start-line="378" selection-start-column="49" selection-end-line="378" selection-end-column="49" />
-          <folding>
-            <element signature="e#61#79#0" expanded="true" />
-            <marker date="1544394188406" expanded="true" signature="133:138" ph="..." />
-            <marker date="1544394188406" expanded="true" signature="2141:2308" ph="..." />
-            <marker date="1544394188406" expanded="true" signature="2729:3077" ph="..." />
-            <marker date="1544394188406" expanded="true" signature="2758:2767" ph="..." />
-            <marker date="1544394188406" expanded="true" signature="3077:3613" ph="..." />
-            <marker date="1544394188406" expanded="true" signature="4869:4897" ph="..." />
-            <marker date="1544394188406" expanded="true" signature="8461:8487" ph="..." />
-            <marker date="1544394188406" expanded="true" signature="8608:8650" ph="..." />
+            <marker date="1544564392999" expanded="true" signature="663:946" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/io_wrapper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="52" column="32" lean-forward="true" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+        <state relative-caret-position="799">
+          <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4913">
+          <caret line="289" column="26" selection-start-line="289" selection-start-column="26" selection-end-line="289" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Animation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+          <folding>
+            <element signature="e#80#98#0" expanded="true" />
+            <marker date="1544556194882" expanded="true" signature="260:261" ph="..." />
+            <marker date="1544556194882" expanded="true" signature="260:266" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_suite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3230">
+          <caret line="268" column="52" selection-start-line="268" selection-start-column="52" selection-end-line="268" selection-end-column="52" />
+          <folding>
+            <element signature="e#60#78#0" expanded="true" />
+            <marker date="1544564392968" expanded="true" signature="133:138" ph="..." />
+            <marker date="1544564392968" expanded="true" signature="2044:2207" ph="..." />
+            <marker date="1544564392968" expanded="true" signature="2628:2976" ph="..." />
+            <marker date="1544564392968" expanded="true" signature="2657:2666" ph="..." />
+            <marker date="1544564392968" expanded="true" signature="2976:3512" ph="..." />
+            <marker date="1544564392968" expanded="true" signature="4768:4796" ph="..." />
+            <marker date="1544564392968" expanded="true" signature="8295:8321" ph="..." />
+            <marker date="1544564392968" expanded="true" signature="8442:8484" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

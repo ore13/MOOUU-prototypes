@@ -9,23 +9,24 @@ from Test_suite import *
 
 
 def run_test_problems():
-    test = TestAlgorithm(ZDT6, NSGA_II.NSGA_II)
-    test.new_plot("ZDT1", colour='b', marker='o')
-    test.change_algorithm(SPEA.SPEA)
-    test.replot(colour='g', marker='o')
-    test.change_algorithm(SPEA_2.SPEA_2)
-    test.replot(colour='r', marker='o')
-    # test.save_plot('ZDT4', 'C:/Users/Violet/Desktop/GNS work/Comparisons')
-    plt.show()
+    for problem in [ZDT1, ZDT2, ZDT3, ZDT4, ZDT6]:
+        test = TestAlgorithm(problem, NSGA_II.NSGA_II)
+        test.new_plot(str(problem()), colour='b', marker='o')
+        test.change_algorithm(SPEA.SPEA)
+        test.replot(colour='g', marker='o')
+        test.change_algorithm(SPEA_2.SPEA_2)
+        test.replot(colour='r', marker='o')
+        test.save_plot(str(problem()) + '.jpeg', 'C:/Users/Violet/Desktop/GNS work/Comparisons4')
+        plt.close('all')
 
 
 def constr_test():
     constr = TestAlgorithm(SRN, NSGA_II.NSGA_II)
     constr.new_plot("SRN", colour='b', marker='o')
-    # constr.change_algorithm(SPEA.SPEA)
-    # constr.replot(colour='g', marker='o')
-    # constr.change_algorithm(SPEA_2.SPEA_2)
-    # constr.replot(colour='r', marker='o')
+    constr.change_algorithm(SPEA.SPEA)
+    constr.replot(colour='g', marker='o')
+    constr.change_algorithm(SPEA_2.SPEA_2)
+    constr.replot(colour='r', marker='o')
     plt.show()
 
 
@@ -107,8 +108,8 @@ def nice_plot_SPEA_2():
 
 
 if __name__ == "__main__":
-    # run_test_problems()
+    run_test_problems()
     # nice_plot_SPEA_2()
     # nice_plot_SPEA()
     # nice_plot_NSGA_II()
-    constr_test()
+    # constr_test()

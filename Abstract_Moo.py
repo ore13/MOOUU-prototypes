@@ -37,6 +37,7 @@ class AbstractMOEA:
         self.mut_prob = mut_prob
         self.mut_dist = mut_dist
         self.iterations = iterations
+        self.animator_points = []
 
     def run(self):
         pass
@@ -93,10 +94,20 @@ class AbstractMOEA:
         else:
             return a.covers(b)
 
-    @staticmethod
-    def reset_population(*args):
-        for individual in itr.chain(*args):
+    def reset_population(self, population):
+        gen = []
+        for obj in self.objectives:
+            gen.append(np.zeros(len(population)))
+        count = 0
+        for individual in population:
+            for i, obj in enumerate(individual.objective_values):
+                gen[i][count] = obj
             individual.clear()
+            count += 1
+        self.animator_points.append(gen)
+
+    def get_animation_points(self):
+        return self.animator_points
 
 
 class AbstractPopIndividual:

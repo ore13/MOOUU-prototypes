@@ -12,7 +12,7 @@ from Abstract_Moo import AbstractPopIndividual, AbstractMOEA
 class SPEA(AbstractMOEA):
 
     def __init__(self, objectives, bounds, constraints=None, population_size=100, archive_size=25, cross_prob=0.9,
-                 cross_dist=1, mut_prob=0.01, mut_dist=20, iterations=20):
+                 cross_dist=15, mut_prob=0.01, mut_dist=20, iterations=20):
         super().__init__(objectives, bounds, constraints, cross_prob, cross_dist, mut_prob, mut_dist, iterations)
         self.population_size = population_size
         self.archive_size = archive_size

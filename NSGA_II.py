@@ -21,7 +21,7 @@ class NSGA_II(AbstractMOEA):
     """
 
     # ------------------------External methods--------------------------------
-    def __init__(self, objectives, bounds, constraints=None, parent_pop_size=100, cross_prob=0.9, cross_dist=1,
+    def __init__(self, objectives, bounds, constraints=None, parent_pop_size=100, cross_prob=0.9, cross_dist=15,
                  mut_prob=0.01, mut_dist=20, iterations=20):
         """initialise the algorithm. Parameters:
            objectives: vector of objective functions to be optimised

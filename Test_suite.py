@@ -15,7 +15,7 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = algorithm(self.problem.objectives, bounds, iterations=100, constraints=constraints)
+        self.moo = algorithm(self.problem.objectives, bounds, iterations=250, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def change_problem(self, problem):
@@ -25,7 +25,7 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = self.algorithm(self.problem.objectives, bounds, iterations=100, constraints=constraints)
+        self.moo = self.algorithm(self.problem.objectives, bounds, iterations=250, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def change_algorithm(self, algorithm):
@@ -34,7 +34,7 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = algorithm(self.problem.objectives, self.problem.bounds, iterations=100, constraints=constraints)
+        self.moo = algorithm(self.problem.objectives, self.problem.bounds, iterations=250, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def new_plot(self, name, **kwargs):
@@ -46,16 +46,14 @@ class TestAlgorithm:
         plt.scatter(self.x, self.y, s=10, c=kwargs.get('colour'), marker=kwargs.get('marker'), label=str(self.moo))
         px, py = self.problem.get_pareto_front()
         plt.plot(px, py, label='True Pareto Front')
-        # x_bounds = (int(np.rint(min(px))), int(np.rint(max(px))))
-        # plt.xlim(x_bounds)
         plt.xlabel('Objective 1')
         plt.ylabel('Objective 2')
         plt.legend()
         plt.title(name)
 
     def replot(self, **kwargs):
-        plt.plot(self.x, self.y, c=kwargs.get('colour'), marker=kwargs.get('marker'),
-                    label='{}'.format(str(self.moo)))
+        plt.scatter(self.x, self.y, s=10, c=kwargs.get('colour'), marker=kwargs.get('marker'),
+                    label=str(self.moo))
         plt.legend()
 
     def save_plot(self, name, directory):
@@ -172,7 +170,7 @@ class ZDT2(Problem):
         self.bounds = [(0, 1) for _ in range(self.number_of_decision_vars)]
 
     def __str__(self):
-        return "Test problem ZDT2"
+        return "ZDT2"
 
     @staticmethod
     def f1(x):
@@ -200,7 +198,7 @@ class ZDT3(Problem):
         self.bounds = [(0, 1) for _ in range(self.number_of_decision_vars)]
 
     def __str__(self):
-        return "Test problem ZDT3"
+        return "ZDT3"
 
     @staticmethod
     def f1(x):
@@ -228,7 +226,7 @@ class ZDT4(Problem):
         self.bounds = [(0, 1) if i == 0 else (-5, 5) for i in range(self.number_of_decision_vars)]
 
     def __str__(self):
-        return "Test problem ZDT4"
+        return "ZDT4"
 
     @staticmethod
     def f1(x):
@@ -256,7 +254,7 @@ class ZDT6(Problem):
         self.bounds = [(0, 1) for _ in range(self.number_of_decision_vars)]
 
     def __str__(self):
-        return "Test problem ZDT6"
+        return "ZDT6"
 
     @staticmethod
     def f1(x):
@@ -284,7 +282,7 @@ class CONSTR(Problem):
         self.bounds = [(0.1, 1), (0, 5)]
 
     def __str__(self):
-        return "Test problem CONSTR"
+        return "CONSTR"
 
     def constrained(self):
         return True
@@ -327,7 +325,7 @@ class SRN(Problem):
         self.bounds = [(-20, 20), (-20, 20)]
 
     def __str__(self):
-        return "Test problem SRN"
+        return "SRN"
 
     def constrained(self):
         return True
