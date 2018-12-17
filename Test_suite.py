@@ -15,7 +15,8 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = algorithm(self.problem.objectives, bounds, iterations=250, constraints=constraints)
+        self.moo = algorithm(problem.objective_vector, bounds, problem.number_objectives(), iterations=10,
+                             constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def change_problem(self, problem):
@@ -25,7 +26,8 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = self.algorithm(self.problem.objectives, bounds, iterations=250, constraints=constraints)
+        self.moo = self.algorithm(self.problem.objective_vector, bounds, problem.number_objectives(), iterations=10,
+                                  constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def change_algorithm(self, algorithm):
@@ -34,7 +36,8 @@ class TestAlgorithm:
             constraints = self.problem.constraints
         else:
             constraints = None
-        self.moo = algorithm(self.problem.objectives, self.problem.bounds, iterations=250, constraints=constraints)
+        self.moo = algorithm(self.problem.objective_vector, self.problem.bounds, self.problem.number_objectives(),
+                             iterations=10, constraints=constraints)
         self.pareto_set, self.x, self.y = self.get_points()
 
     def new_plot(self, name, **kwargs):
@@ -131,6 +134,30 @@ class Problem:
     @staticmethod
     def constraint2(x):
         return np.NAN
+
+    @classmethod
+    def objective_vector(cls, x):
+        return np.array([cls.f1(x), cls.f2(x)])
+
+    @staticmethod
+    def number_objectives():
+        return 2
+
+
+class Simple(Problem):
+
+    def __init__(self):
+        super().__init__()
+        self.number_of_decision_vars = 2
+        self.bounds = [(0.1, 2), (0,1, 2)]
+
+    @staticmethod
+    def f1(x):
+        return x[0]
+
+    @staticmethod
+    def f2(x, front=False):
+        return 1/x[0] + x[1]
 
 
 class ZDT1(Problem):

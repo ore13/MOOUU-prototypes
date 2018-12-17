@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import Test_suite as ts
 import NSGA_II
+import ffmpeg
 import SPEA
 import SPEA_2
 
@@ -44,7 +45,7 @@ class Animator:
 
 
 if __name__ == "__main__":
-    test = ts.TestAlgorithm(ts.ZDT1, SPEA_2.SPEA_2)
+    test = ts.TestAlgorithm(ts.ZDT1, NSGA_II.NSGA_II)
     moo_finished = test.moo
     pareto_front = test.problem.get_pareto_front()
     ani = Animator(moo_finished, pareto_front, 'SPEA2.mp4')

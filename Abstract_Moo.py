@@ -15,8 +15,8 @@ class AbstractMOEA:
     """
 
     # ------------------------External methods--------------------------------
-    def __init__(self, objectives, bounds, constraints=None, cross_prob=0.8, cross_dist=20, mut_prob=0.01,
-                 mut_dist=20, iterations=20):
+    def __init__(self, objectives, bounds, number_objectives,
+                 constraints=None, cross_prob=0.8, cross_dist=20, mut_prob=0.01, mut_dist=20, iterations=20):
         """initialise the algorithm. Parameters:
            objectives: vector of objective functions to be optimised
            bounds: array of upper and lower bounds for each decision variable, eg [(0, 5), (-2, 2)]
@@ -29,6 +29,7 @@ class AbstractMOEA:
            iterations: number of iterations of the algorithm
         """
         self.constraints = constraints
+        self.number_objectives = number_objectives
         self.is_constrained = constraints is not None
         self.objectives = objectives
         self.bounds = bounds
@@ -96,7 +97,7 @@ class AbstractMOEA:
 
     def reset_population(self, population):
         gen = []
-        for obj in self.objectives:
+        for _ in range(self.number_objectives):
             gen.append(np.zeros(len(population)))
         count = 0
         for individual in population:
@@ -162,10 +163,10 @@ class AbstractPopIndividual:
         return bool(self.fitness == other.fitness)
 
     def calculate_objective_values(self):
-        obj_vector = np.zeros(len(self.objectives), dtype=float)
-        for i, objective in enumerate(self.objectives):
-            obj_vector[i] = objective(self.d_vars)
-        return obj_vector
+        # obj_vector = np.zeros(len(self.objectives), dtype=float)
+        # for i, objective in enumerate(self.objectives):
+        #     obj_vector[i] = objective(self.d_vars)
+        return self.objectives(self.d_vars)
 
     def constrain_dominates(self, other):
         if self.violates and other.violates:

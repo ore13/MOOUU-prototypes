@@ -21,8 +21,9 @@ class NSGA_II(AbstractMOEA):
     """
 
     # ------------------------External methods--------------------------------
-    def __init__(self, objectives, bounds, constraints=None, parent_pop_size=100, cross_prob=0.9, cross_dist=15,
-                 mut_prob=0.01, mut_dist=20, iterations=20):
+    def __init__(self, objectives, bounds, number_objectives,
+                 constraints=None, parent_pop_size=100, cross_prob=0.9, cross_dist=15,mut_prob=0.01, mut_dist=20,
+                 iterations=20):
         """initialise the algorithm. Parameters:
            objectives: vector of objective functions to be optimised
            bounds: array of upper and lower bounds for each decision variable, eg [(0, 5), (-2, 2)]
@@ -34,7 +35,8 @@ class NSGA_II(AbstractMOEA):
            mut_dist: distribution parameter of the mutation operation
            iterations: number of iterations of the algorithm
         """
-        super().__init__(objectives, bounds, constraints, cross_prob, cross_dist, mut_prob, mut_dist, iterations)
+        super().__init__(objectives, bounds, number_objectives, constraints, cross_prob, cross_dist, mut_prob,
+                         mut_dist, iterations)
         # --------------------------------sets of population members------------------------------------------
         self.parent_pop_size = parent_pop_size
         self.parent_pop = []
@@ -110,7 +112,7 @@ class NSGA_II(AbstractMOEA):
         """Internal method. Calculates and assigns the crowding distance for each individual in the population"""
         front = self.fronts[front_index]
         i = 0
-        while i < len(self.objectives):
+        while i < self.number_objectives:
             front.sort(key=lambda x: x.objective_values[i])
             front[0].crowding_distance = np.inf
             front[-1].crowding_distance = np.inf

@@ -6,16 +6,24 @@ import SPEA_2
 import numpy as np
 import matplotlib.pyplot as plt
 from Test_suite import *
+import time
 
 
 def run_test_problems():
     for problem in [ZDT1, ZDT2, ZDT3, ZDT4, ZDT6]:
+        t0 = time.perf_counter()
         test = TestAlgorithm(problem, NSGA_II.NSGA_II)
         test.new_plot(str(problem()), colour='b', marker='o')
+        t1 = time.perf_counter()
+        print(t1 - t0)
         test.change_algorithm(SPEA.SPEA)
         test.replot(colour='g', marker='o')
+        t2 = time.perf_counter()
+        print(t2 - t1)
         test.change_algorithm(SPEA_2.SPEA_2)
         test.replot(colour='r', marker='o')
+        t3 = time.perf_counter()
+        print(t3 - t2)
         test.save_plot(str(problem()) + '.jpeg', 'C:/Users/Violet/Desktop/GNS work/Comparisons4')
         plt.close('all')
 
