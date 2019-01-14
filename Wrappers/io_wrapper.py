@@ -3,7 +3,8 @@ import sys
 import argparse
 import numpy as np
 import pandas as pd
-import Test_suite as ts
+import TestProblems.Problem_suite as ts
+import time
 
 test_dict = {"zdt1": ts.ZDT1, "zdt2": ts.ZDT2, "zdt3": ts.ZDT3, "zdt4": ts.ZDT4, "zdt6": ts.ZDT6}
 
@@ -46,9 +47,9 @@ def run_through_wrapper(args):
         input_df = pd.read_csv(args.input_file)
     except Exception as e:
         raise Exception("error reading input file {0}:{1}".format(args.input_file, str(e)))
-    if len(input_df.columns) != tf.number_decision_vars():
-        raise Exception("Incorrect number of decision variables. Should be {} d. vars. got {} d. vars."
-                        .format(len(input_df.columns), tf.number_decision_vars()))
+    # if len(input_df.columns) != tf.number_decision_vars():
+    #     raise Exception("Incorrect number of decision variables. Should be {} d. vars. got {} d. vars."
+    #                     .format(len(input_df.columns), tf.number_decision_vars()))
     f1 = tf.f1(input_df.parval1)
     f2 = tf.f2(input_df.parval1)
     with open(args.output_file, 'w') as f:

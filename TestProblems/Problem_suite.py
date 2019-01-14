@@ -12,7 +12,7 @@ class TestAlgorithm:
         self.algorithm = algorithm
         bounds = self.problem.bounds
         if self.problem.constrained():
-            constraints = self.problem.constraints
+            constraints = problem.constraint_vector
         else:
             constraints = None
         self.moo = algorithm(problem.objective_vector, bounds, problem.number_objectives(), iterations=10,
@@ -23,7 +23,7 @@ class TestAlgorithm:
         self.problem = problem()
         bounds = self.problem.bounds
         if self.problem.constrained():
-            constraints = self.problem.constraints
+            constraints = problem.constraint_vector
         else:
             constraints = None
         self.moo = self.algorithm(self.problem.objective_vector, bounds, problem.number_objectives(), iterations=10,
@@ -33,7 +33,7 @@ class TestAlgorithm:
     def change_algorithm(self, algorithm):
         self.algorithm = algorithm
         if self.problem.constrained():
-            constraints = self.problem.constraints
+            constraints = self.problem.constraint_vector
         else:
             constraints = None
         self.moo = algorithm(self.problem.objective_vector, self.problem.bounds, self.problem.number_objectives(),
@@ -134,6 +134,10 @@ class Problem:
     @staticmethod
     def constraint2(x):
         return np.NAN
+
+    @classmethod
+    def constraint_vector(cls, x):
+        return np.array([cls.constraint1(x), cls.constraint2(x)])
 
     @classmethod
     def objective_vector(cls, x):

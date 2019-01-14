@@ -6,15 +6,15 @@ Otis Rea
 """
 
 import numpy as np
-from Abstract_Moo import AbstractPopIndividual, AbstractMOEA
+from GeneticAlgorithms.Abstract_Moo import AbstractPopIndividual, AbstractMOEA
 
 
 class SPEA(AbstractMOEA):
 
     def __init__(self, objectives, bounds, number_objectives, constraints=None, population_size=100, archive_size=25,
                  cross_prob=0.9,cross_dist=15, mut_prob=0.01, mut_dist=20, iterations=20):
-        super().__init__(objectives, bounds, number_objectives, constraints, cross_prob, cross_dist, mut_prob,
-                         mut_dist, iterations)
+        super().__init__(objectives, bounds, number_objectives, constraints=constraints, cross_prob=cross_prob,
+                         cross_dist=cross_dist, mut_prob=mut_prob, mut_dist=mut_dist, iterations=iterations)
         self.population_size = population_size
         self.archive_size = archive_size
         self.population = []
@@ -22,6 +22,7 @@ class SPEA(AbstractMOEA):
 
     def run(self):
         self.population = self.initialise_population(self.population_size, PopIndividual)
+        self.run_model(self.population)
         for _ in range(self.iterations):
             temporary_archive = self.fast_non_dominated_front(self.population)
             for individual in temporary_archive:
@@ -34,6 +35,7 @@ class SPEA(AbstractMOEA):
             self.crossover_step_SBX(self.population)
             self.mutation_step_polynomial(self.population)
             self.reset_population(self.archive)
+            self.run_model(self.population)
         return self.archive
 
     def __str__(self):
@@ -93,7 +95,7 @@ class SPEA(AbstractMOEA):
         for individual1 in self.archive:
             n = 0
             for individual2 in self.population:
-                if self.covers(individual1, individual2):
+                if individual1.covers(individual2):
                     n += 1
                     individual2.covered_by_set.append(individual1)
             individual1.fitness = n / (self.population_size + 1)
@@ -107,11 +109,11 @@ class SPEA(AbstractMOEA):
         """use Kung's algorithim to identify the non dominated set"""
         if not covers:
             population.sort()  # sort values using self defined __lt__ operator
-            return self._front(population, key=self.dominates)
+            return self._front(population, key=lambda p, q: p.dominates(q))  # key=self.dominates
         # TODO: objective_values
         else:
             population.sort()
-            return self._front(population, key=self.covers)
+            return self._front(population, key=lambda p, q: p.covers(q))  # key=self.covers
 
     def _front(self, population, key):
         if len(population) == 1:
@@ -137,8 +139,8 @@ class SPEA(AbstractMOEA):
 class PopIndividual(AbstractPopIndividual):
     """represents an individual in a population for SPEA"""
 
-    def __init__(self, d_vars, objectives, constraints=None, objective_values=None, total_constraint_violation=None):
-        super().__init__(d_vars, objectives, constraints, objective_values, total_constraint_violation)
+    def __init__(self, d_vars, constraints=None, objective_values=None, total_constraint_violation=None):
+        super().__init__(d_vars, constraints, objective_values, total_constraint_violation)
         self.covered_by_set = []
 
     def __str__(self):
@@ -158,6 +160,7 @@ class PopIndividual(AbstractPopIndividual):
                 result = True
         else:
             result = self.objective_values[0] < other.objective_values[0]
+        return result
 
     def clear(self):
         self.covered_by_set = []
