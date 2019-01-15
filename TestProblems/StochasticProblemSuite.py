@@ -348,8 +348,6 @@ class CONSTR(DeterministicBenchmark):
 
     def __init__(self):
         super().__init__()
-        self.number_decision_vars = 2
-        self.bounds = [(0.1, 1), (0, 5)]
 
     def __str__(self):
         return "CONSTR"
@@ -358,12 +356,16 @@ class CONSTR(DeterministicBenchmark):
         return True
 
     @staticmethod
+    def bounds():
+        return [(0.1, 1), (0, 5)]
+
+    @staticmethod
     def constraint1(x):
-        return (x[1] + 9 * x[0]) / 6 - 1
+        return x[1] + 9 * x[0]  # greater than or equal to 6
 
     @staticmethod
     def constraint2(x):
-        return -x[1] + 9 * x[0] - 1
+        return -x[1] + 9 * x[0]  # greater than or equal to 1
 
     @staticmethod
     def f1(x):
@@ -374,6 +376,18 @@ class CONSTR(DeterministicBenchmark):
         if front:
             raise Exception("This problem does not support the front flag")
         return (1 + x[1]) / x[0]
+
+    @staticmethod
+    def number_decision_variables():
+        return 2
+
+    @staticmethod
+    def calculate_objectives(d_vars, pars):
+        return np.array([CONSTR.f1(d_vars), CONSTR.f2(d_vars)])
+
+    @staticmethod
+    def calculate_constraints(d_vars, pars):
+        return np.array([CONSTR.constraint1(d_vars), CONSTR.constraint2(d_vars)])
 
     def get_pareto_front(self):
         x1_1 = np.linspace(7 / 18, 2 / 3)
@@ -391,8 +405,6 @@ class SRN(DeterministicBenchmark):
 
     def __init__(self):
         super().__init__()
-        self.number_decision_vars = 2
-        self.bounds = [(-20, 20), (-20, 20)]
 
     def __str__(self):
         return "SRN"
@@ -401,12 +413,20 @@ class SRN(DeterministicBenchmark):
         return True
 
     @staticmethod
+    def number_decision_variables():
+        return 2
+
+    @staticmethod
+    def bounds():
+        return [(-20, 20), (-20, 20)]
+
+    @staticmethod
     def constraint1(x):
-        return 225 - np.power(x[0], 2) - np.power(x[1], 2)
+        return np.power(x[0], 2) + np.power(x[1], 2)  # lest than or equal to 225
 
     @staticmethod
     def constraint2(x):
-        return 3 * x[1] - x[0] - 10
+        return 3 * x[1] - x[0]  # greater than or equal to 10
 
     @staticmethod
     def f1(x):
@@ -417,6 +437,14 @@ class SRN(DeterministicBenchmark):
         if front:
             raise Exception("This problem does not support the front flag")
         return 9 * x[0] - np.power(x[1] - 1, 2)
+
+    @staticmethod
+    def calculate_objectives(d_vars, pars):
+        return np.array(SRN.f1(d_vars), SRN.f2(d_vars))
+
+    @staticmethod
+    def calculate_constraints(d_vars, pars):
+        return np.array(SRN.constraint1(d_vars), SRN.constraint2(d_vars))
 
     def get_pareto_front(self):
         maximiser1 = -2.5
@@ -489,9 +517,9 @@ class Test2(DeterministicBenchmark):
         return np.array([Test2.f1(d_vars)])
 
 
-
 test_functions = {"stochasticparaboloid": StochasticParaboloid, "stochasticparaboloid2": StochasticParaboloid2,
-                  'simple': Simple, 'zdt1': ZDT1, 'zdt2': ZDT2, 'test1': Test1, 'test2': Test2}
+                  'simple': Simple, 'zdt1': ZDT1, 'zdt2': ZDT2, 'test1': Test1, 'test2': Test2, 'constr': CONSTR,
+                  'srn': SRN}
 
 
 class IOWrapper:
@@ -501,7 +529,8 @@ class IOWrapper:
         model = test_functions[args.benchmark_function.lower()]
         d_vars, pars = self.read_input_file(args.input_file, model)
         objectives = model.calculate_objectives(d_vars, pars)
-        self.write_output_file(objectives, args.output_file)
+        constraints = model.calculate_constraints(d_vars, pars)
+        self.write_output_file(objectives, constraints, args.output_file)
 
     @staticmethod
     def parse():
@@ -540,10 +569,13 @@ class IOWrapper:
         return d_vars, pars
 
     @staticmethod
-    def write_output_file(objectives, output_file):
+    def write_output_file(objectives, constraints, output_file):
         num_objectives = len(objectives)
+        num_constraints = len(constraints)
+        data = np.concatenate((objectives, constraints))
         index = ['objective{}'.format(i + 1) for i in range(num_objectives)]
-        df = pd.Series(objectives, index)
+        index += ['constraint{}'.format(i + 1) for i in range(num_constraints)]
+        df = pd.Series(data, index)
         f = open(output_file, 'w')
         f.write('MODEL OUTPUT FILE\n')
         f.close()

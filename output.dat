@@ -1,3 +1,5 @@
 MODEL OUTPUT FILE
-objective1,20.081223041203835
-objective2,12.9795708843267
+objective1,2.0
+objective2,1.0
+constraint1,19.0
+constraint2,17.0
