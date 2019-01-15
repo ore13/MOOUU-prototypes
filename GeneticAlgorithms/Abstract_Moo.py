@@ -60,7 +60,7 @@ class AbstractMOEA:
         """
         if type(population) != "numpy.ndarray":
             population = np.array(population)
-        positions = np.where([individual.calculate_objectives for individual in population])[0]
+        positions = np.where([individual.run_model for individual in population])[0]
         ensemble = np.atleast_2d(np.array([individual.d_vars for individual in population[positions]]))
         ensemble = ensemble.T
         if len(ensemble) > 0:
@@ -269,10 +269,10 @@ class AbstractPopIndividual:
         # self.objectives = objectives
         self.fitness = 0
         self.is_constrained = not (constraints is None)
-        self.calculate_objectives = False
+        self.run_model = False
         self.calculate_constraints = False
         if objective_values is None:
-            self.calculate_objectives = True
+            self.run_model = True
             self.objective_values = None
         else:
             self.objective_values = objective_values
@@ -287,13 +287,7 @@ class AbstractPopIndividual:
             self.violates = bool(self.total_constraint_violation > 0)
 
     def update(self):
-        if not self.is_constrained:
-            self.calculate_objectives = True
-        else:  # TODO: check this whole section. Strategy for constrained problems needs to be updated
-            self.total_constraint_violation = self.calculate_constrained_values(self.constraints, self.d_vars)
-            self.violates = bool(self.total_constraint_violation > 0)
-            self.calculate_objectives = True
-            self.calculate_constraints = True
+        self.run_model = True
 
     def __str__(self):
         try:
