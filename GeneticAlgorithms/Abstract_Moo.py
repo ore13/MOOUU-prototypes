@@ -391,11 +391,11 @@ class AbstractPopIndividual:
     def clone(self):
         cls = self.__class__
         if self.is_constrained and self.violates:
-            return cls(self.d_vars, self.constraints,
+            return cls(self.d_vars, is_constrained=self.is_constrained,
                        total_constraint_violation=self.total_constraint_violation)
         elif self.is_constrained:
-            return cls(self.d_vars, self.constraints, self.objective_values,
-                       self.total_constraint_violation)
+            return cls(self.d_vars, is_constrained=self.is_constrained, objective_values=self.objective_values,
+                       total_constraint_violation=self.total_constraint_violation)
         else:
             return cls(self.d_vars, objective_values=self.objective_values)
 

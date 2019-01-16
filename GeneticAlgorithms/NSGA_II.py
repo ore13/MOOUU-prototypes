@@ -203,9 +203,10 @@ class Population(AbstractPopulation):
 class PopIndividual(AbstractPopIndividual):
     """represents an individual in a population for NSGA-II"""
 
-    def __init__(self, d_vars, constraints=None, objective_values=None, total_constraint_violation=None):
+    def __init__(self, d_vars, is_constrained=False, objective_values=None, total_constraint_violation=None):
         """initialise the new population member"""
-        super().__init__(d_vars, constraints, objective_values, total_constraint_violation)
+        super().__init__(d_vars, is_constrained=is_constrained, objective_values=objective_values,
+                         total_constraint_violation=total_constraint_violation)
         self.dominated_set = []
         self.domination_count = 0
         self.rank = None
