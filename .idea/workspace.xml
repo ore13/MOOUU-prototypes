@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59708be3-a81c-46db-ac5a-fae01c9056cd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeneticAlgorithms/Abstract_MOO_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneticAlgorithms/Abstract_MOO_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProblems/StochasticProblemSuite.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestProblems/StochasticProblemSuite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/StochasticParaboloid.pst" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/StochasticParaboloid.pst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,13 +38,13 @@
           <entry key="inp" value="1" />
           <entry key="objs" value="2" />
           <entry key="out" value="1" />
-          <entry key="py" value="188" />
+          <entry key="py" value="191" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="15" />
-          <entry key="Python" value="188" />
+          <entry key="Python" value="191" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -53,13 +55,13 @@
           <entry key="byteManipulation" value="361" />
           <entry key="dat" value="21" />
           <entry key="dummy" value="71" />
-          <entry key="py" value="125954" />
+          <entry key="py" value="127032" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="92" />
-          <entry key="Python" value="130701" />
+          <entry key="Python" value="131779" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -68,21 +70,62 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/NSGA_II_test.py">
+        <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_MOO_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2788">
-              <caret line="164" column="48" selection-start-line="164" selection-start-column="48" selection-end-line="164" selection-end-column="48" />
+            <state relative-caret-position="1173">
+              <caret line="69" column="64" lean-forward="true" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
+              <folding>
+                <element signature="e#40#84#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_MOO_test.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="208" column="29" selection-start-line="208" selection-start-column="29" selection-end-line="208" selection-end-column="29" />
+            <state relative-caret-position="-51">
+              <caret line="89" column="54" lean-forward="true" selection-start-line="89" selection-start-column="54" selection-end-line="89" selection-end-column="54" />
               <folding>
-                <element signature="e#40#84#0" expanded="true" />
+                <element signature="e#3930#4543#0" />
+                <element signature="e#4625#4975#0" />
+                <element signature="e#5031#5281#0" />
+                <element signature="e#5343#5658#0" />
+                <element signature="e#5712#6071#0" />
+                <element signature="e#6117#6144#0" />
+                <element signature="e#6286#6534#0" />
+                <element signature="e#6567#6594#0" />
+                <element signature="e#6627#6644#0" />
+                <element signature="e#6678#6982#0" />
+                <element signature="e#7022#7317#0" />
+                <element signature="e#7351#7379#0" />
+                <element signature="e#7413#7441#0" />
+                <element signature="e#7484#7677#0" />
+                <element signature="e#7726#7765#0" />
+                <element signature="e#7875#8179#0" />
+                <element signature="e#8286#8971#0" />
+                <element signature="e#9061#9306#0" />
+                <element signature="e#9393#9707#0" />
+                <element signature="e#10145#10836#0" />
+                <element signature="e#11376#11441#0" />
+                <element signature="e#11481#11724#0" />
+                <element signature="e#12400#13300#0" />
+                <element signature="e#12929#13005#0" />
+                <element signature="e#13442#13647#0" />
+                <element signature="e#13681#13697#0" />
+                <element signature="e#13736#13777#0" />
+                <element signature="e#13816#13858#0" />
+                <element signature="e#13897#13938#0" />
+                <element signature="e#13977#14019#0" />
+                <element signature="e#14066#14108#0" />
+                <element signature="e#14160#14248#0" />
+                <element signature="e#14290#15821#0" />
+                <element signature="e#15860#16647#0" />
+                <element signature="e#16678#17142#0" />
+                <element signature="e#17220#18102#0" />
+                <element signature="e#18230#18767#0" />
+                <element signature="e#18852#19305#0" />
+                <element signature="e#19392#19928#0" />
               </folding>
             </state>
           </provider>
@@ -91,35 +134,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UU/UncertaintyPropogation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
+            <state relative-caret-position="510">
               <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py">
+        <entry file="file://$PROJECT_DIR$/TestProblems/StochasticProblemSuite.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="69" column="53" lean-forward="true" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
+            <state relative-caret-position="119">
+              <caret line="585" selection-start-line="585" selection-end-line="585" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/TestProblems/StochasticProblemSuite.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/NSGA_II.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3060">
-              <caret line="380" column="36" lean-forward="true" selection-start-line="380" selection-start-column="36" selection-end-line="380" selection-end-column="36" />
-              <folding>
-                <element signature="e#5007#5875#0" />
-                <element signature="e#5918#6790#0" />
-                <element signature="e#6833#7443#0" />
-                <element signature="e#7486#8113#0" />
-                <element signature="e#8156#8790#0" />
-                <element signature="e#10154#12420#0" />
-                <element signature="e#11877#12246#0" />
-              </folding>
+            <state relative-caret-position="862">
+              <caret line="82" column="21" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -135,7 +169,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tournament_selection</find>
       <find>sort()</find>
       <find>&lt;</find>
       <find>less_than</find>
@@ -165,6 +198,7 @@
       <find>run_sweep</find>
       <find>run_new</find>
       <find>run_model_new</find>
+      <find>self.calculate_objectives</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -210,19 +244,19 @@
         <option value="$PROJECT_DIR$/Wrappers/StochasticIO.py" />
         <option value="$PROJECT_DIR$/GeneticAlgorithms/SPEA.py" />
         <option value="$PROJECT_DIR$/GeneticAlgorithms/SPEA_2.py" />
-        <option value="$PROJECT_DIR$/GeneticAlgorithms/Abstract_MOO_test.py" />
         <option value="$PROJECT_DIR$/GeneticAlgorithms/NSGA_II.py" />
         <option value="$PROJECT_DIR$/GeneticAlgorithms/NSGA_II_test.py" />
         <option value="$PROJECT_DIR$/input.dat" />
         <option value="$PROJECT_DIR$/TestProblems/StochasticProblemSuite.py" />
+        <option value="$PROJECT_DIR$/GeneticAlgorithms/Abstract_MOO_test.py" />
         <option value="$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="316" />
-    <option name="width" value="958" />
-    <option name="height" value="688" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="474" />
+    <option name="width" value="1437" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -261,12 +295,13 @@
     <option name="myUseExistingConsole" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Violet\PycharmProjects\GNSMOO\TestProblems" />
+      <recent name="C:\Users\Violet\PycharmProjects\GNSMOO" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Violet\PycharmProjects\GNSMOO\GeneticAlgorithms" />
       <recent name="C:\Users\Violet\PycharmProjects\GNSMOO\UU" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Violet\PycharmProjects\GNSMOO" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -281,7 +316,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.NSGA_II_Test">
+  <component name="RunManager" selected="Python.Abstract_MOO_test">
     <configuration name="Abstract_MOO_test" type="PythonConfigurationType" factoryName="Python" folderName="GeneticAlgorithms_venv">
       <module name="GNSMOO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -593,15 +628,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.048472077" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.33710408" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.38116592" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49789253" weight="0.15271494" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49789253" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.29977375" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -754,13 +789,6 @@ x[0] ** 2 + x[1] ** 2</expression-string>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Documents/Python/Potential flow grapher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Example.py" />
     <entry file="file://$PROJECT_DIR$/SPEA.py" />
     <entry file="file://$USER_HOME$/Documents/GNS/readout.py">
@@ -922,13 +950,6 @@ x[0] ** 2 + x[1] ** 2</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/NSGA_II.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="82" column="21" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/SPEA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
@@ -953,49 +974,95 @@ x[0] ** 2 + x[1] ** 2</expression-string>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/NSGA_II.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="862">
+          <caret line="82" column="21" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/NSGA_II_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2788">
+        <state relative-caret-position="2584">
           <caret line="164" column="48" selection-start-line="164" selection-start-column="48" selection-end-line="164" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/core/_methods.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UU/UncertaintyPropogation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestProblems/StochasticProblemSuite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="585" selection-start-line="585" selection-end-line="585" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_MOO_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="208" column="29" selection-start-line="208" selection-start-column="29" selection-end-line="208" selection-end-column="29" />
+        <state relative-caret-position="1173">
+          <caret line="69" column="64" lean-forward="true" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
           <folding>
             <element signature="e#40#84#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UU/UncertaintyPropogation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="69" column="53" lean-forward="true" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestProblems/StochasticProblemSuite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3060">
-          <caret line="380" column="36" lean-forward="true" selection-start-line="380" selection-start-column="36" selection-end-line="380" selection-end-column="36" />
+        <state relative-caret-position="-51">
+          <caret line="89" column="54" lean-forward="true" selection-start-line="89" selection-start-column="54" selection-end-line="89" selection-end-column="54" />
           <folding>
-            <element signature="e#5007#5875#0" />
-            <element signature="e#5918#6790#0" />
-            <element signature="e#6833#7443#0" />
-            <element signature="e#7486#8113#0" />
-            <element signature="e#8156#8790#0" />
-            <element signature="e#10154#12420#0" />
-            <element signature="e#11877#12246#0" />
+            <element signature="e#3930#4543#0" />
+            <element signature="e#4625#4975#0" />
+            <element signature="e#5031#5281#0" />
+            <element signature="e#5343#5658#0" />
+            <element signature="e#5712#6071#0" />
+            <element signature="e#6117#6144#0" />
+            <element signature="e#6286#6534#0" />
+            <element signature="e#6567#6594#0" />
+            <element signature="e#6627#6644#0" />
+            <element signature="e#6678#6982#0" />
+            <element signature="e#7022#7317#0" />
+            <element signature="e#7351#7379#0" />
+            <element signature="e#7413#7441#0" />
+            <element signature="e#7484#7677#0" />
+            <element signature="e#7726#7765#0" />
+            <element signature="e#7875#8179#0" />
+            <element signature="e#8286#8971#0" />
+            <element signature="e#9061#9306#0" />
+            <element signature="e#9393#9707#0" />
+            <element signature="e#10145#10836#0" />
+            <element signature="e#11376#11441#0" />
+            <element signature="e#11481#11724#0" />
+            <element signature="e#12400#13300#0" />
+            <element signature="e#12929#13005#0" />
+            <element signature="e#13442#13647#0" />
+            <element signature="e#13681#13697#0" />
+            <element signature="e#13736#13777#0" />
+            <element signature="e#13816#13858#0" />
+            <element signature="e#13897#13938#0" />
+            <element signature="e#13977#14019#0" />
+            <element signature="e#14066#14108#0" />
+            <element signature="e#14160#14248#0" />
+            <element signature="e#14290#15821#0" />
+            <element signature="e#15860#16647#0" />
+            <element signature="e#16678#17142#0" />
+            <element signature="e#17220#18102#0" />
+            <element signature="e#18230#18767#0" />
+            <element signature="e#18852#19305#0" />
+            <element signature="e#19392#19928#0" />
           </folding>
         </state>
       </provider>

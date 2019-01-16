@@ -17,7 +17,7 @@ class AbstractPopIndividualTests:
 
         def constraints(x):
             return np.array([x[1] + 9 * x[0] - 6, -x[1] + 9 * x[0] - 1])
-
+        moo = AbstractMOEA(objectives, [(0, 1), (0, 1)], 2, constraints=constraints)
         a = AbstractPopIndividual([0.2, 1])
         assert a.fitness == 0
         assert np.all(np.isclose(a.d_vars, np.array([0.2, 1])))
@@ -25,19 +25,17 @@ class AbstractPopIndividualTests:
         b = AbstractPopIndividual([0.2, 1], objective_values=np.array([0.2, 10], dtype=float))
         assert b.is_constrained is False
         assert np.all(np.isclose(b.objective_values, [0.2, 10]))
-        c = AbstractPopIndividual([0.2, 1], constraints)
+        c = AbstractPopIndividual([0.2, 1], is_constrained=True)
         assert c.is_constrained
-        assert c.constraints == constraints
-        assert c.violates
-        assert np.isclose(c.total_constraint_violation, 3.4)
-        d = AbstractPopIndividual([0.60000001, 0.6], constraints)
-        assert d.violates is False
-        assert np.isclose(d.total_constraint_violation, 0)
-        population = [a, d]
-        moo = AbstractMOEA(objectives, [(0, 1), (0, 1)], 2)
+        d = AbstractPopIndividual([0.60000001, 0.6], is_constrained=True)
+        population = [a, c, d]
         moo.run_model(population)
         assert np.all(np.isclose(a.objective_values, [0.2, 10]))
         assert np.all(np.isclose(d.objective_values, [0.6, 8 / 3]))
+        assert np.isclose(c.total_constraint_violation, 3.4)
+        assert c.violates is True
+        assert np.isclose(d.total_constraint_violation, 0)
+        assert d.violates is False
 
     @staticmethod
     def test_update():
@@ -46,29 +44,30 @@ class AbstractPopIndividualTests:
 
         def constraints(x):
             return np.array([x[1] + 9 * x[0] - 6, -x[1] + 9 * x[0] - 1])
-
-        a = AbstractPopIndividual([0.3, 1], constraints)
+        moo = AbstractMOEA(objectives, [(0, 1), (0, 1)], 2, constraints=constraints)
+        a = AbstractPopIndividual([0.3, 1], is_constrained=True)
+        assert a.calculate_constraints == a.run_model
         a.d_vars = np.array([0.2, 1], dtype=float)
         a.update()
-        assert a.is_constrained
-        assert a.constraints == constraints
-        assert a.violates
+        assert a.calculate_constraints == a.run_model
+        moo.run_model(AbstractPopulation([a]))
         assert np.isclose(a.total_constraint_violation, 3.4)
+        assert a.violates is True
+        assert np.all(np.isclose(a.objective_values, [0.2, 10]))
         a.d_vars = np.array([0.6000001, 0.6])
         a.update()
+        moo.run_model(AbstractPopulation([a]))
         assert a.violates is False
         assert np.isclose(a.total_constraint_violation, 0)
+        assert np.all(np.isclose(a.objective_values, [0.6, 8 / 3]))
         b = AbstractPopIndividual([0.1, 1])
         b.d_vars = np.array([0.2, 1], dtype=float)
         b.update()
+        moo.run_model(AbstractPopulation([b]))
         assert b.fitness == 0
         assert np.all(np.isclose(b.d_vars, np.array([0.2, 1])))
         assert b.is_constrained is False
-        population = [a, b]
-        moo = AbstractMOEA(objectives, [(0, 1), (0, 1)], 2)
-        moo.run_model(population)
         assert np.all(np.isclose(b.objective_values, [0.2, 10]))
-        assert np.all(np.isclose(a.objective_values, [0.6, 8/3]))
 
     @staticmethod
     def test_dominates():
@@ -91,12 +90,12 @@ class AbstractPopIndividualTests:
         def constraints(x):
             return np.array([x[1] + 9 * x[0] - 6, -x[1] + 9 * x[0] - 1])
 
-        a = AbstractPopIndividual([0.6, 0.7], constraints)
-        b = AbstractPopIndividual([0.8, 2], constraints)
-        c = AbstractPopIndividual([0.2, 1], constraints)
-        d = AbstractPopIndividual([0.1, 3], constraints)
+        a = AbstractPopIndividual([0.6, 0.7], is_constrained=True)
+        b = AbstractPopIndividual([0.8, 2], is_constrained=True)
+        c = AbstractPopIndividual([0.2, 1], is_constrained=True)
+        d = AbstractPopIndividual([0.1, 3], is_constrained=True)
         population = [a, b, c, d]
-        moo = AbstractMOEA(objectives, (0, 5), 2)
+        moo = AbstractMOEA(objectives, (0, 5), 2, constraints=constraints)
         moo.run_model(population)
         assert a.dominates(b)
         assert a.dominates(c)

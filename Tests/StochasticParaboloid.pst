@@ -3,10 +3,10 @@ pcf
 restart estimation
 3  2  1  0  1
 1  1  single  point  1  0  0
-1e-1  -4.0   0.3  0.03    10	    999
-5.0   5.0   1.0e-3
+1e-1  -4.0   0.3  0.03  10  999
+5.0   5.0   1.0e-3  absparmax(5)=1
 0.1  
-20   .005  4   4  .005   4
+-2   .005  4   4  .005   4
 1    1    1
 * singular value decomposition
 1
@@ -15,16 +15,16 @@ restart estimation
 * parameter groups
 var	absolute	1.0000E-10	0.000	switch	2.000	parabolic
 * parameter data
-dvar1  none  factor  0  -5.0  5.0  var  1.0  0.0  1  
-dvar2  none  factor  0  -5.0  5.0  var  1.0  0.0  1
-par1   none  factor  0  -5.0  5.0  var  1.0  0.0  1
+dvar1  none  absolute(5)  0  -5.0  5.0  var  1.0  0.0  1  
+dvar2  none  absolute(5)  0  -5.0  5.0  var  1.0  0.0  1
+par1   none  absolute(5)  0  -5.0  5.0  var  1.0  0.0  1
 * observation groups
 objective
 * observation data
 obj1  1  0.0  objective
 obj2  1  0.0  objective
 * model command line
-python StochasticProblemSuite.py
+python StochasticProblemSuite.py StochasticParaboloid
 * model input/output
 StochasticParaboloid.tpl stpbld.in
 StochasticParaboloid.ins stpbld.out

@@ -49,6 +49,10 @@ class BenchmarkTestProblem:
         raise Exception("Child class should define this function")
 
     @staticmethod
+    def constrained():
+        return False
+
+    @staticmethod
     def _quadratic_positive_root(a, b, c):
         return (-b + np.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
 
@@ -352,7 +356,8 @@ class CONSTR(DeterministicBenchmark):
     def __str__(self):
         return "CONSTR"
 
-    def constrained(self):
+    @staticmethod
+    def constrained():
         return True
 
     @staticmethod
@@ -409,7 +414,8 @@ class SRN(DeterministicBenchmark):
     def __str__(self):
         return "SRN"
 
-    def constrained(self):
+    @staticmethod
+    def constrained():
         return True
 
     @staticmethod
@@ -440,11 +446,11 @@ class SRN(DeterministicBenchmark):
 
     @staticmethod
     def calculate_objectives(d_vars, pars):
-        return np.array(SRN.f1(d_vars), SRN.f2(d_vars))
+        return np.array([SRN.f1(d_vars), SRN.f2(d_vars)])
 
     @staticmethod
     def calculate_constraints(d_vars, pars):
-        return np.array(SRN.constraint1(d_vars), SRN.constraint2(d_vars))
+        return np.array([SRN.constraint1(d_vars), SRN.constraint2(d_vars)])
 
     def get_pareto_front(self):
         maximiser1 = -2.5
@@ -529,8 +535,11 @@ class IOWrapper:
         model = test_functions[args.benchmark_function.lower()]
         d_vars, pars = self.read_input_file(args.input_file, model)
         objectives = model.calculate_objectives(d_vars, pars)
-        constraints = model.calculate_constraints(d_vars, pars)
-        self.write_output_file(objectives, constraints, args.output_file)
+        if model.constrained():
+            constraints = model.calculate_constraints(d_vars, pars)
+        else:
+            constraints = []
+        self.write_output_file(objectives=objectives, constraints=constraints, output_file=args.output_file)
 
     @staticmethod
     def parse():
@@ -569,7 +578,7 @@ class IOWrapper:
         return d_vars, pars
 
     @staticmethod
-    def write_output_file(objectives, constraints, output_file):
+    def write_output_file(objectives, output_file, constraints=None):
         num_objectives = len(objectives)
         num_constraints = len(constraints)
         data = np.concatenate((objectives, constraints))

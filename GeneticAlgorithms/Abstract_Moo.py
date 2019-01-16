@@ -61,19 +61,30 @@ class AbstractMOEA:
         if type(population) != "numpy.ndarray":
             population = np.array(population)
         positions = np.where([individual.run_model for individual in population])[0]
+        constraint_positions = np.where([individual.calculate_constraints for individual in population])
+        #assert np.all(constraint_positions == positions)
         ensemble = np.atleast_2d(np.array([individual.d_vars for individual in population[positions]]))
         ensemble = ensemble.T
         if len(ensemble) > 0:
-            data = np.atleast_2d(self.objectives(ensemble))
-            data = data.T
-            for i, individual in enumerate(population[positions]):
-                individual.objective_values = data[i]
+            objectives = np.atleast_2d(self.objectives(ensemble)).T
+            if self.is_constrained:
+                constraints = np.atleast_2d(self.constraints(ensemble)).T
+                constraints[np.where(constraints >= 0)] = 0
+                total_constraint_violation = np.sum(np.abs(constraints), axis=1)
+                for i, individual in enumerate(population[positions]):
+                    individual.objective_values = objectives[i]
+                    individual.total_constraint_violation = total_constraint_violation[i]
+                    individual.violates = bool(individual.total_constraint_violation > 0)
+            else:
+                for i, individual in enumerate(population[positions]):
+                    individual.objective_values = objectives[i]
+
 
     def run_model_IO(self, population, decision_variable_template='individual_{}.inp',
                   objective_template='individual_{}.out'):
         input_files = population.write_decision_variables(decision_variable_template)
         output_files = [objective_template.format(i + 1) for i in range(len(input_files))]
-        for I, O in zip(input_files, output_files):  # TODO: substitute this for parallel run use pyemu.helpers.setup_slaves (or something)
+        for I, O in zip(input_files, output_files):
             cmd = self.model_path + [self.model, '--input_file', I, '--output_file', O]
             subprocess.run(cmd, shell=True)
         population.read_objectives(objective_template)
@@ -223,7 +234,7 @@ class AbstractPopulation:
         if model_update is False:
             positions = np.arange(0, len(self))
         else:
-            positions = np.where([individual.calculate_objectives for individual in self.population])[0]
+            positions = np.where([individual.run_model for individual in self.population])[0]
         return np.atleast_2d(np.array([individual.d_vars for individual in self.population[positions]]))
 
     def write_decision_variables(self, filename_template):
@@ -240,7 +251,7 @@ class AbstractPopulation:
         return file_names
 
     def read_objectives(self, filename_template):
-        positions = np.where([individual.calculate_objectives for individual in self.population])[0]
+        positions = np.where([individual.run_model for individual in self.population])[0]
         file_names = [filename_template.format(i) for i in range(1, len(positions) + 1)]
         for filename, individual in zip(file_names, self.population[positions]):
             df = pd.read_csv(filename, header=0, index_col=0, encoding='ascii').T
@@ -263,12 +274,12 @@ class AbstractPopulation:
 class AbstractPopIndividual:
     """represents an individual in a population for NSGA-II"""
 
-    def __init__(self, d_vars, constraints=None, objective_values=None, total_constraint_violation=None):
+    def __init__(self, d_vars, is_constrained=False, objective_values=None, total_constraint_violation=None):
         """initialise the new population member"""
         self.d_vars = np.array(d_vars, dtype=float)
         # self.objectives = objectives
         self.fitness = 0
-        self.is_constrained = not (constraints is None)
+        self.is_constrained = is_constrained
         self.run_model = False
         self.calculate_constraints = False
         if objective_values is None:
@@ -277,17 +288,20 @@ class AbstractPopIndividual:
         else:
             self.objective_values = objective_values
         if self.is_constrained:
-            self.constraints = constraints
             if total_constraint_violation is None:
-                self.total_constraint_violation = self.calculate_constrained_values(self.constraints, self.d_vars)
                 self.calculate_constraints = True
+                self.violates = None
             else:
                 self.total_constraint_violation = total_constraint_violation
+                self.violates = bool(self.total_constraint_violation > 0)
                 self.calculate_constraints = False
-            self.violates = bool(self.total_constraint_violation > 0)
 
     def update(self):
+        self.objective_values = None
+        self.total_constraint_violation = None
+        self.violates = None
         self.run_model = True
+        self.calculate_constraints = True
 
     def __str__(self):
         try:
