@@ -9,12 +9,12 @@ import matplotlib.pyplot as plt
 
 
 def run_test_problems():
-    test = TestAlgorithm(ZDT1, NSGA_II)
-    test.new_plot(str(ZDT1()), colour='b', marker='o')
-    test.change_algorithm(SPEA)
-    test.replot(colour='g', marker='o')
-    test.change_algorithm(SPEA_2)
-    test.replot(colour='r', marker='o')
+    test = TestAlgorithm(ZDT6, NSGA_II)
+    test.new_plot(str(ZDT6()), colour='b', marker='o')
+    # test.change_algorithm(SPEA)
+    # test.replot(colour='g', marker='o')
+    # test.change_algorithm(SPEA_2)
+    # test.replot(colour='r', marker='o')
     plt.show()
 
 
@@ -67,8 +67,8 @@ def nice_plot(algorithm_name):
 
 
 if __name__ == "__main__":
-    constr_test()
-    #run_test_problems()
+    #constr_test()
+    run_test_problems()
     # nice_plot('SPEA')
     # nice_plot('NSGA_II')
     # nice_plot('SPEA_2')

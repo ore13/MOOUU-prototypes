@@ -66,7 +66,7 @@ class AbstractMOEA:
         ensemble = np.atleast_2d(np.array([individual.d_vars for individual in population[positions]]))
         ensemble = ensemble.T
         if len(ensemble) > 0:
-            objectives = np.atleast_2d(self.objectives(ensemble)).T
+            objectives = np.atleast_2d(self.objectives(ensemble))
             if self.is_constrained:
                 constraints = np.atleast_2d(self.constraints(ensemble)).T
                 constraints[np.where(constraints >= 0)] = 0
@@ -116,7 +116,7 @@ class AbstractMOEA:
 
     def crossover_step_SBX(self, population):
         for i in range(len(population)):
-            if np.random.random() > self.cross_prob:
+            if np.random.random() <= self.cross_prob:
                 rand_index = np.random.randint(0, len(population))
                 population[i].crossover_SBX(population[rand_index], self.bounds, self.cross_dist)
 
@@ -217,7 +217,7 @@ class AbstractPopulation:
 
     def crossover(self, bounds, crossover_probability, crossover_distribution):
         for individual1 in self.population:
-            if np.random.random() > crossover_probability:
+            if np.random.random() <= crossover_probability:
                 individual2 = np.random.choice(self.population)
                 individual1.crossover_SBX(individual2, bounds, crossover_distribution)
 
@@ -424,7 +424,12 @@ class AbstractPopIndividual:
             if values_are_close:
                 p = 1
             else:
-                p = 1 - 1/(2 * transformation ** (distribution_parameter + 1))
+                try:
+                    p = 1 - 1/(2 * transformation ** (distribution_parameter + 1))
+                except RuntimeWarning:
+                    print('RuntimeWarning occurred at line 428')
+                    print(transformation)
+                    p = 1
             u = rand * p
             if u <= 0.5:
                 beta_values.append((2 * u) ** (1 / (distribution_parameter + 1)))

@@ -5,128 +5,48 @@ import scipy.stats as stat
 import ga
 import matplotlib.pyplot as plt
 import time
+import random
+from TestProblems.Problem_suite import *
+import pandas as pd
 
 
-class StochasticTest:
-
-    def __init__(self):
-        raise Exception("Class should not be instatiated")
-
-    @staticmethod
-    def f1(d_vars, pars=np.array([0, 0]).reshape([2, 1])):
-        """
-        Represents a model giving an objective function as it's output
-        :param d_vars: decision vector
-        :param pars: array of parameter combination vectors
-        :return: output of model given parameters. length of output is equal to number of supplied parameters
-        """
-        return d_vars[0] + pars[0]
-
-    @staticmethod
-    def f2(d_vars, pars=np.array([0, 0]).reshape([2, 1])):
-        """
-        Represents a model with an objective function as it's output
-        :param d_vars: decision vector
-        :param pars: parameters of the model, which should be taken from a normal distribution
-        :return: output of model given parameters
-        """
-        return 1 / d_vars[0] + d_vars[1] + pars[1]
-
-    @classmethod
-    def calculate_objectives(cls, d_vars, pars=np.array([0, 0]).reshape([2, 1])):
-        """calculates the two objectives f1 and f2"""
-        return np.array([cls.f1(d_vars, pars), cls.f2(d_vars, pars)])
-
-    @staticmethod
-    def number_parameters():
-        return 2
-
-    @staticmethod
-    def number_decision_variables():
-        return 2
-
-    @staticmethod
-    def number_objectives():
-        return 2
-
-    @classmethod
-    def parameter_means(cls):
-        return np.zeros(cls.number_parameters())
-
-    @staticmethod
-    def parameter_covariance():
-        return np.diag([1, 1])
-
-    @staticmethod
-    def bounds():
-        return [(0.1, 2), (0.1, 2)]
-
-    @staticmethod
-    def _quadratic_positive_root(a, b, c):
-        return (-b + np.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
+def additive_parameter_interaction(d_vars, pars):
+    if len(d_vars) != pars.shape[1]:
+        raise Exception('Should have same number of parameters and decision variables')
+    if pars.shape[1] % 2 == 0:
+        even = np.arange(pars.shape[1] // 2) * 2
+        odd = even + 1
+    else:
+        even = np.arange(pars.shape[1] // 2 + 1) * 2
+        odd = np.arange(pars.shape[1] // 2) * 2 + 1
+    return 1 / pars.shape[1] * np.array([np.sum(pars[:, even], axis=1), np.sum(pars[:, odd], axis=1)]).T
 
 
-class StochasticParaboloid(StochasticTest):
-
-    def __init__(self):
-        super().__init__()
-
-    @staticmethod
-    def f1(d_vars, pars=np.array([[1]])):
-        return (d_vars[0] - 2) ** 2 + d_vars[1] ** 2 + 0.1 * (d_vars[0] + pars[0]) ** 3
-
-    @staticmethod
-    def f2(d_vars, pars=np.array([[1]])):
-        return (d_vars[0] + 2) ** 2 + d_vars[1] ** 2 - 0.1 * (d_vars[0] + pars[0]) ** 3
-
-    @staticmethod
-    def number_parameters():
-        return 1
-
-    @staticmethod
-    def bounds():
-        return [(-5, 5), (-5, 5)]
-
-    @staticmethod
-    def parameter_covariance():
-        return np.diag([1])
-
-    @staticmethod
-    def pareto_front(risk):
-        """:returns pareto front given a certain level of risk"""
-        beta_up = stat.norm.ppf(risk)
-        beta_down = stat.norm.ppf(1 - risk)
-        a, b, c = (3 * 0.1, 2 + 6 * 0.1 * beta_up, 3 * 0.1 * beta_up ** 2 - 4)
-        argminf1 = StochasticTest._quadratic_positive_root(a, b, c)
-        a, b, c = (-3 * 0.1, 2 - 6 * 0.1 * beta_down, 4 - 3 * 0.1 * beta_down ** 2)
-        argminf2 = StochasticTest._quadratic_positive_root(a, b, c)
-        pareto_set = np.vstack((np.linspace(argminf2, argminf1), np.zeros(50)))
-        f1 = StochasticParaboloid.f1(pareto_set, [beta_up])
-        f2 = StochasticParaboloid.f2(pareto_set, [beta_down])
-        return np.vstack((f1, f2))
+def multiplicitive_parameter_interaction(d_vars, pars):
+    if len(d_vars) != pars.shape[1]:
+        raise Exception('Should have same number of parameters and decision variables')
+    if pars.shape[1] % 2 == 0:
+        even = np.arange(pars.shape[1] // 2 - 1) * 2 + 2
+        odd = even + 1
+    else:
+        even = np.arange(pars.shape[1] // 2) * 2 + 2
+        odd = np.arange(pars.shape[1] // 2) * 2 + 1
+    return np.array([d_vars[0] * pars[:, 0] + np.sum(d_vars[even] * pars[:, even], axis=1),
+                     np.sum(d_vars[odd] * pars[:, odd], axis=1)]).T
 
 
-class StochasticParaboloid2(StochasticParaboloid):
-
-    def __init__(self):
-        super().__init__()
-
-    @staticmethod
-    def f1(d_vars, pars=np.array([[1]])):
-        return (d_vars[0] - 2) ** 2 + d_vars[1] ** 2 + 0.05 * (d_vars[1] + pars[0]) ** 3
-
-    @staticmethod
-    def f2(d_vars, pars=np.array([[1]])):
-        return (d_vars[0] + 2) ** 2 + d_vars[1] ** 2 + 0.05 * (d_vars[1] + pars[0]) ** 3
-
-    @staticmethod
-    def pareto_front(risk):
-        beta_up = stat.norm.ppf(risk)
-        arg_min_f1 = StochasticTest._quadratic_positive_root(0.15, 2 - 0.3 * beta_up, 0.15 * beta_up ** 2)
-        pareto_set = np.vstack((np.linspace(-2, 2), np.full(50, arg_min_f1)))
-        f1 = StochasticParaboloid2.f1(pareto_set, [beta_up])
-        f2 = StochasticParaboloid2.f2(pareto_set, [beta_up])
-        return np.vstack((f1, f2))
+def nonlinear_parameter_interaction(d_vars, pars):
+    if len(d_vars) != len(pars):
+        raise Exception('Should have same number of parameters and decision variables')
+    if len(pars) % 2 == 0:
+        even = np.arange(len(pars) // 2 - 1) * 2 + 2
+        odd = even + 1
+    else:
+        even = np.arange(len(pars) // 2) * 2 + 2
+        odd = np.arange(len(pars) // 2) * 2 + 1
+    f1 = np.sinh(5 * (d_vars[0] + 1) * pars[0]) + np.sum(np.sinh(5 * d_vars[even] * pars[even]))
+    f2 = np.sum(np.sinh(5 * d_vars[odd] * pars[odd]))
+    return np.array([f1, f2])
 
 
 class UncertaintyPropagation:
@@ -139,20 +59,34 @@ class UncertaintyPropagation:
         if len(mean) != len(cov):
             raise Exception("Standard deviation and error vectors must have same length")
         rvs = stat.multivariate_normal.rvs(mean, cov, size=num_drawn)
-        return rvs.reshape((len(mean), num_drawn))
+        return rvs
 
     @staticmethod
-    def risk_shifted_ensemble(d_vars, risk, model, ensemble=None, evals=30):
-        if ensemble is None:
-            mean = model.parameter_means()
-            cov = model.parameter_covariance()
-            pars = UncertaintyPropagation.parameters_from_gaussian(evals, mean, cov)
-            ensemble = model.calculate_objectives(d_vars, pars)
-        else:
-            evals = ensemble.shape[0]
-        ensemble.sort()
+    def risk_shifted_ensemble(d_vars, risk, eval_func, comb, pars):
+        d_vars_copy = d_vars.T
+        evals = pars.shape[0]
         index = int(risk * evals)
-        return ensemble[:, index]
+        objectives = []
+        for i, d_var in enumerate(d_vars_copy):
+            eval_ensemble = comb(d_var, pars).T
+            obs_ensemble = eval_func(eval_ensemble)
+            obs_ensemble.sort(axis=1)
+            objectives.append(obs_ensemble[:, index])
+        return np.array(objectives).T
+        #return eval_func(d_vars)
+
+    @staticmethod
+    def pyemu_interactions_ensemble(d_vars, pars, interaction, model, risk):
+        d_vars_copy = d_vars.T
+        evals = pars.shape[0]
+        index = int(risk * evals)
+        objectives = []
+        normal = model(d_vars)
+        for objective, dvar in zip(normal.T, d_vars_copy):
+            obs_ensemble = objective + interaction(dvar, pars)
+            obs_ensemble.sort(axis=0)
+            objectives.append(obs_ensemble[index, :])
+        return np.array(objectives).T
 
     @staticmethod
     def risk_shifted_fosm(d_vars, risk, model, parameter_jacobian=None):
@@ -169,32 +103,32 @@ class UncertaintyPropagation:
         return objective_sd * stat.norm.ppf(risk) + objective_mean
 
 
-class Tests:
-
-    @staticmethod
-    def test_risk_shift_ensemble():
-        np.random.seed(129302)
-        risk_shifted = UncertaintyPropagation.risk_shifted_ensemble([1, 1], 0.5, StochasticTest, evals=2000)
-        assert np.all(np.isclose(risk_shifted, [1, 2], atol=1e-1))
-        risk_shifted = UncertaintyPropagation.risk_shifted_ensemble([1, 1], 0.9, StochasticTest, evals=2000)
-        assert np.all(np.isclose(risk_shifted, [2.28155, 3.28155], atol=1e-1))
-        risk_shifted = UncertaintyPropagation.risk_shifted_ensemble([1, 1], 0.1, StochasticTest, evals=2000)
-        assert np.all(np.isclose(risk_shifted, [-0.28155156, 0.71844843], atol=1e-1))
-
-    @staticmethod
-    def test_risk_shift_fosm():
-        risk_shifted = UncertaintyPropagation.risk_shifted_fosm([1, 1], 0.5, StochasticTest)
-        assert np.all(np.isclose(risk_shifted, [1, 2], atol=1e-1))
-        risk_shifted = UncertaintyPropagation.risk_shifted_fosm([1, 1], 0.9, StochasticTest)
-        assert np.all(np.isclose(risk_shifted, [2.28155, 3.28155], atol=1e-1))
-        risk_shifted = UncertaintyPropagation.risk_shifted_fosm([1, 1], 0.1, StochasticTest)
-        assert np.all(np.isclose(risk_shifted, [-0.28155156, 0.71844843], atol=1e-1))
+def additive(dvar, pars):
+    assert len(dvar) == pars.shape[1]
+    par_copy = pars.copy()
+    par_copy[:, 1:] = 1/10 * par_copy[:, 1:]
+    return dvar + par_copy
 
 
-def example(risk):
+def ZDT_risk_vals(problem, risk):
+    mean = np.zeros(shape=problem.number_decision_vars())
+    cov = 0.2 * np.eye(problem.number_decision_vars())
+    par_ensemble = UncertaintyPropagation.parameters_from_gaussian(400, mean, cov)
+    # mean = par_ensemble.mean(axis=0)
+    # for col, mean in zip(np.arange(0, 30), mean):
+    #     par_ensemble[:, col] = par_ensemble[:, col] - mean  # centering to reduce bias
+    if np.any(par_ensemble > 1) or np.any(par_ensemble < -1):
+        where_above = np.where(par_ensemble > 1)
+        where_below = np.where(par_ensemble < -1)
+        par_ensemble[where_above] = 1
+        par_ensemble[where_below] = -1
+
     def uncertain_objective(d_vars):
-        return UncertaintyPropagation.risk_shifted_ensemble(d_vars, risk=risk, model=StochasticTest)
-    moo = ga.NSGA_II(uncertain_objective, StochasticTest.bounds(), StochasticTest.number_objectives(), iterations=50)
+        obj = UncertaintyPropagation.pyemu_interactions_ensemble(d_vars, par_ensemble, multiplicitive_parameter_interaction,
+                                                                 model=problem.objective_vector, risk=risk)
+        return obj.T
+    moo = ga.NSGA_II(uncertain_objective, problem().bounds, problem.number_objectives(), iterations=500,
+                     parent_pop_size=200)
     pareto = moo.run()
     x = []
     y = []
@@ -202,45 +136,17 @@ def example(risk):
         f1, f2 = individual.objective_values
         x.append(f1)
         y.append(f2)
+    data = [individual.d_vars for individual in pareto]
+    df = pd.DataFrame(data=data, columns=['dvar{}'.format(i) for i in range(30)])
+    df.to_csv('Opt_dvars_risk_{:2f}.csv'.format(risk))
     plt.plot(x, y, 'o', markersize=3, label='risk = {}'.format(risk))
-
-
-def risk_affecting_dec_space_example(risk, method, model):
-    def uncertain_objective(d_vars):
-        if method.lower() == 'fosm':
-            return UncertaintyPropagation.risk_shifted_fosm(d_vars, risk=risk, model=model)
-        elif method.lower() == 'ensemble':
-            return UncertaintyPropagation.risk_shifted_ensemble(d_vars, risk=risk, model=model, evals=100)
-        else:
-            raise Exception("no known method {}".format(method))
-    moo = ga.NSGA_II(uncertain_objective, model.bounds(), model.number_objectives(), iterations=100)
-    pareto = moo.run()
-    x = []
-    y = []
-    for individual in pareto:
-        f1, f2 = individual.objective_values
-        x.append(f1)
-        y.append(f2)
-    plt.plot(x, y, 'o', markersize=3, label='risk = {}'.format(risk))
-    x, y = model.pareto_front(risk)
-    plt.plot(x, y, label='True Pareto front, risk = {}'.format(risk))
 
 
 if __name__ == "__main__":
-    Tests.test_risk_shift_ensemble()
-    Tests.test_risk_shift_fosm()
-    risk_affecting_dec_space_example(0.05, 'ensemble', StochasticParaboloid)
-    risk_affecting_dec_space_example(0.5, 'ensemble', StochasticParaboloid)
-    risk_affecting_dec_space_example(0.95, 'ensemble', StochasticParaboloid)
-    plt.title("MOOUU test problem StochasticParaboloid\nusing ensemble method")
-    plt.xlabel('Objective 1')
-    plt.ylabel('Objective 2')
-    plt.legend()
-    plt.figure(2)
-    risk_affecting_dec_space_example(0.01, 'fosm', StochasticParaboloid)
-    risk_affecting_dec_space_example(0.5, 'fosm', StochasticParaboloid)
-    risk_affecting_dec_space_example(0.99, 'fosm', StochasticParaboloid)
-    plt.title("MOOUU test problem StochasticParaboloid\nusing FOSM method")
+    problem = ZDT3
+    ZDT_risk_vals(problem, 0.5)
+    ZDT_risk_vals(problem, 0.7)
+    ZDT_risk_vals(problem, 0.9)
     plt.xlabel('Objective 1')
     plt.ylabel('Objective 2')
     plt.legend()

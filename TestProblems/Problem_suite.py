@@ -2,6 +2,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
 
 class TestAlgorithm:
@@ -240,8 +241,13 @@ class ZDT3(Problem):
         if front:
             g = 1
         else:
-            g = 1 + 9 * np.sum(x[1:]) / (len(x) - 1)
-        return g * (1 - np.sqrt(ZDT3.f1(x) / g) - (ZDT3.f1(x) / g) * np.sin(10 * np.pi * ZDT3.f1(x)))
+            g = 1 + 9 * np.sum(x[1:], axis=0) / (len(x) - 1)
+        try:
+            return g * (1 - np.sqrt(ZDT3.f1(x) / g) - (ZDT3.f1(x) / g) * np.sin(10 * np.pi * ZDT3.f1(x)))
+        except RuntimeWarning:
+            time.sleep(0.1)
+            print(g)
+            print(x[0])
 
     @staticmethod
     def number_decision_vars():

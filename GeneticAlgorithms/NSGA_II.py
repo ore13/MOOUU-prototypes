@@ -59,6 +59,7 @@ class NSGA_II(AbstractMOEA):
         self.mutation_step_polynomial(self.child_pop)
         self.run_model(self.child_pop)
         for i in range(self.iterations):
+            print('iteration number {}'.format(i))
             self.population = self.child_pop + self.parent_pop
             self.non_dominated_sort()
             self.parent_pop = []

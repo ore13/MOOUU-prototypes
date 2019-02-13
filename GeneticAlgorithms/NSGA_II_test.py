@@ -113,6 +113,10 @@ class NSGA_IITests:
         c = front1[1]
         b = front1[2]
         a = front1[3]
+        print(a.objective_values)
+        print(b.objective_values)
+        print(c.objective_values)
+        print(d.objective_values)
         assert d.crowding_distance == np.inf
         assert a.crowding_distance == np.inf
         assert np.isclose(c.crowding_distance, 1)

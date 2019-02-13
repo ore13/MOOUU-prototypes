@@ -4,6 +4,8 @@ Tests for SPEA_2
 """
 
 from GeneticAlgorithms.SPEA_2 import *
+import pandas as pd
+import matplotlib.pyplot as plt
 import argparse
 
 
