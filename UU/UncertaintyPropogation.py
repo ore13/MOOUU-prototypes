@@ -31,22 +31,23 @@ def multiplicitive_parameter_interaction(d_vars, pars):
     else:
         even = np.arange(pars.shape[1] // 2) * 2 + 2
         odd = np.arange(pars.shape[1] // 2) * 2 + 1
-    return np.array([d_vars[0] * pars[:, 0] + np.sum(d_vars[even] * pars[:, even], axis=1),
-                     np.sum(d_vars[odd] * pars[:, odd], axis=1)]).T
+    return np.array([np.sum(d_vars[odd] * pars[:, odd], axis=1),
+                     2 * d_vars[0] * pars[:, 0] + np.sum(d_vars[even] * pars[:, even], axis=1)]).T
 
 
 def nonlinear_parameter_interaction(d_vars, pars):
-    if len(d_vars) != len(pars):
+    if len(d_vars) != pars.shape[1]:
         raise Exception('Should have same number of parameters and decision variables')
-    if len(pars) % 2 == 0:
-        even = np.arange(len(pars) // 2 - 1) * 2 + 2
+    if pars.shape[1] % 2 == 0:
+        even = np.arange(pars.shape[1] // 2 - 1) * 2 + 2
         odd = even + 1
     else:
-        even = np.arange(len(pars) // 2) * 2 + 2
-        odd = np.arange(len(pars) // 2) * 2 + 1
-    f1 = np.sinh(5 * (d_vars[0] + 1) * pars[0]) + np.sum(np.sinh(5 * d_vars[even] * pars[even]))
-    f2 = np.sum(np.sinh(5 * d_vars[odd] * pars[odd]))
-    return np.array([f1, f2])
+        even = np.arange(pars.shape[1] // 2) * 2 + 2
+        odd = np.arange(pars.shape[1] // 2) * 2 + 1
+    f1 = np.sum(np.exp(d_vars[odd] * pars[:, odd]) - 1, axis=1)
+    f2 = (1 + np.abs(np.cos(20 * np.pi * d_vars[0]))) * (np.exp(d_vars[0] * pars[:, 0]) - 1) + \
+         np.sum(np.exp(d_vars[even] * pars[:, even]) - 1, axis=1)
+    return np.array([f1, f2]).T
 
 
 class UncertaintyPropagation:
@@ -111,6 +112,7 @@ def additive(dvar, pars):
 
 
 def ZDT_risk_vals(problem, risk):
+    np.random.seed(123456) # for consistent starting generation
     mean = np.zeros(shape=problem.number_decision_vars())
     cov = 0.2 * np.eye(problem.number_decision_vars())
     par_ensemble = UncertaintyPropagation.parameters_from_gaussian(400, mean, cov)
@@ -124,7 +126,7 @@ def ZDT_risk_vals(problem, risk):
         par_ensemble[where_below] = -1
 
     def uncertain_objective(d_vars):
-        obj = UncertaintyPropagation.pyemu_interactions_ensemble(d_vars, par_ensemble, multiplicitive_parameter_interaction,
+        obj = UncertaintyPropagation.pyemu_interactions_ensemble(d_vars, par_ensemble, nonlinear_parameter_interaction,
                                                                  model=problem.objective_vector, risk=risk)
         return obj.T
     moo = ga.NSGA_II(uncertain_objective, problem().bounds, problem.number_objectives(), iterations=500,
@@ -138,11 +140,28 @@ def ZDT_risk_vals(problem, risk):
         y.append(f2)
     data = [individual.d_vars for individual in pareto]
     df = pd.DataFrame(data=data, columns=['dvar{}'.format(i) for i in range(30)])
-    df.to_csv('Opt_dvars_risk_{:2f}.csv'.format(risk))
+    df.to_csv('Opt_dvars_risk_{:.2f}.csv'.format(risk))
     plt.plot(x, y, 'o', markersize=3, label='risk = {}'.format(risk))
+    # save data - as this will be used for plot
+    objectives = [individual.objective_values for individual in pareto]
+    df_obj = pd.DataFrame(data=objectives, columns=['Objective_1', 'Objective_2'])
+    df_obj.to_csv('risk{}_pareto_front_{}.csv'.format(risk, str(problem())))
+    # ideal = np.zeros(shape=(30, 200))
+    # ideal[0, :] = np.linspace(0, 1, 200)
+    # f1, f2 = uncertain_objective(ideal).T
+    # plt.plot(f1, f2, label='ideal front')
 
 
 if __name__ == "__main__":
+    plt.figure()
+    problem = ZDT1
+    ZDT_risk_vals(problem, 0.5)
+    ZDT_risk_vals(problem, 0.7)
+    ZDT_risk_vals(problem, 0.9)
+    plt.xlabel('Objective 1')
+    plt.ylabel('Objective 2')
+    plt.legend()
+    plt.figure()
     problem = ZDT3
     ZDT_risk_vals(problem, 0.5)
     ZDT_risk_vals(problem, 0.7)

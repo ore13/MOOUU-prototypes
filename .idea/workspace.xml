@@ -3,23 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="59708be3-a81c-46db-ac5a-fae01c9056cd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeneticAlgorithms/NSGA_II.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneticAlgorithms/NSGA_II.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeneticAlgorithms/NSGA_II_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneticAlgorithms/NSGA_II_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeneticAlgorithms/SPEA_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneticAlgorithms/SPEA_2_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestProblems/Problem_suite.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestProblems/Problem_suite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Example.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Example.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UU/UncertaintyPropogation.py" beforeDir="false" afterPath="$PROJECT_DIR$/UU/UncertaintyPropogation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/individual_1.inp" beforeDir="false" afterPath="$PROJECT_DIR$/individual_1.inp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/individual_1.out" beforeDir="false" afterPath="$PROJECT_DIR$/individual_1.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/individual_2.inp" beforeDir="false" afterPath="$PROJECT_DIR$/individual_2.inp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/individual_2.out" beforeDir="false" afterPath="$PROJECT_DIR$/individual_2.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/individual_3.inp" beforeDir="false" afterPath="$PROJECT_DIR$/individual_3.inp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/individual_3.out" beforeDir="false" afterPath="$PROJECT_DIR$/individual_3.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/individual_4.inp" beforeDir="false" afterPath="$PROJECT_DIR$/individual_4.inp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/individual_4.out" beforeDir="false" afterPath="$PROJECT_DIR$/individual_4.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/individual_5.inp" beforeDir="false" afterPath="$PROJECT_DIR$/individual_5.inp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/individual_5.out" beforeDir="false" afterPath="$PROJECT_DIR$/individual_5.out" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,55 +16,56 @@
     <session id="1602270817">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="66" />
+          <entry key="project.closed" value="70" />
           <entry key="project.open.time.0" value="8" />
           <entry key="project.open.time.1" value="15" />
-          <entry key="project.open.time.10" value="5" />
+          <entry key="project.open.time.10" value="7" />
           <entry key="project.open.time.11" value="5" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="3" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.4" value="2" />
           <entry key="project.open.time.7" value="4" />
           <entry key="project.open.time.8" value="14" />
           <entry key="project.open.time.9" value="11" />
-          <entry key="project.opened" value="70" />
+          <entry key="project.opened" value="73" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Optimal_dvars" value="4" />
+          <entry key="csv" value="2" />
           <entry key="dat" value="9" />
           <entry key="dvar" value="2" />
           <entry key="inp" value="1" />
           <entry key="objs" value="2" />
           <entry key="out" value="1" />
-          <entry key="py" value="205" />
+          <entry key="py" value="206" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="19" />
-          <entry key="Python" value="205" />
+          <entry key="PLAIN_TEXT" value="21" />
+          <entry key="Python" value="206" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="NSGA-II" value="452" />
           <entry key="NSGA_II" value="81" />
-          <entry key="Python Console" value="4203" />
+          <entry key="Python Console" value="4233" />
           <entry key="byteManipulation" value="361" />
           <entry key="dat" value="21" />
           <entry key="dummy" value="71" />
-          <entry key="py" value="132944" />
+          <entry key="py" value="135002" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="92" />
-          <entry key="Python" value="138041" />
+          <entry key="Python" value="140129" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -90,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_MOO_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
+            <state relative-caret-position="3740">
               <caret line="221" selection-start-line="221" selection-end-line="247" selection-end-column="58" />
               <folding>
                 <element signature="e#40#84#0" expanded="true" />
@@ -102,7 +88,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6473">
+            <state relative-caret-position="7259">
               <caret line="431" column="25" selection-start-line="431" selection-start-column="25" selection-end-line="431" selection-end-column="25" />
             </state>
           </provider>
@@ -111,12 +97,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UU/UncertaintyPropogation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="140" column="54" lean-forward="true" selection-start-line="140" selection-start-column="54" selection-end-line="140" selection-end-column="54" />
+            <state relative-caret-position="816">
+              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
               <folding>
                 <element signature="e#88#106#0" expanded="true" />
-                <element signature="e#5187#5988#0" />
-                <element signature="e#9521#9720#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dvar_plot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+              <folding>
+                <element signature="e#1#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -125,20 +121,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/NSGA_II_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
+            <state relative-caret-position="952">
               <caret line="56" selection-start-line="56" selection-end-line="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tests/Example.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
-              <folding>
-                <element signature="e#34#79#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -146,7 +130,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/SPEA_2_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
+            <state relative-caret-position="2839">
               <caret line="170" column="23" selection-start-line="170" selection-start-column="23" selection-end-line="170" selection-end-column="23" />
               <folding>
                 <element signature="e#27#65#0" expanded="true" />
@@ -158,8 +142,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/SPEA_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+            <state relative-caret-position="85">
+              <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
               <folding>
                 <element signature="e#24#68#0" expanded="true" />
               </folding>
@@ -179,11 +163,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestProblems/Problem_suite.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="248" column="20" lean-forward="true" selection-start-line="248" selection-start-column="20" selection-end-line="248" selection-end-column="20" />
+            <state relative-caret-position="5134">
+              <caret line="304" column="47" selection-start-line="304" selection-start-column="47" selection-end-line="304" selection-end-column="47" />
               <folding>
                 <element signature="e#60#78#0" expanded="true" />
-                <element signature="e#5372#5632#0" />
               </folding>
             </state>
           </provider>
@@ -279,23 +262,24 @@
         <option value="$PROJECT_DIR$/GeneticAlgorithms/SPEA_2.py" />
         <option value="$PROJECT_DIR$/GeneticAlgorithms/NSGA_II.py" />
         <option value="$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py" />
+        <option value="$PROJECT_DIR$/UU/dvar_plot.py" />
         <option value="$PROJECT_DIR$/TestProblems/Problem_suite.py" />
+        <option value="$PROJECT_DIR$/dvar_plot.py" />
         <option value="$PROJECT_DIR$/UU/UncertaintyPropogation.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1296" />
-    <option name="height" value="696" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-13" />
+    <option name="y" value="-13" />
+    <option name="width" value="2545" />
+    <option name="height" value="1540" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -318,10 +302,16 @@
               <item name="GNSMOO" type="462c0819:PsiDirectoryNode" />
               <item name="Tests" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="GNSMOO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GNSMOO" type="462c0819:PsiDirectoryNode" />
+              <item name="UU" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -332,13 +322,14 @@
     <option name="myUseExistingConsole" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Violet\PycharmProjects\GNSMOO" />
+      <recent name="C:\Users\Violet\PycharmProjects\GNSMOO\GeneticAlgorithms" />
+      <recent name="C:\Users\Violet\PycharmProjects\GNSMOO\UU" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Violet\PycharmProjects\GNSMOO\TestProblems" />
       <recent name="C:\Users\Violet\PycharmProjects\GNSMOO" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Violet\PycharmProjects\GNSMOO\GeneticAlgorithms" />
-      <recent name="C:\Users\Violet\PycharmProjects\GNSMOO\UU" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -564,6 +555,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="dvar_plot" type="PythonConfigurationType" factoryName="Python" folderName="UU_venv">
+      <module name="GNSMOO" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Violet\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dvar_plot.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="gaTest" type="PythonConfigurationType" factoryName="Python" folderName="Tests_venv">
       <module name="GNSMOO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -638,6 +650,7 @@
       <item itemvalue="Python.testbox" />
       <item itemvalue="Python.IOtest.py" />
       <item itemvalue="Python.UncertaintyPropogation" />
+      <item itemvalue="Python.dvar_plot" />
       <item itemvalue="Python.io_wrapper" />
       <item itemvalue="Python.StochasticIO" />
     </list>
@@ -665,14 +678,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-7" y="-7" width="1111" height="591" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16344994" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21488371" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.33710408" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.38116592" />
-      <window_info active="true" anchor="bottom" x="0" y="23" width="1680" height="987" id="Run" order="2" sideWeight="0.49789253" visible="true" weight="0.31390134" />
+      <window_info anchor="bottom" x="0" y="23" width="1680" height="987" id="Run" order="2" sideWeight="0.49789253" weight="0.59430605" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.45627803" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -680,7 +694,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32692307" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5021075" side_tool="true" weight="0.32969034" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49917492" weight="0.3957399" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49917492" weight="0.40246636" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -824,8 +838,6 @@ x[0] ** 2 + x[1] ** 2</expression-string>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/NSGA_II.py" />
-    <entry file="file://$PROJECT_DIR$/Abstract_Moo.py" />
     <entry file="file://$PROJECT_DIR$/StochasticTestProblems.py" />
     <entry file="file://$PROJECT_DIR$/StochasticTests.py" />
     <entry file="file://$PROJECT_DIR$/Tests.py" />
@@ -984,29 +996,6 @@ x[0] ** 2 + x[1] ** 2</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
-          <folding>
-            <element signature="e#34#79#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/SPEA_2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-          <folding>
-            <element signature="e#24#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/SPEA_2_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="170" column="23" selection-start-line="170" selection-start-column="23" selection-end-line="170" selection-end-column="23" />
-          <folding>
-            <element signature="e#27#65#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1017,51 +1006,9 @@ x[0] ** 2 + x[1] ** 2</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/NSGA_II_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_MOO_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="221" selection-start-line="221" selection-end-line="247" selection-end-column="58" />
-          <folding>
-            <element signature="e#40#84#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestProblems/Problem_suite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="248" column="20" lean-forward="true" selection-start-line="248" selection-start-column="20" selection-end-line="248" selection-end-column="20" />
-          <folding>
-            <element signature="e#60#78#0" expanded="true" />
-            <element signature="e#5372#5632#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6473">
-          <caret line="431" column="25" selection-start-line="431" selection-start-column="25" selection-end-line="431" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Optimal_dvars">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1204" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/NSGA_II.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/matplotlib/axes/_base.py">
@@ -1076,14 +1023,86 @@ x[0] ** 2 + x[1] ** 2</expression-string>
         <state relative-caret-position="-421" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Opt_dvars_risk_0.500000.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_MOO_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3740">
+          <caret line="221" selection-start-line="221" selection-end-line="247" selection-end-column="58" />
+          <folding>
+            <element signature="e#40#84#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Abstract_Moo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7259">
+          <caret line="431" column="25" selection-start-line="431" selection-start-column="25" selection-end-line="431" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dvar_plot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding>
+            <element signature="e#1#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/NSGA_II_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/SPEA_2_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2839">
+          <caret line="170" column="23" selection-start-line="170" selection-start-column="23" selection-end-line="170" selection-end-column="23" />
+          <folding>
+            <element signature="e#27#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/SPEA_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+          <folding>
+            <element signature="e#24#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/NSGA_II.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestProblems/Problem_suite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5134">
+          <caret line="304" column="47" selection-start-line="304" selection-start-column="47" selection-end-line="304" selection-end-column="47" />
+          <folding>
+            <element signature="e#60#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/UU/UncertaintyPropogation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="140" column="54" lean-forward="true" selection-start-line="140" selection-start-column="54" selection-end-line="140" selection-end-column="54" />
+        <state relative-caret-position="816">
+          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
           <folding>
             <element signature="e#88#106#0" expanded="true" />
-            <element signature="e#5187#5988#0" />
-            <element signature="e#9521#9720#0" />
           </folding>
         </state>
       </provider>

@@ -185,7 +185,7 @@ class ZDT1(Problem):
         if front:
             g = 1
         else:
-            g = 1 + 9 * np.sum(x[1:]) / (len(x) - 1)
+            g = 1 + 9 * np.sum(x[1:], axis=0) / (len(x) - 1)
         return g * (1 - np.sqrt(ZDT1.f1(x) / g))
 
     @staticmethod
@@ -302,7 +302,7 @@ class ZDT6(Problem):
         if front:
             g = 1
         else:
-            g = 1 + 9 * np.power(np.sum(x[1:]) / (len(x) - 1), 0.25)
+            g = 1 + 9 * np.power(np.sum(x[1:], axis=0) / (len(x) - 1), 0.25)
         return g * (1 - np.power(ZDT6.f1(x) / g, 2))
 
     @staticmethod
